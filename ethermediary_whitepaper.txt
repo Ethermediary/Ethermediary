@@ -1,0 +1,22 @@
+L'objectif est de créé un intermédiaire fiable sur la blockchain Ethereum pour permettre de certifier à un acheteur qu'il recevra bien l'objet de la transaction, et à un vendeur qu'il recevra bien le paiement de l'acheteur. Une interface en ligne permettra un accès simplifié au contrat.
+
+A acheteur
+V vendeur
+S safeguard
+
+1) A dépose une certaine somme sur S, plus l'adresse publique de V.
+2) S envoie à V un lien d'acceptation constitué de l'adresse publique de A encodé avec la somme bloquée de A.
+	Si V accepte, V envoie l'objet de la transaction à A (preuve de livraison conseillé), et goto (3).
+	Si V refuse, S renvoie les fonds à A, minus 2x le frais de transaction, et EXIT.
+3) V est maintenant sur que le paiement de A lui parviendra si l'objet est livré à A. S communique à A que V a accepté, ainsi qu'un lien de paiement constitué de l'adresse publique de V encodé.
+4) Tant que A n'a pas reçu l'object de la transaction, il ne clique pas sur le lien de paiement.
+	Au bout de 30 jours, si A n'a toujours pas reçu l'objet de la transaction, il pourra demander à être rembourser de la somme minus 2x le frais de la transaction*. Tout litige reste à charge du vendeur et de l'acheteur, le dévellopeur du contrat ne pourra en aucun cas être tenu responsable**.
+5) Si A clique sur le lien de paiement, S envoie à V le paiement de A, minus 2x le frais de la transaction*.
+
+
+*(1x pour payer le frais de la transaction, et 1x comme contribution au dévellopeur)
+**(Le contrat décrit ici ne fait QUE les actions spécifiés et rien d'autre)
+
+NB : Tout les mois, un montant égal aux nombres de cycle de transaction multiplié par chacun des frais de transaction retenu comme contribution au dévellopeur sera envoyé sur l'adresse publique ********************** (envoie de la contribution au dévellopeur).
+
+NB 2 : Les fonds déposés sur le contrat Ethermediary transitionnent sur le wallet associé à l'adresse publique *****************. PERSONNE hormis le contrat Ethermediary n'a accès à la clé privé de ce wallet, NI MEME le dévellopeur.
