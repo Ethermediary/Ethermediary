@@ -1,0 +1,38 @@
+html {
+    height: 100%;
+}
+
+body {
+  background-color: #112266;
+  color: Black;
+  font-family: 'Raleway', sans-serif;
+  background: linear-gradient(141deg, #0fdd70 0%, #ffaadb 51%, #2cb5ff 100%);
+  box-sizing: inherit;
+  color: white;
+  opacity: 1;
+}
+
+#logo{
+  position: relative;
+  margin-top: 50px;
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 60px;
+  font-style: oblique;
+  text-align: center;
+  color: White;
+  text-decoration: underline;
+}
+
+#content{
+  position: relative;
+  margin-top: 50px;
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #AAAAFF;
+  border: 10px solid White;
+  border-radius: 5px;
+  padding: 20px;
+}

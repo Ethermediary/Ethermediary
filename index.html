@@ -1,36 +1,60 @@
-<script type="text/javascript" src="page.js"></script>
+<!DOCTYPE html>
+<html lang="en">
 
-<p id="text"></p>
-<a>balance acheteur:</a><a id="balance_acheteur"></a>
-<br />
-<a>balance vendeur:</a><a id="balance_vendeur"></a>
-<br />
-<a>balance contact:</a><a id="balance_contract"></a>
-<br /><br />
+<head>
+	<meta name="description" content="Ethermediary"/>
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<link href="https://fonts.googleapis.com/css?family=Raleway:500" rel="stylesheet">
+	<link rel="icon" type="/image/png" href="imgs/favicon." />
+	<title>Ethermediary</title>
+</head>
 
-<button id="offre_button">ACHETEUR: faire une offre(+20)</button>
-<input id="offre_value"/>
-<button id="acheteur_cancel_offer">ACHETEUR: annuler l'offre</button>
-<button id="coli_recu">ACHETEUR: j'ai recu le colis, voici la photo de l'objet</button>
-<button id="coli_recu_bad">ACHETEUR: j'ai recu le colis, mais il est nul je veux le retourner</button>
-<button id="sent_back_proof">ACHETEUR: j'ai renvoyer le colis, voici la preuve</button>
-<button id="mutual_cancel_acheteur">ACHETEUR: demander/accepter l'annulation</button>
-<button id="refuse_cancel_acheteur">ACHETEUR: refuser la demande d'annulation</button>
+<body>
 
-<br />
-<br/>
+	<div id="logo">
+		<!-- Un petit logo sympathoche pour Ethermediary-->
+		<a>Ethermediary</a>
+	</div>
 
-<button id="accept_offre">VENDEUR: accepter offre(-20)</button>
-<button id="refuse_offre">VENDEUR: refuser offre</button>
-<button id="cancel_offer">VENDEUR: annuler, j'ai plus l'objet</button>
-<button id="give_proof">VENDEUR: fournir preuve d'expedition</button>
-<button id="received_sent_back">VENDEUR: j'ai récupérer le colis retourné</button>
-<button id="mutual_cancel_vendeur">VENDEUR: demander/accepter l'annulation</button>
-<button id="refuse_cancel_vendeur">VENDEUR: refuser la demande d'annulation</button>
+	<div id="content">
 
-<br />
-<br />
+	  <a>Status:<script type="text/javascript" src="page.js"></script></a>
 
-<a>ACHETEUR screen:</a><a id="acheteur_screen"></a>
-<br />
-<a>VENDEUR screen:</a><a id="vendeur_screen"></a>
+	  <p id="text"></p>
+	  <a>Balance acheteur:</a><a id="balance_acheteur"></a>
+	  <br />
+	  <a>Balance vendeur:</a><a id="balance_vendeur"></a>
+	  <br />
+	  <a>Balance contact:</a><a id="balance_contract"></a>
+	  <br /><br />
+
+	  <button id="offre_button">ACHETEUR: Faire une offre(+20)</button>
+	  <input id="offre_value"/>
+	  <button id="acheteur_cancel_offer">ACHETEUR: Annuler l'offre</button>
+	  <button id="coli_recu">ACHETEUR: J'ai recu le colis, voici la photo de l'objet</button>
+	  <button id="coli_recu_bad">ACHETEUR: J'ai recu le colis, mais il est nul je veux le retourner</button>
+	  <button id="sent_back_proof">ACHETEUR: J'ai renvoyer le colis, voici la preuve</button>
+	  <button id="mutual_cancel_acheteur">ACHETEUR: Demander/accepter l'annulation</button>
+	  <button id="refuse_cancel_acheteur">ACHETEUR: Refuser la demande d'annulation</button>
+
+	  <br/>
+	  <br/>
+
+	  <button id="accept_offre">VENDEUR: Accepter offre(-20)</button>
+	  <button id="refuse_offre">VENDEUR: Refuser offre</button>
+	  <button id="cancel_offer">VENDEUR: Annuler, j'ai plus l'objet</button>
+	  <button id="give_proof">VENDEUR: Fournir preuve d'expedition</button>
+	  <button id="received_sent_back">VENDEUR: J'ai rÃ©cupÃ©rer le colis retournÃ©</button>
+	  <button id="mutual_cancel_vendeur">VENDEUR: Demander/accepter l'annulation</button>
+	  <button id="refuse_cancel_vendeur">VENDEUR: Refuser la demande d'annulation</button>
+
+	  <br />
+	  <br />
+
+	  <a>ACHETEUR screen:</a><a id="acheteur_screen"></a>
+	  <br />
+	  <a>VENDEUR screen:</a><a id="vendeur_screen"></a>
+
+</div>
+
+</body>
