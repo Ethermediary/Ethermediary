@@ -17,7 +17,8 @@ var offre_button,
     mutual_cancel_acheteur_button,
     refuse_cancel_acheteur_button,
     refuse_cancel_vendeur_button,
-    acheteur_cancel_offer_button;
+    acheteur_cancel_offer_button,
+    allow_refund_checkbox;
 
 
 var balance_contract = 0;
@@ -25,6 +26,7 @@ var balance_acheteur = 100;
 var balance_vendeur = 100;
 var acheteur_screen;
 var vendeur_screen;
+var allow_refund = false;
 
 var buttonList;
 
@@ -32,7 +34,7 @@ const STATE_INIT = {
     name: "INIT", layout: [0, 1]
 };
 const STATE_OFFER_MADE = {
-    name: "OFFER_MADE", layout: [5, 6, 14]
+    name: "OFFER_MADE", layout: [5, 6, 14, 15]
 };
 const STATE_WAITING_SEND = {
     name: "WAITING_SEND", layout: [2, 3, 7, 9, 11]
@@ -67,7 +69,6 @@ var state = STATE_INIT;
 var stateBeforeCancel;
 
 
-
 window.onload = function () {
     offre_button = document.getElementById("offre_button");
     offre_value = document.getElementById("offre_value");
@@ -89,6 +90,7 @@ window.onload = function () {
     refuse_cancel_acheteur_button = document.getElementById("refuse_cancel_acheteur");
     refuse_cancel_vendeur_button = document.getElementById("refuse_cancel_vendeur");
     acheteur_cancel_offer_button = document.getElementById("acheteur_cancel_offer");
+    allow_refund_checkbox = document.getElementById("allow_refund");
     //bouton annuler pour l'acheteur, bouton acheteur j'ai renvoyer le package, bouton vendeur j'ai bien recupéré le package
     //bouton annuler pour le vendeur dispo au debut si jamais il a plus de stock/il veut plus vendre
     //bouton the package is bad i want to return it acheteur, 
@@ -108,11 +110,12 @@ window.onload = function () {
         mutual_cancel_acheteur_button,
         refuse_cancel_acheteur_button,
         refuse_cancel_vendeur_button,
-        acheteur_cancel_offer_button
+        acheteur_cancel_offer_button,
+        allow_refund_checkbox
     ];
 
     offre_button.onclick = () => ACHETEUR_makeOffer(offre_value.value);
-    accept_offer_button.onclick = VENDEUR_acceptOffer;
+    accept_offer_button.onclick = () => VENDEUR_acceptOffer(allow_refund_checkbox.checked);
     refuse_offer_button.onclick = VENDEUR_refuseOffer;
     give_proof_button.onclick = VENDEUR_provideProof;
     coli_recu_button.onclick = ACHETEUR_receivedPackage;
@@ -182,13 +185,13 @@ function ACHETEUR_receivedPackage() {
     updateDisplay();
 }
 
-function ACHETEUR_receivedBadPackage(){
-    if (state == STATE_WAITING_SEND) {
+function ACHETEUR_receivedBadPackage() {
+    if (state == STATE_WAITING_SEND && allow_refund) {
         state = STATE_SENDING_BACK_BAD_PACKAGE;
 
         acheteur_screen = "please send back the item and provide proof";
         vendeur_screen = "ACHETEUR didn't like your product, he is sending it back to you, please tell us when you sent it next time";
-    } else if (state == STATE_WAITING_ARRIVE) {
+    } else if (state == STATE_WAITING_ARRIVE && allow_refund) {
         state = STATE_SENDING_BACK_BAD_PACKAGE;
 
         acheteur_screen = "please send back the item and provide proof";
@@ -237,10 +240,12 @@ function ACHETEUR_refuseMutualCancel() {
 
 //-------------------------------VENDEUR
 
-function VENDEUR_acceptOffer() {
+function VENDEUR_acceptOffer(allowRefund) {
     //on retire une somme au vendeur pour l'encourager a declarer le package recu
     if (state == STATE_OFFER_MADE) {
         state = STATE_WAITING_SEND;
+
+        allow_refund = allowRefund;
 
         balance_vendeur -= caution;
         balance_contract += caution;
