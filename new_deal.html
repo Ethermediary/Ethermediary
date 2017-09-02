@@ -13,6 +13,7 @@
 
 	<div id="logo">
 		<!-- Un petit logo sympathoche pour Ethermediary-->
+		<a href="./index.html"><img src="./front/logo.png" width="50px" style="position: relative; top:5px;"/></a>
 		<a href="./index.html">Ethermediary</a>
 	</div>
 
@@ -23,19 +24,26 @@
 			</a>
 		</div>
 
-		<div id="button_menu" class="note">
+		<div id="button_menu" class="note" style="margin-top: 0px; top: -10px;">
 			 <input type="informations" placeholder="Buyer public adress" name="buyer_adress"/>
 			 <a>&nbsp;Copy and paste is the way to go &nbsp;= ]</a></br></br>
 
+			 <input type="informations" placeholder="Buyer's email" name="buyer_email"/>
+			 <a>&nbsp;Email of the Buyer</a></br></br>
+
 			 <input type="informations" placeholder="Seller public adress" name="seller_adress"/>
 			 <a>&nbsp;This is where the contract will send your paiement</a></br></br>
+
+			 <input type="informations" placeholder="Seller's email" name="seller_email"/>
+			 <a>&nbsp;Email of the Seller</a></br></br>
 
 			 <input type="informations" placeholder="Amount of tokens" name="amount"/>
 			 <a>&nbsp;The contract will be waiting for this amount coming from your public adress</a></br></br>
 
 			 <input type="informations" placeholder="Minimum duration before refund in days" name="refund_duration"/>
-			 <a>&nbsp;The minimum amount of days before the buyer could ask for a refund</a></br></br></br>
-			 <a href="./transaction.html"><button id="new_deal_button" >Make an offer</button></a>
+			 <a>&nbsp;The minimum amount of days before the buyer could ask for a refund</a></br></br>
+
+			 <a href="./new_deal_done.html"><button id="new_deal_button" >Make an offer</button></a>
 		</div>
 
 	</div>

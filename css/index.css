@@ -44,7 +44,7 @@ body {
   width: 1000px;
   height: auto;
   margin-top: 30px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
@@ -52,6 +52,10 @@ body {
 
 .note {
   font-size: 20px;
+}
+
+.align {
+  text-align: center;
 
 }
 
@@ -126,7 +130,7 @@ button[id=get_deal_button]:hover {
   height: 200px;
   display: inline-block;
   float: left;
-  margin-top: 70px;
+  margin-top: 10px;
   margin-left: 100px;
   text-align: center;
   font-size: 35px;
@@ -138,7 +142,7 @@ button[id=get_deal_button]:hover {
   height: 200px;
   display: inline-block;
   float: right;
-  margin-top: 70px;
+  margin-top: 10px;
   margin-right: 100px;
   text-align: center;
   font-size: 35px;
@@ -147,25 +151,37 @@ button[id=get_deal_button]:hover {
 #button_menu{
   position: relative;
   width: 1000px;
+  height: auto;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 100px;
 }
 
 /*Input*/
 
 input[type=informations]{
   position: relative;
-  width: 260px;
+  width: 250px;
   height: 40px;
   border: solid #18469E 2px;
   border-radius: 3px;
   background-color: #FFFFFF;
   padding-left: 10px;
-  margin-right: 5px;
+  padding-right: 10px;
 }
 
 #new_deal_button{
   position: relative;
   width: 274px;
   height: 50px;
+}
+
+/*new_deal_done*/
+
+#receipt{
+  position: relative;
+  width: 500px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
