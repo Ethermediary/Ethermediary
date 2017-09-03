@@ -15,7 +15,7 @@
 <node CREATED="1504352851735" HGAP="-15" ID="ID_279024882" MODIFIED="1504368231059" POSITION="right" TEXT="The Seller accept the Deal" VSHIFT="-99">
 <linktarget COLOR="#00ff05" DESTINATION="ID_279024882" ENDARROW="Default" ENDINCLINATION="-117;97;" ID="Arrow_ID_675730281" SOURCE="ID_1712786620" STARTARROW="None" STARTINCLINATION="-88;190;"/>
 <node CREATED="1504353524805" HGAP="230" ID="ID_1664812467" MODIFIED="1504368617381" TEXT="The Buyer send the right amount to the contract" VSHIFT="287">
-<node CREATED="1504353978951" HGAP="62" ID="ID_1184404379" MODIFIED="1504368070019" VSHIFT="-28">
+<node CREATED="1504353978951" HGAP="62" ID="ID_1184404379" MODIFIED="1504368841784" VSHIFT="-28">
 <richcontent TYPE="NODE"><html>
   <head>
     
@@ -34,12 +34,15 @@
       &#160;&#160;&#160;&#160;- Here is a received link http://ethermediary.com/blablabla
     </p>
     <p>
+      &#160;&#160;&#160;&#160;- Here is a cancel link http://ethermediary.com/blablabla
+    </p>
+    <p>
       - The Seller send the object or activate the service.
     </p>
   </body>
 </html>
 </richcontent>
-<node CREATED="1504367810065" HGAP="74" ID="ID_1588305018" MODIFIED="1504368006146" VSHIFT="32">
+<node CREATED="1504367810065" HGAP="76" ID="ID_1588305018" MODIFIED="1504371388403" VSHIFT="41">
 <richcontent TYPE="NODE"><html>
   <head>
     
@@ -70,7 +73,7 @@
 <icon BUILTIN="button_ok"/>
 </node>
 </node>
-<node CREATED="1504354479698" HGAP="191" ID="ID_1912917035" MODIFIED="1504368464348" VSHIFT="3">
+<node CREATED="1504354479698" HGAP="181" ID="ID_1912917035" MODIFIED="1504368820254" VSHIFT="8">
 <richcontent TYPE="NODE"><html>
   <head>
     
@@ -115,7 +118,21 @@
 <icon BUILTIN="messagebox_warning"/>
 </node>
 </node>
-<node CREATED="1504368117402" HGAP="95" ID="ID_513621261" MODIFIED="1504368468116" TEXT="You guys fucked up, the Deal is canceled and the money can&apos;t be retrieved" VSHIFT="88">
+<node CREATED="1504368117402" HGAP="116" ID="ID_513621261" MODIFIED="1504368817590" VSHIFT="101">
+<richcontent TYPE="NODE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Six month elapsed. You guys fucked up.
+    </p>
+    <p>
+      The Deal is canceled and the money can't be retrieved
+    </p>
+  </body>
+</html>
+</richcontent>
 <icon BUILTIN="button_cancel"/>
 </node>
 </node>
