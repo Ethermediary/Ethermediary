@@ -1,0 +1,3 @@
+geth --identity "MyNodeName" --rpc --rpcport "8080" --rpccorsdomain "*" --datadir "D:\wecode\ethermediary\ethermediary_contrat\chain" --port "30303" --nodiscover --rpcapi "db,eth,net,web3,personal" --networkid 1999 init D:\wecode\ethermediary\ethermediary_contrat\CustomGenesis.json
+
+geth --identity "MyNodeName" --rpc --rpcport "8080" --rpccorsdomain "*" --datadir "D:\wecode\ethermediary\ethermediary_contrat\chain" --port "30303" --nodiscover --rpcapi "db,eth,net,web3,personal" --networkid 1999
