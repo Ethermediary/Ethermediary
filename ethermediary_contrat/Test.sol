@@ -13,27 +13,33 @@ contract SampleContract{
 		DONE
 	}
 
-	State public state = State.INIT;
-	State stateBeforeCancel;
-	uint public offer;
-	uint public cautionBuyer;
-	uint public cautionSeller;
-	bool public allowRefund;
-	address buyer;
-	address seller;
 	address taxCollector;
+	struct Exchange{
+		State state;
+		State stateBeforeCancel;
+		uint offer;
+		uint cautionBuyer;
+		uint cautionSeller;
+		bool allowRefund;
+		address buyer;
+		address seller;
+	}
+	mapping (uint => Exchange) exchanges;
+	event NewExchange(uint id);
+	event SayState(uint state, uint offer, uint cautionBuyer, uint cautionSeller, 
+		bool allowRefund, address buyer, address seller);
 
 	function SampleContract(){
 		taxCollector = msg.sender;
 	}
 
-	modifier onlyBuyer(){
-		require(msg.sender == buyer);
+	modifier onlyBuyer(uint id){
+		require(msg.sender == exchanges[id].buyer);
 		_;
 	}
 
-	modifier onlySeller(){
-		require(msg.sender == seller);
+	modifier onlySeller(uint id){
+		require(msg.sender == exchanges[id].seller);
 		_;
 	}
 
@@ -42,159 +48,211 @@ contract SampleContract{
 		_;
 	}
 
-	modifier inState(State s){
-		require(s == state);
+	modifier inState(uint id, State s){
+		require(s == exchanges[id].state);
 		_;
 	}
 
-	modifier inState2(State s1, State s2){
-		require(state == s1 || state == s2);
+	modifier inState2(uint id, State s1, State s2){
+		require(exchanges[id].state == s1 || exchanges[id].state == s2);
 		_;
 	}
 
-	modifier condition(bool _condition){
-		require(_condition);
+	modifier refundAllowed(uint id){
+		require(exchanges[id].allowRefund);
 		_;
 	}
 
-	function BUYER_makeOffer(uint amount) payable inState(State.INIT) returns(bool, string){
+	function BUYER_makeOffer(uint amount) payable returns(bool, string){
 		if(msg.value < (amount*11)/10)
 			return (false, "message value is not amount * 1.1");
-		buyer = msg.sender;
-		offer = amount;
-		cautionBuyer = msg.value - amount;
-		state = State.OFFER_MADE;
-		return (true, toString(offer));
+
+		uint uuid = generateUUID();
+		Exchange storage newExchange = exchanges[uuid];
+		newExchange.buyer = msg.sender;
+		newExchange.offer = amount;
+		newExchange.cautionBuyer = msg.value - amount;
+		newExchange.state = State.OFFER_MADE;
+		exchanges[uuid] = newExchange;
+		NewExchange(uuid);
+		return (true, toString(uuid));
 	}
 
-	function BUYER_cancelOffer() inState(State.OFFER_MADE) onlyBuyer{
-		state = State.DONE;
-		refund();
+	function BUYER_cancelOffer(uint id) inState(id, State.OFFER_MADE) onlyBuyer(id){
+		exchanges[id].state = State.DONE;
+		refund(id);
 	}
 
-	function BUYER_receivedPackage() inState2(State.WAITING_SEND, State.WAITING_ARRIVE) onlyBuyer{
-		state = State.DONE;
-		finishTransaction();
+	function BUYER_receivedPackage(uint id) inState2(id, State.WAITING_SEND, State.WAITING_ARRIVE) onlyBuyer(id){
+		exchanges[id].state = State.DONE;
+		finishTransaction(id);
 	}
 
-	function BUYER_receivedBadPackage() 
-		inState2(State.WAITING_SEND, State.WAITING_ARRIVE)
-		onlyBuyer
-		condition(allowRefund)
+	function BUYER_receivedBadPackage(uint id) 
+		inState2(id, State.WAITING_SEND, State.WAITING_ARRIVE)
+		onlyBuyer(id)
+		refundAllowed(id)
 	{
-		state = State.SENDING_BACK_BAD_PACKAGE;
+		exchanges[id].state = State.SENDING_BACK_BAD_PACKAGE;
 	}
 
-	function BUYER_sentBackBadPackage() 
-		inState(State.SENDING_BACK_BAD_PACKAGE) 
-		onlyBuyer 
-		condition(allowRefund)
+	function BUYER_sentBackBadPackage(uint id) 
+		inState(id, State.SENDING_BACK_BAD_PACKAGE) 
+		onlyBuyer(id)
+		refundAllowed(id)
 	{
-		state = State.SENT_BACK_BAD_PACKAGE;
+		exchanges[id].state = State.SENT_BACK_BAD_PACKAGE;
 	}
 
-	function BUYER_askForCancel() onlyBuyer{
-		require(uint(state) >= uint(State.WAITING_SEND) && uint(state) < uint(State.MUTUAL_CANCEL_BUYER));
-		stateBeforeCancel = state;
-		state = State.MUTUAL_CANCEL_BUYER;
+	function BUYER_askForCancel(uint id) onlyBuyer(id){
+		Exchange storage ref = exchanges[id];
+		require(uint(ref.state) >= uint(State.WAITING_SEND) && uint(ref.state) < uint(State.MUTUAL_CANCEL_BUYER));
+		ref.stateBeforeCancel = ref.state;
+		ref.state = State.MUTUAL_CANCEL_BUYER;
 	}
 
-	function BUYER_acceptCancel() onlyBuyer inState(State.MUTUAL_CANCEL_SELLER){
-		state = State.DONE;
-		refund();
+	function BUYER_acceptCancel(uint id) onlyBuyer(id) inState(id, State.MUTUAL_CANCEL_SELLER){
+		exchanges[id].state = State.DONE;
+		refund(id);
 	}
 
-	function BUYER_refuseCancel() onlyBuyer inState(State.MUTUAL_CANCEL_SELLER){
-		state = stateBeforeCancel;
+	function BUYER_refuseCancel(uint id) onlyBuyer(id) inState(id, State.MUTUAL_CANCEL_SELLER){
+		exchanges[id].state = exchanges[id].stateBeforeCancel;
 	}
 
-	function SELLER_answerOffer(bool answer, bool canRefund) 
+	function SELLER_answerOffer(uint id, bool answer, bool canRefund) 
 		payable 
-		inState(State.OFFER_MADE) 
+		inState(id, State.OFFER_MADE) 
 		returns (bool, string)
 	{
+		Exchange storage ref = exchanges[id];
+
 		if(answer){
-			if(canRefund && msg.value < (offer*1)/10)
+			if(canRefund && msg.value < (ref.offer*1)/10)
 				return (false, "you must provide at least 10% of the offer as a caution if you allow refunds");
-			
-			seller = msg.sender;
-			state = State.WAITING_SEND;
-			allowRefund = canRefund;
+
+			ref.seller = msg.sender;
+			ref.state = State.WAITING_SEND;
+			ref.allowRefund = canRefund;
 			if(canRefund)
-				cautionSeller = msg.value;
+				ref.cautionSeller = msg.value;
 			
 			return (true, "offer accepted");
 		}else{
-			state = State.DONE;
-			refund();
+			ref.state = State.DONE;
+			refund(id);
 			return (true, "offer rejected, refunded buyer");
 		}
 	}
 
-	function SELLER_cancelAcceptation() inState(State.WAITING_SEND) onlySeller{
-		state = State.DONE;
-		refund();
+	function SELLER_cancelAcceptation(uint id) inState(id, State.WAITING_SEND) onlySeller(id){
+		exchanges[id].state = State.DONE;
+		refund(id);
 	}
 
-	function SELLER_confirmSend() inState(State.WAITING_SEND) onlySeller{
-		state = State.WAITING_ARRIVE;
+	function SELLER_confirmSend(uint id) inState(id, State.WAITING_SEND) onlySeller(id){
+		exchanges[id].state = State.WAITING_ARRIVE;
 	}
 
-	function SELLER_receivedBadPackage() 
-		inState2(State.SENDING_BACK_BAD_PACKAGE, State.SENT_BACK_BAD_PACKAGE)
-		onlySeller
-		condition(allowRefund)
+	function SELLER_receivedBadPackage(uint id) 
+		inState2(id, State.SENDING_BACK_BAD_PACKAGE, State.SENT_BACK_BAD_PACKAGE)
+		onlySeller(id)
+		refundAllowed(id)
 	{
-		state = State.DONE;
-		refund();
+		exchanges[id].state = State.DONE;
+		refund(id);
 	}
 
-	function SELLER_askCancel() onlySeller{
-		require(uint(state) >= uint(State.WAITING_ARRIVE) && uint(state) < uint(State.MUTUAL_CANCEL_BUYER));
-		stateBeforeCancel = state;
-		state = State.MUTUAL_CANCEL_SELLER;
+	function SELLER_askForCancel(uint id) onlySeller(id){
+		Exchange storage ref = exchanges[id];
+		require(uint(ref.state) >= uint(State.WAITING_ARRIVE) && uint(ref.state) < uint(State.MUTUAL_CANCEL_BUYER));
+		ref.stateBeforeCancel = ref.state;
+		ref.state = State.MUTUAL_CANCEL_SELLER;
 	}
 
-	function SELLER_acceptCancel() onlySeller inState(State.MUTUAL_CANCEL_BUYER){
-		state = State.DONE;
-		refund();
+	function SELLER_acceptCancel(uint id) onlySeller(id) inState(id, State.MUTUAL_CANCEL_BUYER){
+		exchanges[id].state = State.DONE;
+		refund(id);
 	}
 
-	function SELLER_refuseCancel() onlySeller inState(State.MUTUAL_CANCEL_BUYER){
-		state = stateBeforeCancel;
+	function SELLER_refuseCancel(uint id) onlySeller(id) inState(id, State.MUTUAL_CANCEL_BUYER){
+		exchanges[id].state = exchanges[id].stateBeforeCancel;
 	}
 
 //test if the refund and finish transaction work 
-	function refund() private {
-		var toBuyer = offer + cautionBuyer;
-		var toSeller = cautionSeller;
-		offer = 0;
-		cautionBuyer = 0;
-		cautionSeller = 0;
+	function refund(uint id) private {
+		Exchange storage ref = exchanges[id];
 
-		buyer.transfer(toBuyer);
+		var toBuyer = ref.offer + ref.cautionBuyer;
+		var toSeller = ref.cautionSeller;
+		ref.offer = 0;
+		ref.cautionBuyer = 0;
+		ref.cautionSeller = 0;
+
+		ref.buyer.transfer(toBuyer);
 		if(toSeller != 0){
-			seller.transfer(toSeller);
+			ref.seller.transfer(toSeller);
 		}
+
+		delete exchanges[id];
 	}
 
-	function finishTransaction() private {
-		/*var toSeller = ;
-		var toBuyer = ;
-		offer = 0;
-		cautionSeller = 0;
-		cautionBuyer = 0;*/
+	function finishTransaction(uint id) private {
+		Exchange storage ref = exchanges[id];
 
-		seller.transfer(offer + cautionSeller);
-		buyer.transfer(cautionBuyer);
+		var toSeller = ref.offer + ref.cautionSeller;
+		var toBuyer = ref.cautionBuyer;
+		ref.offer = 0;
+		ref.cautionSeller = 0;
+		ref.cautionBuyer = 0;
+
+		ref.seller.transfer(toSeller);
+		ref.buyer.transfer(toBuyer);
+		
+		delete exchanges[id];
 	}
 
-	function EMERGENCY_finishTransaction() onlyTaxCollector{
-		finishTransaction();
+	function EMERGENCY_finishTransaction(uint id) onlyTaxCollector{
+		finishTransaction(id);
 	}
 
-	function EMERGENCY_refund() onlyTaxCollector{
-		refund();
+	function EMERGENCY_refund(uint id) onlyTaxCollector{
+		refund(id);
+	}
+
+	//returns all the info of an exchange
+	function getInfo(uint id)  returns (uint, uint, uint, uint, bool, address, address){
+		Exchange storage ref = exchanges[id];
+		require(ref.state != State.INIT);
+		require(msg.sender == ref.buyer || msg.sender == ref.seller || msg.sender == taxCollector);
+		/*State state;
+		State stateBeforeCancel;
+		uint offer;
+		uint cautionBuyer;
+		uint cautionSeller;
+		bool allowRefund;
+		address buyer;
+		address seller*/
+		SayState(uint(ref.state), ref.offer, ref.cautionBuyer, ref.cautionSeller, ref.allowRefund, ref.buyer, ref.seller);
+		return (uint(ref.state), ref.offer, ref.cautionBuyer, ref.cautionSeller, ref.allowRefund, ref.buyer, ref.seller);
+	}
+
+	function rand(uint min, uint max, uint seed) private returns (uint){
+        return uint(sha3(seed))%(min+max)-min;
+	}
+
+	function generateUUID() private returns (uint res){
+		//max uint = 2**53 - 1; = 9007199254740991
+		//this is the max int for javascript, since most wallet work on javascript engine doing more than that
+		//will break everything
+
+		uint i = 0;
+		do{
+			res = rand(0, 9007199254740991, block.timestamp + i);
+			i++;
+		}while(exchanges[res].state != State.INIT);	
+
+		return res;
 	}
 
 	function toString(uint v) private constant returns (string){
