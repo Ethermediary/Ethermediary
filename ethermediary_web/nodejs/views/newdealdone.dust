@@ -1,0 +1,24 @@
+{> "views/header.dust"/}
+
+	<div id="content" class="gradient">
+
+		<div id="definition">
+			<a>Your <strong>deal</strong> is now <strong>created</strong>. The contract <strong>Ethermediary</strong> is waiting for you, the buyer, to send the exact amount of <strong>*****</strong>
+        from your</br >specified <strong>public adress</strong> to the contract.</br></br>Here are the information of the deal:
+			</a>
+		</div>
+
+		<div id="receipt" class="note"><strong>
+      <a>Specific ID of the deal :</a></br></br>
+      <a>Buyer public adress :</a></br></br>
+      <a>Seller public adress :</a></br></br>
+      <a>Amount of token :</a></br></br>
+      <a>Minimum duration before refund :</a></strong></br></br>
+
+    <a>These information are not correct ?</br>You can delete the deal <strong>here</strong>.</a>
+
+		</div>
+
+	</div>
+
+{> "views/footer.dust"/}

@@ -1,0 +1,35 @@
+{
+  "name": "ethermediary",
+  "version": "1.0.0",
+  "description": "A lightweight website to interact with the Ethermediary smart contract",
+  "main": "index.js",
+  "scripts": {
+    "build-css": "stylus source/stylesheets/index.styl -o static/css",
+    "watch-css": "stylus source/stylesheets/index.styl -o static/css -w",
+    "clean": "rm -rf static/css && mkdir -p static/css",
+    "build": "npm run clean && npm run build-css",
+    "watch": "npm run clean && npm run watch-css & nodemon server -e js,jade",
+    "start": "node server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.6.6",
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "dust": "^0.3.0",
+    "dustjs-helpers": "^1.7.3",
+    "error-handler": "^1.0.0",
+    "express": "^4.15.4",
+    "express-validator": "^4.1.1",
+    "hoffman": "^0.2.2",
+    "nodemon": "^1.11.0",
+    "path": "^0.12.7",
+    "querystring": "^0.2.0",
+    "request": "^2.81.0",
+    "routes": "^2.1.0",
+    "serve-favicon": "^2.4.3",
+    "socket.io": "^2.0.3",
+    "validator": "^8.1.0"
+  }
+}

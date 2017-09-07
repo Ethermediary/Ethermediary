@@ -1,0 +1,28 @@
+{> "views/header.dust"/}
+
+	<div id="content" class="gradient">
+
+		<div id="definition">
+			<a><strong>Ethermediary</strong> is an Ethereum based smart contract. It allows you to safely trade objects and services for money on the internet,
+				and accepts <strong>Bitcoin</strong>, <strong>Ether</strong>, and every other <strong>ERC20 tokens</strong> available.</br></br>
+				<strong>Ethermediary</strong> acts as a safe third party, <strong>completely independant</strong> and <strong>trustless</strong>, which garanty the seller to be paid,
+				and the buyer to received the object or service for close to nothing.
+			</a>
+		</div>
+
+		<div id="button_menu">
+			<div id="new_deal_def">
+				<a>Start a new deal </br>as a Buyer</a></br></br>
+				<a href="/newdealone"><button>New Deal</button></a>
+		  </div>
+
+			<div id="get_deal_def">
+				<a>Access and interact </br>with a deal</a></br></br>
+				<a href="/getdeal"><button>Get Deal</button></a>
+
+      </div>
+		</div>
+
+	</div>
+
+{> "views/footer.dust"/}
