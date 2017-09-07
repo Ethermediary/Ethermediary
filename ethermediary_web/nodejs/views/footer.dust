@@ -1,0 +1,18 @@
+      <div id="footer" class="note">
+      <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terms of use</a>
+
+      <a class="marge" href="./howitworks">How it works</a>
+
+      <a href="https://github.com/Ethermediary" style="float: right;">
+        <img src="./imgs/GitHub-Mark/PNG/GitHub-Mark-64px.png" width="25px"/>
+      </a>
+      <a href="https://github.com/Ethermediary" style="float: right;">GitHub&nbsp;&nbsp;</a>
+
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="/js/app.js"></script>
+
+</body>

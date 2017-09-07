@@ -1,0 +1,46 @@
+{> "views/header.dust"/}
+
+	<div id="content" class="gradient">
+
+		<div id="definition">
+			<a>The <strong>buyer</strong> have to initialise the <strong>deal</strong> and make an offer to the <strong>seller</strong>.
+			</a>
+		</div></br>
+
+		<div id="button_menu" class="note">
+
+			<form method="POST" action="/newdealtwo">
+
+				{?err1}
+					<div id="alert">
+						<a class="info">
+							<img src="./imgs/alert.png" width="30px"><span>{#err1}Error : {.msg}{/err1}</span></img>
+						</a>
+					</div>
+				{/err1}
+				<input type="text" placeholder="Object or service associated" name="meta" value="{meta}"/>
+				<a>&nbsp;&nbsp;&nbsp;The object or service associated with the Deal</a></br></br>
+
+				{?err2}
+					<div id="alert">
+						<a class="info">
+							<img src="./imgs/alert.png" width="30px"><span>{#err2}Error : {.msg}{/err2}</span></img>
+						</a>
+					</div>
+				{/err2}
+				<input type="text" placeholder="Amount of tokens" name="amount" value="{amount}"/>
+				<a>&nbsp;&nbsp;&nbsp;The contract will be waiting for this amount coming from your public adress</a></br></br></br>
+
+				<input type="submit" value="Next"></input>
+			</form>
+
+		</div>
+
+	</div>
+
+{> "views/footer.dust"/}
+
+
+
+
+<!--<a href="./newdealtwo"><button id="new_deal_button" >Next</button></a>-->
