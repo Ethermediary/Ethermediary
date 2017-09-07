@@ -1,22 +1,16 @@
 const express = require('express');
-app = express();
-fs = require('fs');
-qs = require('querystring');
-favicon = require('serve-favicon');
-path = require('path');
-hoffman = require('hoffman');
-request = require('request');
-cookieParser = require('cookie-parser');
-bodyParser = require('body-parser');
-expressValidator = require('express-validator');
-const { check, validationResult } = require('express-validator/check');
-const { matchedData } = require('express-validator/filter');
-server = require('http').createServer(app);
-io = require('socket.io')(server);
-dustjshelpers = require("dustjs-helpers");
-validator = require('validator');
-
-formular = require('./formular.js');
+const app = express();
+const favicon = require('serve-favicon');
+const path = require('path');
+const hoffman = require('hoffman');
+//const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
+//const { check, validationResult } = require('express-validator/check');
+//const { matchedData } = require('express-validator/filter');
+//server = require('http').createServer(app);
+//io = require('socket.io')(server);
+const formular = require('./formular.js');
 
 // Set path ...
 app.use(bodyParser.json());
@@ -25,7 +19,7 @@ app.use(expressValidator());
 doCache = process.env.DEBUG == false;
 app.use(favicon(path.join(__dirname, "public", "imgs", "favicon.ico")));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cookieParser());
+//app.use(cookieParser());
 app.engine('dust', hoffman.__express());
 //set the view engine to dust
 app.set('view engine', 'dust');
@@ -46,27 +40,17 @@ app.get('/', function (req, res) {
   res.render('index.dust', {req : req});
 });
 
-// All the code handling formular datas
-formular();
+app.use(formular);
 
-// A boolean filter fo dustjs
-hoffman.isTrue = function(chunk, context, bodies, params) {
-  return context.resolve(params.key) != 0;
-}
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-
-server.listen(3000, function () {
+var ser = app.listen(3000, function () {
   console.log('Listening on port 3000!');
 });
 
 // Event management with sockets.io
-io.sockets.on('connection', function (socket) {
-    console.log('Un client est connecté !');
-    socket.on('message', function (message) {
-        console.log('Un client me parle ! Il me dit : ' + message);
-    });
-    socket.broadcast.emit('message', 'Un autre client vient de se connecter !');
-});
+//io.sockets.on('connection', function (socket) {
+//    console.log('Un client est connecté !');
+//    socket.on('message', function (message) {
+//        console.log('Un client me parle ! Il me dit : ' + message);
+//    });
+//    socket.broadcast.emit('message', 'Un autre client vient de se connecter !');
+//});

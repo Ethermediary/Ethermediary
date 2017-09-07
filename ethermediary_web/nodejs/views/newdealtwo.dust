@@ -9,54 +9,54 @@
 
 		<div id="button_menu" class="note">
 			<form method="POST" action="/newdealdone">
-					{?err1}
+					{?error_buyer_address}
 						<div id="alert">
 							<a class="info">
-								<img src="./imgs/alert.png" width="30px"><span>{#err1}Error : {.msg}{/err1}</span></img>
+								<img src="./imgs/alert.png" width="30px"><span>{#error_buyer_address}Error : {.msg}<br/>{/error_buyer_address}</span></img>
 							</a>
 						</div>
-					{/err1}
-					<input type="text" placeholder="Buyer public adress" name="buyer_adress" value="{buyer_adress}"/>
+					{/error_buyer_address}
+					<input type="text" placeholder="Buyer public address" name="buyer_address" value="{req.body.buyer_address}"/>
 					<a>&nbsp;&nbsp;&nbsp;Copy and paste is the way to go &nbsp;= ]</a></br></br>
 
-					{?err2}
+					{?error_buyer_email}
 						<div id="alert">
 							<a class="info">
-								<img src="./imgs/alert.png" width="30px"><span>{#err2}Error : {.msg}{/err2}</span></img>
+								<img src="./imgs/alert.png" width="30px"><span>{#error_buyer_email}Error : {.msg}<br/>{/error_buyer_email}</span></img>
 							</a>
 						</div>
-					{/err2}
-					<input type="text" placeholder="Buyer's email" name="buyer_email" value="{buyer_email}"/>
+					{/error_buyer_email}
+					<input type="text" placeholder="Buyer's email" name="buyer_email" value="{req.body.buyer_email}"/>
 					<a>&nbsp;&nbsp;&nbsp;Email of the Buyer</a></br></br>
 
-					{?err3}
+					{?error_seller_address}
 						<div id="alert">
 							<a class="info">
-								<img src="./imgs/alert.png" width="30px"><span>{#err3}Error : {.msg}{/err3}</span></img>
+								<img src="./imgs/alert.png" width="30px"><span>{#error_seller_address}Error : {.msg}<br/>{/error_seller_address}</span></img>
 							</a>
 						</div>
-					{/err3}
-					<input type="text" placeholder="Seller public adress" name="seller_adress" value="{seller_adress}"/>
+					{/error_seller_address}
+					<input type="text" placeholder="Seller public address" name="seller_address" value="{req.body.seller_address}"/>
 					<a>&nbsp;&nbsp;&nbsp;This is where the contract will send your paiement</a></br></br>
 
-					{?err4}
+					{?error_seller_email}
 						<div id="alert">
 							<a class="info">
-								<img src="./imgs/alert.png" width="30px"><span>{#err4}Error : {.msg}{/err4}</span></img>
+								<img src="./imgs/alert.png" width="30px"><span>{#error_seller_email}Error : {.msg}<br/>{/error_seller_email}</span></img>
 							</a>
 						</div>
-					{/err4}
-					<input type="text" placeholder="Seller's email" name="seller_email" value="{seller_email}"/>
+					{/error_seller_email}
+					<input type="text" placeholder="Seller's email" name="seller_email" value="{req.body.seller_email}"/>
 					<a>&nbsp;&nbsp;&nbsp;Email of the Seller</a></br></br>
 
-					{?err5}
+					{?error_refund_duration}
 						<div id="alert">
 							<a class="info">
-								<img src="./imgs/alert.png" width="30px"><span>{#err5}Error : {.msg}{/err5}</span></img>
+								<img src="./imgs/alert.png" width="30px"><span>{#error_refund_duration}Error : {.msg}<br/>{/error_refund_duration}</span></img>
 							</a>
 						</div>
-					{/err5}
-					<input type="text" placeholder="Minimum duration before refund in days" name="refund_duration" value="{refund_duration}"/>
+					{/error_refund_duration}
+					<input type="text" placeholder="Minimum duration before refund in days" name="refund_duration" value="{req.body.refund_duration}"/>
 					<a>&nbsp;&nbsp;&nbsp;The minimum amount of days before the buyer could ask for a refund</a></br></br></br>
 
 					<input class="inline" type="submit" value="Next"></input>

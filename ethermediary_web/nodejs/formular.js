@@ -1,121 +1,95 @@
-function formular(){
+const express = require('express');
+const router = new express.Router();
+const path = require('path');
+module.exports = router;
 
-    app.post('/newdealtwo',function(req,res){
-        var meta = req.body.meta;
-        amount = req.body.amount;
-        assign = 0;
-        req.sanitizeBody('meta').trim();
-        req.sanitizeBody('amount').trim();
+router.post('/newdealtwo',function(req,res){
+    req.sanitizeBody('meta').trim();
+    req.sanitizeBody('amount').trim();
 
-        req.checkBody("meta", "Please enter the transaction purpose").isAlphanumeric();
-        err1 = req.validationErrors()[0];
-        if(err1){assign++}
+    req.checkBody("meta", "Please enter the transaction purpose").isAlphanumeric();
+    req.checkBody("amount", "Please enter a decimal number").isDecimal();
 
-        req.checkBody("amount", "Please enter a decimal number").isDecimal();
-        err2 = req.validationErrors()[assign];
-        if(err2){assign++}
+    req.getValidationResult()
+        .then(function (results) {
+            if (results.isEmpty()) {
+                res.render(path.join(__dirname, 'views', 'newdealtwo.dust'));
+            } else {
+                let errors = results.array();
+                res.render(path.join(__dirname, 'views', 'newdealone.dust'), {
+                    req: req,
+                    error_meta: errors.filter(e => e.param == "meta"),
+                    error_amount: errors.filter(e => e.param == "amount")
+                });
+            }
+        })
+        .catch(function (err) {
+            console.log("error while validating: " + err);
+            res.status(500).send("error validating results");
+        });
+});
 
-      	var errors = req.validationErrors();
-        let handleError = function(err){
-          res.render(path.join(__dirname, 'views', 'newdealone.dust'), {
-            req: req,
-            error: err,
-            meta: meta,
-            amount: amount,
-            err1: err1,
-            err2: err2
-          });
-        };
+router.post('/newdealdone',function(req,res){
+    req.sanitizeBody('buyer_address').trim();
+    req.sanitizeBody('buyer_email').trim();
+    req.sanitizeBody('seller_address').trim();
+    req.sanitizeBody('seller_email').trim();
+    req.sanitizeBody('refund_duration').trim();
 
-      	if(errors){
-      		handleError(errors);
-      		return;
-      	}
-        else {
-          res.render(path.join(__dirname, 'views', 'newdealtwo.dust'));
-        }
-
-    });
-
-    app.post('/newdealdone',function(req,res){
-      var buyer_adress = req.body.buyer_adress;
-      buyer_email = req.body.buyer_email;
-      seller_adress = req.body.seller_adress;
-      seller_email = req.body.seller_email;
-      refund_duration = req.body.refund_duration;
-      var err1, err2, err3, err4, err5;
-      var assign = 0;
-
-      req.sanitizeBody('buyer_adress').trim();
-      req.sanitizeBody('buyer_email').trim();
-      req.sanitizeBody('seller_adress').trim();
-      req.sanitizeBody('seller_email').trim();
-      req.sanitizeBody('refund_duration').trim();
-
-      let pos = function(err, rang){
-        if((Object.getOwnPropertyNames(req.validationErrors()).length-1) == (assign))
-          { return (rang-1); } // Not my error so I dodge
-        else return Object.getOwnPropertyNames(req.validationErrors()).length-2;  // It's my error
-      }
-
-      // On extrait l'erreur correspondante de l'objet retourné par req.validationErrors()
-      req.checkBody("buyer_adress", "Please enter a valid public adress for the Buyer")
+    // On extrait l'erreur correspondante de l'objet retourné par req.validationErrors()
+    req.checkBody("buyer_address", "Please enter a valid public address for the Buyer")
         .len(42);
-      err1 = req.validationErrors()[pos(err1,0)];
-      if(err1){assign++}
-
-      req.checkBody("buyer_email", "Please enter a valid email for the Buyer")
-        .isEmail();
-      err2 = req.validationErrors()[pos(err2,1)];
-      if(err2){assign++}
-
-      req.checkBody("seller_adress", "Please enter a valid public adress for the Seller")
+    req.checkBody("buyer_address", "this is a second error")
         .len(42);
-      err3 = req.validationErrors()[pos(err3,2)];
-      if(err3){assign++}
-
-      req.checkBody("seller_email", "Please enter a valid email for the Seller")
+    req.checkBody("buyer_email", "Please enter a valid email for the Buyer")
         .isEmail();
-      err4 = req.validationErrors()[pos(err4,3)];
-      if(err4){assign++}
-
-      req.checkBody("refund_duration", "Please enter a valid integer for the number of days")
+    req.checkBody("seller_address", "Please enter a valid public address for the Seller")
+        .len(42);
+    req.checkBody("seller_email", "Please enter a valid email for the Seller")
+        .isEmail();
+    req.checkBody("refund_duration", "Please enter a valid integer for the number of days")
         .isInt({ min: 7, max: 365 });
-      err5 = req.validationErrors()[pos(err5,4)];
-      if(err5){assign++}
 
-      let handleError = function(err){
-        res.render(path.join(__dirname, 'views', 'newdealtwo.dust'), {
-          req: req,
-          error: err,
-          buyer_adress: buyer_adress,
-          buyer_email: buyer_email,
-          seller_adress: seller_adress,
-          seller_email: seller_email,
-          refund_duration: refund_duration,
-          err1: err1,
-          err2: err2,
-          err3: err3,
-          err4: err4,
-          err5, err5
-         });
-      };
 
-    	var errors = req.validationErrors();
-    	if(errors){
-    		handleError(errors);
-    		return;
-    	}
-      else {
-        res.render(path.join(__dirname, 'views', 'newdealdone.dust'));
-      }
-    });
+    //on utilise getValidationResult car req.validationErrors() est deprecated (il va etre retiré du module dans le futur)
+    //getValidationResult nous donne un objets qui contient plusieurs fonction
+    //ici on utilise isEmpty() pour check si ya des erreurs 
+    //et array() qui nous donne la meme list d'objet que si on appelait directement req.validationErrors()
+    //chaque element de l'array est un object avec les membres suivants: location, param, msg
+    //voila un exemple pour l'erreur sur buyer_address:
+    //{
+    //    location: "body",
+    //    param: "buyer_body",
+    //    msg: "Please enter a valid public address for the Buyer"
+    //}
+    req.getValidationResult()
+        .then(function (results) {
+            if (results.isEmpty()) {
+                res.render(path.join(__dirname, 'views', 'newdealdone.dust'));
+            } else {
+                let errors = results.array();
 
-    app.post('/mydeal',function(req,res){
-       var deal_id = req.body.deal_id;
-       res.render(path.join(__dirname, 'views', 'mydeal.dust'));
-    });
+                //ici errors contient donc la list d'objet décrite dans le paragraphe plus haut
+                //on utilise Array.prototype.filter pour récuperer seulement les membres 
+                //qui ont comme valeur de "param" le nom de l'erreur qu'on veut
+                res.render(path.join(__dirname, 'views', 'newdealtwo.dust'), {
+                    req: req,
+                    error_buyer_address: errors.filter(e => e.param == "buyer_address"),
+                    error_buyer_email: errors.filter(e => e.param == "buyer_email"),
+                    error_seller_address: errors.filter(e => e.param == "seller_address"),
+                    error_seller_email: errors.filter(e => e.param == "seller_email"),
+                    error_refund_duration: errors.filter(e => e.param == "refund_duration")
+                });
+            }
+        })
+        .catch(function (err) {
+            console.log("error while validating: " + err);
+            res.status(500).send("error validating results");
+        });
+});
 
-}
+router.post('/mydeal',function(req,res){
+    var deal_id = req.body.deal_id;
+    res.render(path.join(__dirname, 'views', 'mydeal.dust'));
+});
 
-module.exports = formular;

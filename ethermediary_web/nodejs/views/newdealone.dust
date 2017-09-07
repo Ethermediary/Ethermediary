@@ -11,23 +11,23 @@
 
 			<form method="POST" action="/newdealtwo">
 
-				{?err1}
+				{?error_meta}
 					<div id="alert">
 						<a class="info">
-							<img src="./imgs/alert.png" width="30px"><span>{#err1}Error : {.msg}{/err1}</span></img>
+							<img src="./imgs/alert.png" width="30px"><span>{#error_meta}Error : {.msg}<br/>{/error_meta}</span></img>
 						</a>
 					</div>
-				{/err1}
+				{/error_meta}
 				<input type="text" placeholder="Object or service associated" name="meta" value="{meta}"/>
 				<a>&nbsp;&nbsp;&nbsp;The object or service associated with the Deal</a></br></br>
 
-				{?err2}
+				{?error_amount}
 					<div id="alert">
 						<a class="info">
-							<img src="./imgs/alert.png" width="30px"><span>{#err2}Error : {.msg}{/err2}</span></img>
+							<img src="./imgs/alert.png" width="30px"><span>{#error_amount}Error : {.msg}<br/>{/error_amount}</span></img>
 						</a>
 					</div>
-				{/err2}
+				{/error_amount}
 				<input type="text" placeholder="Amount of tokens" name="amount" value="{amount}"/>
 				<a>&nbsp;&nbsp;&nbsp;The contract will be waiting for this amount coming from your public adress</a></br></br></br>
 
