@@ -1,0 +1,38 @@
+{
+  "contract_name": "SellerBridge",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "name": "dealManagerAddress",
+          "type": "address"
+        },
+        {
+          "name": "dealId",
+          "type": "uint256"
+        },
+        {
+          "name": "givenAnswer",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "constructor"
+    },
+    {
+      "payable": true,
+      "type": "fallback"
+    }
+  ],
+  "unlinked_binary": "0x6060604052341561000f57600080fd5b6040516060806101578339810160405280805191906020018051919060200180519150505b60008054600160a060020a031916600160a060020a03851617905560018290556002805460ff19168215151790555b5050505b60e2806100756000396000f30060606040525b5b60005460015460025473ffffffffffffffffffffffffffffffffffffffff909216916381ec227d91349160ff166040517c010000000000000000000000000000000000000000000000000000000063ffffffff86160281526004810192909252151560248201526044016000604051808303818588803b1515608757600080fd5b6125ee5a03f11515609757600080fd5b505050503373ffffffffffffffffffffffffffffffffffffffff16ff5b0000a165627a7a723058209fd9d64a61e672206f22a542800d9cbe0ca045a67f161dd45f95209c867b7f900029",
+  "networks": {
+    "1505136320161": {
+      "events": {},
+      "links": {},
+      "address": "0x17fdc440f3cc305119578c912020c898dd25e9c5",
+      "updated_at": 1505151454462
+    }
+  },
+  "schema_version": "0.0.5",
+  "updated_at": 1505151454462
+}

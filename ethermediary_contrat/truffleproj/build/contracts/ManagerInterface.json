@@ -1,0 +1,26 @@
+{
+  "contract_name": "ManagerInterface",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "name": "answer",
+          "type": "bool"
+        }
+      ],
+      "name": "SELLER_answerOffer",
+      "outputs": [],
+      "payable": true,
+      "type": "function"
+    }
+  ],
+  "unlinked_binary": "0x",
+  "networks": {},
+  "schema_version": "0.0.5",
+  "updated_at": 1505151269161
+}
