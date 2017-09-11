@@ -135,5 +135,4 @@ router.post('/newdealdone',function(req,res){
 router.post('/mydeal',function(req,res){
     var deal_id = req.body.deal_id;
     res.render(path.join(__dirname, 'views', 'mydeal.dust'));
-    console.log(newDeal);
 });

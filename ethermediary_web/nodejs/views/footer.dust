@@ -1,12 +1,12 @@
       <div id="footer" class="note">
-      <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terms of use</a>
+      <a href="terms" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terms of use</a>
 
       <a class="marge" href="./howitworks">How it works</a>
 
       <a href="https://github.com/Ethermediary" style="float: right;">
         <img src="./imgs/GitHub-Mark/PNG/GitHub-Mark-64px.png" width="25px"/>
       </a>
-      <a href="https://github.com/Ethermediary" style="float: right;">GitHub&nbsp;&nbsp;</a>
+      <a href="https://github.com/Ethermediary" style="float: right;" target="_blank">GitHub&nbsp;&nbsp;</a>
 
     </div>
 
