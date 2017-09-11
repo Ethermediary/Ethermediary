@@ -20,8 +20,6 @@ function formular(){
           res.render(path.join(__dirname, 'views', 'newdealone.dust'), {
             req: req,
             error: err,
-            meta: meta,
-            amount: amount,
             err1: err1,
             err2: err2
           });
@@ -37,7 +35,7 @@ function formular(){
 
     });
 
-    app.post('/newdealdone',function(req,res){
+    app.post('/newdealreview',function(req,res){
       var buyer_adress = req.body.buyer_adress;
       buyer_email = req.body.buyer_email;
       seller_adress = req.body.seller_adress;

@@ -3,6 +3,7 @@ const app = express();
 const favicon = require('serve-favicon');
 const path = require('path');
 const hoffman = require('hoffman');
+const sizeof = require('object-sizeof');
 //const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');

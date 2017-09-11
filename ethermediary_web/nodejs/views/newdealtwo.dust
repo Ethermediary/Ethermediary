@@ -2,13 +2,14 @@
 
 	<div id="content" class="gradient">
 
-		<div id="definition">
-			<a>The <strong>buyer</strong> have to initialise the <strong>deal</strong> and make an offer to the <strong>seller</strong>.
+		<div id="definition" style="margin-bottom: 65px;">
+			<a>The <strong>buyer</strong> have to initialise the <strong>deal</strong> and make an offer to the <strong>seller</strong>.</br>
+				Copy and paste is the way to go = ]
 			</a>
 		</div>
 
 		<div id="button_menu" class="note">
-			<form method="POST" action="/newdealdone">
+			<form method="POST" action="/newdealreview">
 					{?error_buyer_address}
 						<div id="alert">
 							<a class="info">
@@ -49,7 +50,7 @@
 					<input type="text" placeholder="Seller's email" name="seller_email" value="{req.body.seller_email}"/>
 					<a>&nbsp;&nbsp;&nbsp;Email of the Seller</a></br></br>
 
-					{?error_refund_duration}
+					<!--{?error_refund_duration}
 						<div id="alert">
 							<a class="info">
 								<img src="./imgs/alert.png" width="30px"><span>{#error_refund_duration}Error : {.msg}<br/>{/error_refund_duration}</span></img>
@@ -57,9 +58,11 @@
 						</div>
 					{/error_refund_duration}
 					<input type="text" placeholder="Minimum duration before refund in days" name="refund_duration" value="{req.body.refund_duration}"/>
-					<a>&nbsp;&nbsp;&nbsp;The minimum amount of days before the buyer could ask for a refund</a></br></br></br>
+					<a>&nbsp;&nbsp;&nbsp;The minimum amount of days before the buyer could ask for a refund</a></br></br></br>	-->
 
 					<input class="inline" type="submit" value="Next"></input>
+					<input type="store" name="index" value="{index}"></input> <!-- A trick to pass the index of the deal to the next function eheh -->
+
 			 </form>
 		</div>
 
