@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 doCache = process.env.DEBUG == false;
-app.use(favicon(path.join(__dirname, "public", "imgs", "favicon.ico")));
+app.use(favicon(path.join(__dirname, "public", "imgs", "favicon.png")));
 app.use(express.static(path.join(__dirname, 'public')));
 //app.use(cookieParser());
 app.engine('dust', hoffman.__express());
@@ -33,6 +33,9 @@ app.enable('trust proxy');
 
 // Every page parser
 app.get('/:page', function(req, res) {
+  res.render(path.join(__dirname, 'views', path.basename(req.params.page) + '.dust'));
+});
+app.post('/:page', function(req, res) {
   res.render(path.join(__dirname, 'views', path.basename(req.params.page) + '.dust'));
 });
 

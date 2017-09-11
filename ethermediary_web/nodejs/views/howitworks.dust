@@ -10,7 +10,7 @@
 		</div>
 
 		<div id="start">
-			<form method="POST" action="/getdeal">
+			<form method="POST" action="/simulation">
 				<input type="submit" value="Simulation"></input>
 			</form>
 		</div>

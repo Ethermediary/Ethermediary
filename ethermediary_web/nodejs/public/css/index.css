@@ -153,9 +153,22 @@ input[type=text]{
   font-size: 15px;
 }
 
-input[type=store]{
-  display: none;
+input[type=store]{display: none;}
+
+button[type=simul], input[type=simul]{
+  background-color: #FFFFFF;
+  font-size: 15px;
+  color: Black;
+  margin: 5px;
+  display: inline;
+  float: left;
+  border: solid #18469E 2px;
+  border-radius: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
+
+#foo{}
 
 #alert{
   position: relative;
