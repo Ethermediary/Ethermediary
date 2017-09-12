@@ -1,0 +1,26 @@
+<div id="state" data-state="3"></div>
+<div id="deal" data-deal="{jsonData}"></div>
+
+<div id="definition">
+	<a>Please <strong>carefully review</strong> these informations before </br><strong>validating the deal</strong> :</br>
+	</a>
+</div>
+
+<div id="receipt" class="note">
+	<a>Object or Service : <strong>{dealData.meta}</strong></a></br>
+	<a>Amount of the transaction : <strong>{dealData.amount}</strong></a></br>
+	<a>Buyer public address : <strong>{dealData.buyer_address}</strong></a></br>
+	<a>Buyer email address: <strong>{dealData.buyer_email}</strong></a></br>
+	<a>Seller public address : <strong>{dealData.seller_address}</strong></a></br>
+	<a>Seller email address : <strong>{dealData.seller_email}</strong></a></br></br>
+
+	<a>These information are not correct ?</br> Go back to the&nbsp;
+	<a href="/newDeal" style="text-decoration: underline;"><strong>previous fields</strong></a>.</a></br></br></br>
+
+	<form id="mForm" onsubmit="onClick(); return false;" style="margin-left: 260px;">
+			<button style="background-color: #00DD00; color: Black; border: 3px solid #112266;">Confirm</button>
+	</form>
+
+</div>
+<script src="/js/web3.min.js"/>
+<script src="/js/metamaskHandler.js"></script>

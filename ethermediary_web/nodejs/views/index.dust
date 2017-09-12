@@ -13,7 +13,7 @@
 		<div id="button_menu">
 			<div id="new_deal_def">
 				<a>Start a new deal </br>as a Buyer</a></br></br>
-				<a href="/newdealone"><button>New Deal</button></a>
+				<a href="/newDeal"><button>New Deal</button></a>
 		  </div>
 
 			<div id="get_deal_def">

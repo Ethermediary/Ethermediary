@@ -1,0 +1,34 @@
+<div id="state" data-state="1"/>
+<div id="definition">
+	<a>The <strong>buyer</strong> have to initialise the <strong>deal</strong> and make an offer to the <strong>seller</strong>.
+	</a>
+</div></br>
+
+<div id="button_menu" class="note">
+
+	<form id="mForm" onsubmit="onClick(); return false;">
+
+		{?error_meta}
+			<div id="alert">
+				<a class="info">
+					<img src="./imgs/alert.png" width="30px"><span>{#error_meta}Error : {.msg}<br/>{/error_meta}</span></img>
+				</a>
+			</div>
+		{/error_meta}
+		<input type="text" placeholder="Object or service associated" name="meta" value="{req.body.meta}"/>
+		<a>&nbsp;&nbsp;&nbsp;The object or service associated with the Deal</a></br></br>
+
+		{?error_amount}
+			<div id="alert">
+				<a class="info">
+					<img src="./imgs/alert.png" width="30px"><span>{#error_amount}Error : {.msg}<br/>{/error_amount}</span></img>
+				</a>
+			</div>
+		{/error_amount}
+		<input type="text" placeholder="Amount of tokens" name="amount" value="{req.body.amount}"/>
+		<a>&nbsp;&nbsp;&nbsp;The contract will be waiting for this amount coming from your public adress</a></br></br></br>
+
+		<button id="submitButton">Next</button>
+	</form>
+
+</div>
