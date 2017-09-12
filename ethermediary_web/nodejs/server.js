@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 doCache = false;
-app.use(favicon(path.join(__dirname, "public", "imgs", "favicon.ico")));
+app.use(favicon(path.join(__dirname, "public", "imgs", "favicon.png")));
 app.use(express.static(path.join(__dirname, 'public')));
 //app.use(cookieParser());
 app.engine('dust', hoffman.__express());
@@ -38,6 +38,9 @@ app.use(function(req, res, next){
 // Every page parser
 app.get('/:page', function(req, res) {
   res.render(req.params.page);
+});
+app.post('/:page', function(req, res) {
+  res.render(path.join(__dirname, 'views', path.basename(req.params.page) + '.dust'));
 });
 
 // Root page parser
