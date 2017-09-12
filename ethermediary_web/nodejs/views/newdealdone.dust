@@ -1,23 +1,15 @@
-{> "views/header.dust"/}
 
-	<div id="content" class="gradient">
+<div id="definition">
+	<a><strong>Your deal has been confirmed.</strong></br></br>Here is your transaction ID which will allow you to recover your deal ID if&nbsp;
+		you don't receive an email. </br></br><strong>Please thoroughly note it !</strong></br>
+	</a>
+</div>
 
-		<div id="definition">
-			<a><strong>Your deal has been confirmed.</strong></br></br>Here is your specific ID which will allow you to access the deal and&nbsp;
-				further interact with the smart contract. </br></br><strong>Please thoroughly note it !</strong></br>
-			</a>
-		</div>
+<div id="receipt" class="note">
 
-		<div id="receipt" class="note">
+	<a>{transactionHash}</a></br></br>
 
-			<a>{buyer_id}</a></br></br></br></br></br></br></br>
+	<a>If nothing if displayed above, press F12 and look into the 'Console' tab</a>
 
-		<form method="POST" action="/newdealdone" style="margin-left: 260px;">
-				<input type="submit" value="Confirm"></input>
-		</form>
-
-		</div>
-
-	</div>
-
-{> "views/footer.dust"/}
+	</br></br></br></br></br>
+</div>

@@ -3,7 +3,6 @@ const app = express();
 const favicon = require('serve-favicon');
 const path = require('path');
 const hoffman = require('hoffman');
-const sizeof = require('object-sizeof');
 //const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
@@ -17,7 +16,7 @@ const formular = require('./formular.js');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
-doCache = process.env.DEBUG == false;
+doCache = false;
 app.use(favicon(path.join(__dirname, "public", "imgs", "favicon.ico")));
 app.use(express.static(path.join(__dirname, 'public')));
 //app.use(cookieParser());
@@ -29,11 +28,16 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view cache', doCache);
 app.enable('trust proxy');
 
+app.use(function(req, res, next){
+  console.log(req.method + ":" + req.url);
+  next();
+})
+
 ////////////////////////////////////////////////////////////////////////////////
 
 // Every page parser
 app.get('/:page', function(req, res) {
-  res.render(path.join(__dirname, 'views', path.basename(req.params.page) + '.dust'));
+  res.render(req.params.page);
 });
 
 // Root page parser
