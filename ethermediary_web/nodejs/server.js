@@ -39,9 +39,6 @@ app.use(function(req, res, next){
 app.get('/:page', function(req, res) {
   res.render(req.params.page);
 });
-app.post('/:page', function(req, res) {
-  res.render(path.join(__dirname, 'views', path.basename(req.params.page) + '.dust'));
-});
 
 // Root page parser
 app.get('/', function (req, res) {
