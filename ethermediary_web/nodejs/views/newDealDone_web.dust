@@ -1,0 +1,13 @@
+
+<div id="definition">
+	<a><strong>Your deal has been confirmed.</strong></br></br>Send <strong>{amount} ETH</strong> to the following address to start the deal&nbsp;
+		</br></br><strong>Please thoroughly note it !</strong></br>
+	</a>
+</div>
+
+<div id="receipt" class="note">
+
+	<a>{address}</a></br></br>
+
+	</br></br></br></br></br>
+</div>

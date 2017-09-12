@@ -108,7 +108,10 @@ router.post('/setInfo3',function(req,res){
 
     contractInteraction.createBuyerBridge(dealData)
         .then(function(address){
-            res.status(200).send("send " + dealData.amount *1.1 + " to this address to start the deal:" + address);
+            res.render("newDealDone_web", {
+                amount: parseInt(dealData.amount)*1.1,
+                address: address
+            })
         })
         .fail(function(err){
             console.log(err);
@@ -121,12 +124,12 @@ router.post("/dealCreated", function(req, res){
         res.status(400).send("you should provide the transactionHash");
         return;
     }
-    res.render("newDealDone", {
+    res.render("newDealDone_metamask", {
         transactionHash: req.body.transactionHash
     });
 });
 
 router.post('/mydeal',function(req,res){
     var deal_id = req.body.deal_id;
-    res.render(path.join(__dirname, 'views', 'mydeal.dust'));
+    res.render('mydeal');
 });
