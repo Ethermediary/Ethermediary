@@ -9,10 +9,9 @@
 	<title>Ethermediary</title>
 </head>
 
-<body class="gradient">
+<body class="grad_body">
 
 	<div id="logo">
-		<!-- Un petit logo sympathoche pour Ethermediary-->
 		<a href="./"><img src="./imgs/logo.png" width="50px" style="position: relative; top:5px;"/></a>
-		<a href="./">&nbsp;Ethermediary</a>
+		<a href="./">&nbsp;&nbsp;Ethermediary</a>
 	</div>

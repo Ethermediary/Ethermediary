@@ -27,16 +27,16 @@ function makeTransaction(){
 
 function executeTransaction(){
     window.managerContract = window.web3.eth.contract(window.managerAbi).at(window.managerAddress);
-    
-    
+
+
     window.managerContract.BUYER_createDeal(
         window.web3.toWei(window.dealData.amount, 'ether'),
-        window.dealData.buyer_email, 
-        window.dealData.seller_address, 
-        window.dealData.seller_email, 
+        window.dealData.buyer_email,
+        window.dealData.seller_address,
+        window.dealData.seller_email,
         {
-            value: window.web3.toWei(parseInt(window.dealData.amount) * 1.1, 'ether'), 
-            from: window.web3.eth.accounts[0], 
+            value: window.web3.toWei(parseInt(window.dealData.amount) * 1.1, 'ether'),
+            from: window.web3.eth.accounts[0],
             gas: 300000
         },
         function(err, res){
@@ -72,15 +72,18 @@ function sendServerTransactionHash(transactionHash){
 }
 
 function parseAbiAndAddress(callback){
-    $.ajax({ 
-        url: "/eth/managerAbi", 
+    $.ajax({
+        url: "/eth/managerAbi",
         success: function(file_content) {
             eval("window.managerAbi=" + file_content);
 
-            $.ajax({ 
-                url: "/eth/managerAddress", 
+            $.ajax({
+                url: "/eth/managerAddress",
                 success: function(file_content) {
-                    eval("window.managerAddress='" + file_content + "'");
+                    console.log("window.managerAddress='" + file_content.trim() + "';");
+                    eval("window.managerAddress='" + file_content.trim() + "';");
+                    //console.log(file_content.trim());
+                    //window.managerAddress = file_content.trim();
                     callback();
                 },
                 error: function(err){
@@ -98,5 +101,5 @@ function parseAbiAndAddress(callback){
         }
     });
 
-    
+
 }

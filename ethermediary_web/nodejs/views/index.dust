@@ -1,6 +1,6 @@
 {> "views/header.dust"/}
 
-	<div id="content" class="gradient">
+	<div id="content" class="grad_content">
 
 		<div id="definition">
 			<a><strong>Ethermediary</strong> is an Ethereum based smart contract. It allows you to safely trade objects and services for money on the internet,

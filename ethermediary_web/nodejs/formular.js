@@ -39,7 +39,7 @@ router.post('/setInfo1', function(req, res){
 });
 
 router.post('/setInfo2',function(req,res){
-    let dealData = JSON.parse(req.body.dealData);    
+    let dealData = JSON.parse(req.body.dealData);
 
     req.sanitizeBody('buyer_address').trim();
     req.sanitizeBody('buyer_email').trim();
@@ -132,4 +132,9 @@ router.post("/dealCreated", function(req, res){
 router.post('/mydeal',function(req,res){
     var deal_id = req.body.deal_id;
     res.render('mydeal');
+});
+
+router.post('/simulation',function(req,res){
+    var deal_id = req.body.deal_id;
+    res.render('simulation');
 });

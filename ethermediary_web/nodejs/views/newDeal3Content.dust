@@ -1,24 +1,24 @@
 <div id="state" data-state="3"></div>
 <div id="deal" data-deal="{jsonData}"></div>
 
-<div id="definition">
+<div id="definition" style="margin-bottom: 70px;">
 	<a>Please <strong>carefully review</strong> these informations before </br><strong>validating the deal</strong> :</br>
 	</a>
 </div>
 
 <div id="receipt" class="note">
-	<a>Object or Service : <strong>{dealData.meta}</strong></a></br>
-	<a>Amount of the transaction : <strong>{dealData.amount}</strong></a></br>
-	<a>Buyer public address : <strong>{dealData.buyer_address}</strong></a></br>
-	<a>Buyer email address: <strong>{dealData.buyer_email}</strong></a></br>
-	<a>Seller public address : <strong>{dealData.seller_address}</strong></a></br>
-	<a>Seller email address : <strong>{dealData.seller_email}</strong></a></br></br>
+	<a>Object or Service : <strong><span class="clear">{dealData.meta}</span></strong></a></br>
+	<a>Amount of the transaction : <strong><span class="clear">{dealData.amount}</span></strong></a></br>
+	<a>Buyer public address : <strong><span class="clear">{dealData.buyer_address}</span></strong></a></br>
+	<a>Buyer email address: <strong><span class="clear">{dealData.buyer_email}</span></strong></a></br>
+	<a>Seller public address : <strong><span class="clear">{dealData.seller_address}</span></strong></a></br>
+	<a>Seller email address : <strong><span class="clear">{dealData.seller_email}</span></strong></a></br></br>
 
 	<a>These information are not correct ?</br> Go back to the&nbsp;
-	<a href="/newDeal" style="text-decoration: underline;"><strong>previous fields</strong></a>.</a></br></br></br>
+	<a href="/newDeal" style="text-decoration: underline;"><strong>previous fields</strong></a>.</a></br></br></br></br>
 
-	<form id="mForm" onsubmit="onClick(); return false;" style="margin-left: 260px;">
-			<button style="background-color: #00DD00; color: Black; border: 3px solid #112266;">Confirm</button>
+	<form id="mForm" onsubmit="onClick(); return false;" style="margin-left: 210px;">
+			<button class="inline" style="width: 375px; margin: 0px;" type="submit">Validate</button>
 	</form>
 
 </div>

@@ -1,30 +1,33 @@
 {> "views/header.dust"/}
 
-<div id="content" class="mininote">
+<div id="content" class="mininote" style="font-size: 20px;">
 
-	  <a>Status :<script type="text/javascript" src="page.js"></script></a></br>
-	  <a>Balance acheteur :</a><a id="balance_acheteur"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a>Balance vendeur :</a><a id="balance_vendeur"></a></br>
-		<a>Buyer screen:</a><a id="acheteur_screen"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a>Seller screen:</a><a id="vendeur_screen"></a></br>
-		<a>Balance contract :</a><a id="balance_contract"></a></br>
+	  <a>Status :<script type="text/javascript" src="page.js"></script></a></br></br>
+		<a>Contract balance :</a><a id="balance_contract"></a></br>
 
-		<div id="foo" style="font-size: 10px; margin-top:30px; width: 1000px;">
+		<div class="side" style="margin-top:30px;">
+				<a>Buyer screen :</a><a id="acheteur_screen"></a></br>
+				<a>Buyer balance :</a><a id="balance_acheteur"></a></br>
+
 			  <button type="simul" id="offre_button">ACHETEUR: Faire une offre(+20)</button>
-			  <input type="simul" id="offre_value" style=""/></br></br></br></br></br>
+			  <input type="simul" id="offre_value" style="height: 44px; width: 50px;"/>
 			  <button type="simul" id="acheteur_cancel_offer">ACHETEUR: Annuler l'offre</button>
 			  <button type="simul" id="coli_recu">ACHETEUR: J'ai recu le colis, voici la photo de l'objet</button>
-			  <button type="simul" id="coli_recu_bad">ACHETEUR: J'ai recu le colis, mais il est nul je veux le retourner</button>
-			  <button type="simul" id="sent_back_proof">ACHETEUR: J'ai renvoyer le colis, voici la preuve</button>
+			  <!--<button type="simul" id="coli_recu_bad">ACHETEUR: J'ai recu le colis, mais il est nul je veux le retourner</button>-->
+			  <!--<button type="simul" id="sent_back_proof">ACHETEUR: J'ai renvoyer le colis, voici la preuve</button>-->
 			  <button type="simul" id="mutual_cancel_acheteur">ACHETEUR: Demander/accepter l'annulation</button>
 			  <button type="simul" id="refuse_cancel_acheteur">ACHETEUR: Refuser la demande d'annulation</button>
+		</div>
 
-			  <br/>
-			  <br/>
+		<div class="side" id="seller_side" style="margin-top:30px;">
+				<a>Seller screen :</a><a id="vendeur_screen"></a></br>
+			  <a>Seller balance :</a><a id="balance_vendeur"></a></br>
 
 			  <button type="simul" id="accept_offre">VENDEUR: Accepter offre(-20)</button>
 			  <button type="simul" id="refuse_offre">VENDEUR: Refuser offre</button>
-			  <button type="simul" id="cancel_offer">VENDEUR: Annuler, j'ai plus l'objet</button>
-			  <button type="simul" id="give_proof">VENDEUR: Fournir preuve d'expedition</button>
-			  <button type="simul" id="received_sent_back">VENDEUR: J'ai récupérer le colis retourné</button>
+			  <!--<button type="simul" id="cancel_offer">VENDEUR: Annuler, j'ai plus l'objet</button>-->
+			  <!--<button type="simul" id="give_proof">VENDEUR: Fournir preuve d'expedition</button>-->
+			  <!--<button type="simul" id="received_sent_back">VENDEUR: J'ai récupérer le colis retourné</button>-->
 			  <button type="simul" id="mutual_cancel_vendeur">VENDEUR: Demander/accepter l'annulation</button>
 			  <button type="simul" id="refuse_cancel_vendeur">VENDEUR: Refuser la demande d'annulation</button>
 		</div>

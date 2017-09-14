@@ -1,12 +1,8 @@
 {> "views/header.dust"/}
 
-	<div id="content" class="gradient">
-
+	<div id="content" class="grad_content">
 		{> "views/newDeal1Content.dust"/}
-
 	</div>
-	<script id="transferScript" src="/js/transferBaseInfo.js"></script>
-	<script src="/js/jquery-2.2.0.min.js"></script>
 
 {> "views/footer.dust"/}
 

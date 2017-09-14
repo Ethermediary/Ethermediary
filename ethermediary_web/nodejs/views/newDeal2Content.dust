@@ -6,7 +6,7 @@
 	</a>
 </div>
 
-<div id="button_menu" class="note">
+<div id="button_menu" class="note" style="margin-left: 90px; margin-top: 50px;">
 	<form id="mForm" onsubmit="onClick(); return false;">
 			{?error_buyer_address}
 				<div id="alert">
@@ -16,7 +16,7 @@
 				</div>
 			{/error_buyer_address}
 			<input type="text" style="width: 352px;" placeholder="Buyer public address" name="buyer_address" value="{req.body.buyer_address}"/>
-			<a>&nbsp;&nbsp;&nbsp;Copy and paste is the way to go &nbsp;= ]</a></br></br>
+			<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy and paste is the way to go &nbsp;= ]</a></br></br>
 
 			{?error_buyer_email}
 				<div id="alert">
@@ -26,7 +26,7 @@
 				</div>
 			{/error_buyer_email}
 			<input type="text" style="width: 352px;" placeholder="Buyer's email" name="buyer_email" value="{req.body.buyer_email}"/>
-			<a>&nbsp;&nbsp;&nbsp;Email of the Buyer</a></br></br>
+			<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email of the Buyer</a></br></br>
 
 			{?error_seller_address}
 				<div id="alert">
@@ -36,7 +36,7 @@
 				</div>
 			{/error_seller_address}
 			<input type="text" style="width: 352px;" placeholder="Seller public address" name="seller_address" value="{req.body.seller_address}"/>
-			<a>&nbsp;&nbsp;&nbsp;This is where the contract will send your paiement</a></br></br>
+			<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is where the contract will send your paiement</a></br></br>
 
 			{?error_seller_email}
 				<div id="alert">
@@ -46,7 +46,7 @@
 				</div>
 			{/error_seller_email}
 			<input type="text" style="width: 352px;" placeholder="Seller's email" name="seller_email" value="{req.body.seller_email}"/>
-			<a>&nbsp;&nbsp;&nbsp;Email of the Seller</a></br></br>
+			<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email of the Seller</a></br></br></br>
 
 			<!--{?error_refund_duration}
 				<div id="alert">

@@ -1,0 +1,3 @@
+Public Ethereum address for donation :
+0x296Da2A1D10f2Bc816edbdDdD4E039D2a05D483d
+Keystore is on GitHub and pwd is burried inside my head.

@@ -1,0 +1,16 @@
+{> "views/header.dust"/}
+
+	<div id="content" class="grad_content">
+
+		<div id="definition">
+			<a>If you would like to donate something. We are two students who like to code.	<strong>Thank you for your support !</strong>
+			</a></br></br></br></br>
+			<img src="./imgs/donate.png" width="200px" style="position: relative;"/></br>
+			<span class="clear" style="font-size: 18px;">
+				<a>0x296Da2A1D10f2Bc816edbdDdD4E039D2a05D483d</a>
+			</span>
+		</div>
+
+	</div>
+
+{> "views/footer.dust"/}

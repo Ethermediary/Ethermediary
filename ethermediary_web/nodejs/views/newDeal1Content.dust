@@ -1,4 +1,4 @@
-<div id="state" data-state="1"/>
+<div id="state" data-state="1"></div>
 <div id="definition">
 	<a>The <strong>buyer</strong> have to initialise the <strong>deal</strong> and make an offer to the <strong>seller</strong>.
 	</a>
