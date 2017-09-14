@@ -22,5 +22,5 @@
 	</form>
 
 </div>
-<script src="/js/web3.min.js"/>
+<script src="/js/web3.min.js"></script>
 <script src="/js/metamaskHandler.js"></script>

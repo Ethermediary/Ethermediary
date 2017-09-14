@@ -52,13 +52,13 @@
       "address": "0xc17e013bb8d8b5c89d74e344df8a20b7a75995de",
       "updated_at": 1505219955277
     },
-    "1505251055243": {
+    "1505261317650": {
       "events": {},
       "links": {},
-      "address": "0x33620281284dca9dd7ebd9a4fd106786cf1d8a27",
-      "updated_at": 1505251063046
+      "address": "0x70df6237b6491bbc50c83573a85fef0c22b6dc7c",
+      "updated_at": 1505261368636
     }
   },
   "schema_version": "0.0.5",
-  "updated_at": 1505251063046
+  "updated_at": 1505261368636
 }

@@ -301,6 +301,11 @@
         },
         {
           "indexed": false,
+          "name": "emailBuyer",
+          "type": "string"
+        },
+        {
+          "indexed": false,
           "name": "seller",
           "type": "address"
         },
