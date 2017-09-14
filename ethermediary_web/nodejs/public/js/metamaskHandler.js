@@ -80,7 +80,7 @@ function parseAbiAndAddress(callback){
             $.ajax({ 
                 url: "/eth/managerAddress", 
                 success: function(file_content) {
-                    eval("window.managerAddress='" + file_content + "'");
+                    window.managerAddress = file_content.trim();
                     callback();
                 },
                 error: function(err){
@@ -98,5 +98,5 @@ function parseAbiAndAddress(callback){
         }
     });
 
-    
+
 }

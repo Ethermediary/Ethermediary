@@ -32,7 +32,7 @@ contract DealManager {
 	bool public muted = false;
 	mapping(uint => Deal) deals;
 
-	event NewDeal(uint id, address buyer, address seller, string emailSeller, uint value);
+	event NewDeal(uint id, address buyer, string emailBuyer, address seller, string emailSeller, uint value);
 	event DealAnswered(uint id, bool answer);
 	event SellerAskedCancel(uint id);
 	event BuyerAskedCancel(uint id);
@@ -55,7 +55,7 @@ contract DealManager {
 		newDeal.offer = amount;
 		newDeal.cautionBuyer = msg.value - amount;
 		newDeal.state = State.OFFER_MADE;
-		NewDeal(uuid, msg.sender, seller, sellerEmail, msg.value);
+		NewDeal(uuid, msg.sender, myEmail, seller, sellerEmail, msg.value);
 	}
 
 	function BUYER_cancelOffer(uint id) inState(id, State.OFFER_MADE) onlyBuyer(id) {

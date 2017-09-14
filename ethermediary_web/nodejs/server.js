@@ -11,6 +11,8 @@ const expressValidator = require('express-validator');
 //server = require('http').createServer(app);
 //io = require('socket.io')(server);
 const formular = require('./formular.js');
+const contractInteraction = require("./contractInteraction.js");
+const mailer = require("./mailer.js");
 
 // Set path ...
 app.use(bodyParser.json());
@@ -33,6 +35,16 @@ app.use(function(req, res, next){
   next();
 })
 
+contractInteraction.startWatchingContract();
+var i = 0;
+mailer.sendMail("plenituz@gmail.com", "dgdfg", "sdfsdvcxvxcv");
+
+// var interval = setInterval(function(){
+//   mailer.sendMail("plenituz@gmail.com", "petit pd des bois", "salut sdfsdf petit pd des bois"+i);
+//   i++;
+//   if(i > 49)
+//     clearInterval(interval);
+// }, 1000);
 ////////////////////////////////////////////////////////////////////////////////
 
 // Every page parser
