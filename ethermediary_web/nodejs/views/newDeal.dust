@@ -1,8 +1,6 @@
 {> "views/header.dust"/}
 
-	<div id="content" class="grad_content">
 		{> "views/newDeal1Content.dust"/}
-	</div>
 
 {> "views/footer.dust"/}
 
