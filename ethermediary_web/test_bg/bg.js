@@ -40,9 +40,11 @@ function init()
 
 
     var mesh = new Mesh();
-    for(let i = 0; i < 200; i++){
-        mesh.points.push(getRandomPoint());
+    for(let i = 0; i < 10; i++){
+        mesh.points.push([Math.random()*50, i*100]);
+        mesh.points.push([100, i*100]);
     }
+
     mesh.triangles = Delaunay.triangulate(mesh.points);
 
     var alltris = mesh.toTriangles();

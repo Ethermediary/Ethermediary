@@ -60,6 +60,35 @@
       "type": "function"
     },
     {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "name": "buyer",
+          "type": "address"
+        },
+        {
+          "name": "myEmail",
+          "type": "string"
+        },
+        {
+          "name": "seller",
+          "type": "address"
+        },
+        {
+          "name": "sellerEmail",
+          "type": "string"
+        }
+      ],
+      "name": "BUYER_createDeal",
+      "outputs": [],
+      "payable": true,
+      "type": "function"
+    },
+    {
       "constant": true,
       "inputs": [
         {
@@ -107,6 +136,40 @@
         }
       ],
       "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "name": "buyer",
+          "type": "address"
+        },
+        {
+          "name": "myEmail",
+          "type": "string"
+        },
+        {
+          "name": "seller",
+          "type": "address"
+        },
+        {
+          "name": "sellerEmail",
+          "type": "string"
+        }
+      ],
+      "name": "BUYERBRIDGE_createDeal",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": true,
       "type": "function"
     },
     {
@@ -181,31 +244,6 @@
       "name": "SELLER_refuseCancel",
       "outputs": [],
       "payable": false,
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "amount",
-          "type": "uint256"
-        },
-        {
-          "name": "myEmail",
-          "type": "string"
-        },
-        {
-          "name": "seller",
-          "type": "address"
-        },
-        {
-          "name": "sellerEmail",
-          "type": "string"
-        }
-      ],
-      "name": "BUYER_createDeal",
-      "outputs": [],
-      "payable": true,
       "type": "function"
     },
     {

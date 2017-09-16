@@ -1,21 +1,23 @@
 pragma solidity ^0.4.4;
 
 contract ManagerInterface{
-    function BUYER_createDeal(uint amount, string myEmail, address seller, string sellerEmail) payable;
+    function BUYERBRIDGE_createDeal(uint amount, address buyer, string myEmail, address seller, string sellerEmail) payable returns (bool);
 }
 
 contract BuyerBridge{
-    address dealManager;
-    uint _amount;
-    string _myEmail;
-    address _seller;
-    string _sellerEmail;
+    address private dealManager;
+    uint private _amount;
+    address private _buyer;
+    string private _myEmail;
+    address private _seller;
+    string private _sellerEmail;
 
     function BuyerBridge(address dealManagerAddress, 
-        uint amount, string myEmail, address seller, 
+        uint amount, address buyer, string myEmail, address seller, 
         string sellerEmail) 
     {
         dealManager = dealManagerAddress;
+        _buyer = buyer;
         _amount = amount;
         _myEmail = myEmail;
         _seller = seller;
@@ -23,9 +25,12 @@ contract BuyerBridge{
     }
 
     function () payable {
-        ManagerInterface(dealManager)
-            .BUYER_createDeal
-            .value(msg.value)(_amount, _myEmail, _seller, _sellerEmail);
-        suicide(msg.sender);
+        bool didit = ManagerInterface(dealManager)
+            .BUYERBRIDGE_createDeal
+            .value(this.balance)(_amount, _buyer, _myEmail, _seller, _sellerEmail);
+
+        if(didit){
+            suicide(msg.sender);
+        }
     }
 }

@@ -107,10 +107,10 @@ router.post('/setInfo3',function(req,res){
     let dealData = JSON.parse(req.body.dealData);
 
     contractInteraction.createBuyerBridge(dealData)
-        .then(function(address){
+        .then(function(transact){
             res.render("newDealDone_web", {
                 amount: parseInt(dealData.amount)*1.1,
-                address: address
+                transact: transact
             })
         })
         .fail(function(err){
