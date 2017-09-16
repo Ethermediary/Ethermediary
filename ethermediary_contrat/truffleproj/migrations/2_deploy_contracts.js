@@ -8,21 +8,21 @@ module.exports = function(deployer) {
  /* deployer.deploy(ConvertLib);
   deployer.link(ConvertLib, MetaCoin);
   deployer.deploy(MetaCoin);*/
-  deployer.deploy(DealManager)
+  deployer.deploy(DealManager,{gas: 900000})
   .then(function(){
     console.log("deal manager address:" + DealManager.address);
   })
-  deployer.deploy(BuyerBridge, 
-    "0x65dfee531e7a678a377c80f41234c2e2a042cf59",
-     100, "email", "0xBcf7e89caEc7C298Ec8418ae2FF45037FfAd1264", "sellermail")
-  .then(function(){
-    console.log("buyer bridge address:" + BuyerBridge.address);
-  })
+  // deployer.deploy(BuyerBridge, 
+  //   "0x65dfee531e7a678a377c80f41234c2e2a042cf59",
+  //    100, "email", "0xBcf7e89caEc7C298Ec8418ae2FF45037FfAd1264", "sellermail")
+  // .then(function(){
+  //   console.log("buyer bridge address:" + BuyerBridge.address);
+  // })
 
-  deployer.deploy(SellerBridge, "6307379262913404", true)
-  .then(function(){
-    console.log("seller bridge address:" + SellerBridge.address);
-  });
+  // deployer.deploy(SellerBridge, "6307379262913404", true)
+  // .then(function(){
+  //   console.log("seller bridge address:" + SellerBridge.address);
+  // });
 };
 
 /*

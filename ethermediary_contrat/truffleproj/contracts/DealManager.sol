@@ -31,6 +31,8 @@ contract DealManager {
 	uint private taxCollected;
 	bool public muted = false;
 	mapping(uint => Deal) deals;
+	mapping(address => uint) recoveries;
+	mapping(uint => address) reverseRecoveries;
 
 	event NewDeal(uint id, address buyer, string emailBuyer, address seller, string emailSeller, uint value);
 	event DealAnswered(uint id, bool answer);
@@ -40,22 +42,44 @@ contract DealManager {
 	event BuyerRefusedCancel(uint id);
 	event DealOver(string buyerEmail, string sellerEmail, string reason);
 
-	function BUYER_createDeal(uint amount, string myEmail, address seller, string sellerEmail) 
+	//same as BUYER_createDeal but add the sender address to the recovery dictionnary
+	//so that you can recover your deal id from the BuyerBridge address
+	function BUYERBRIDGE_createDeal(uint amount, address buyer, string myEmail, address seller, string sellerEmail)
+		payable condition(!muted) returns (bool)
+	{
+		if(!(msg.value >= (amount*11)/10)){
+			return false;
+		}
+
+		uint uuid = createDeal(amount, buyer, myEmail, seller, sellerEmail);
+		
+		recoveries[msg.sender] = uuid;
+		reverseRecoveries[uuid] = msg.sender;
+		return true;
+	}
+
+	function BUYER_createDeal(uint amount, address buyer, string myEmail, address seller, string sellerEmail) 
 		payable condition(!muted)
 	{
  		require(msg.value >= (amount*11)/10);
+		createDeal(amount, buyer, myEmail, seller, sellerEmail);
+	}
 
+	function createDeal(uint amount, address buyer, string myEmail, address seller, string sellerEmail) 
+		private returns(uint)
+	{
 		uint uuid = generateUUID();
 		Deal storage newDeal = deals[uuid];
 
-		newDeal.buyer._address = msg.sender;
+		newDeal.buyer._address = buyer;
 		newDeal.buyer.email = myEmail;
 		newDeal.seller._address = seller;
 		newDeal.seller.email = sellerEmail;
 		newDeal.offer = amount;
 		newDeal.cautionBuyer = msg.value - amount;
 		newDeal.state = State.OFFER_MADE;
-		NewDeal(uuid, msg.sender, myEmail, seller, sellerEmail, msg.value);
+		NewDeal(uuid, buyer, myEmail, seller, sellerEmail, msg.value);
+		return uuid;
 	}
 
 	function BUYER_cancelOffer(uint id) inState(id, State.OFFER_MADE) onlyBuyer(id) {
@@ -118,7 +142,7 @@ contract DealManager {
 		deal.seller._address.transfer(toSeller);
 
 		DealOver(deal.buyer.email, deal.seller.email, "buyerCheated");	
-		delete deals[id];
+		deleteDeal(id);
 	}
 
 	function sellerCheated(uint id) onlyTaxCollector {
@@ -133,7 +157,7 @@ contract DealManager {
 		deal.buyer._address.transfer(toBuyer);
 
 		DealOver(deal.buyer.email, deal.seller.email, "sellerCheated");	
-		delete deals[id];
+		deleteDeal(id);
 	}
 
 	function muteContract() onlyTaxCollector condition(!muted) {
@@ -183,7 +207,7 @@ contract DealManager {
 		}
 
 		DealOver(ref.buyer.email, ref.seller.email, "refund");
-		delete deals[id];
+		deleteDeal(id);
 	}
 
 	function finishTransaction(uint id) private {
@@ -199,6 +223,12 @@ contract DealManager {
 		ref.buyer._address.transfer(toBuyer);
 		
 		DealOver(ref.buyer.email, ref.seller.email, "finish");		
+		deleteDeal(id);
+	}
+
+	function deleteDeal(uint id) private {
+		delete recoveries[reverseRecoveries[id]];
+		delete reverseRecoveries[id];
 		delete deals[id];
 	}
 

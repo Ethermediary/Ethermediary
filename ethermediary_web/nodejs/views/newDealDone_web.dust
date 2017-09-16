@@ -7,7 +7,7 @@
 
 <div id="receipt" class="note">
 
-	<a>{address}</a></br></br>
+	<a>{transact.address}</a></br></br>
 
 	</br></br></br></br></br>
 </div>

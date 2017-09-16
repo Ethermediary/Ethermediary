@@ -1,0 +1,36 @@
+[
+    {
+      "inputs": [
+        {
+          "name": "dealManagerAddress",
+          "type": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "name": "buyer",
+          "type": "address"
+        },
+        {
+          "name": "myEmail",
+          "type": "string"
+        },
+        {
+          "name": "seller",
+          "type": "address"
+        },
+        {
+          "name": "sellerEmail",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "type": "constructor"
+    },
+    {
+      "payable": true,
+      "type": "fallback"
+    }
+  ]

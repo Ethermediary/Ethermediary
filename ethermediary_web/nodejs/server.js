@@ -36,8 +36,6 @@ app.use(function(req, res, next){
 })
 
 contractInteraction.startWatchingContract();
-//var i = 0;
-//mailer.sendMail("plenituz@gmail.com", "dgdfg", "sdfsdvcxvxcv");
 
 // var interval = setInterval(function(){
 //   mailer.sendMail("plenituz@gmail.com", "petit pd des bois", "salut sdfsdf petit pd des bois"+i);
@@ -45,6 +43,8 @@ contractInteraction.startWatchingContract();
 //   if(i > 49)
 //     clearInterval(interval);
 // }, 1000);
+
+
 ////////////////////////////////////////////////////////////////////////////////
 
 // Every page parser
