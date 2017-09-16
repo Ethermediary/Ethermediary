@@ -36,8 +36,8 @@ app.use(function(req, res, next){
 })
 
 contractInteraction.startWatchingContract();
-var i = 0;
-mailer.sendMail("plenituz@gmail.com", "dgdfg", "sdfsdvcxvxcv");
+//var i = 0;
+//mailer.sendMail("plenituz@gmail.com", "dgdfg", "sdfsdvcxvxcv");
 
 // var interval = setInterval(function(){
 //   mailer.sendMail("plenituz@gmail.com", "petit pd des bois", "salut sdfsdf petit pd des bois"+i);
@@ -48,16 +48,15 @@ mailer.sendMail("plenituz@gmail.com", "dgdfg", "sdfsdvcxvxcv");
 ////////////////////////////////////////////////////////////////////////////////
 
 // Every page parser
-app.get('/:page', function(req, res) {
+/*app.get('/:page', function(req, res) {
   res.render(req.params.page);
-});
-
-// Root page parser
-app.get('/', function (req, res) {
-  res.render('index.dust', {req : req});
-});
+});*/
 
 app.use(formular);
+
+app.get('/', function (req, res) {
+  res.render('skeleton.dust', {req : req});
+});
 
 var ser = app.listen(3000, function () {
   console.log('Listening on port 3000!');

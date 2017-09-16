@@ -1,24 +1,44 @@
-{> "views/header.dust"/}
+<div id="content">
+
+<div id="logo">
+	<a href="./"><img src="./imgs/logo_blue.png" width="70px" style="position: relative; top:12px;"/></a>
+	&nbsp;<a href="./">Ethermediary</a>
+</div></br>
+
+<div id="state" data-state="index"></div>
 
 		<div id="definition">
-			<a><strong>Ethermediary</strong> is an Ethereum based smart contract. It allows you to safely trade objects and services for money on the internet,
-				and accepts <strong>Bitcoin</strong>, <strong>Ether</strong>, and every other <strong>ERC20 tokens</strong> available.</br></br>
-				<strong>Ethermediary</strong> acts as a safe third party, <strong>completely independant</strong> and <strong>trustless</strong>, which garanty the seller to be paid,
-				and the buyer to received the object or service for close to nothing.
+			<a><strong>Ethermediary</strong> is an Ethereum based <strong>smart contract</strong>.</br>It allows you to <strong>safely trade</strong> objects and services for money on the internet.
+				&nbsp;You can use <strong>Ether</strong> or any other <strong>ERC20 tokens</strong>.</br></br>
+				The <strong>Ethermediary</strong> smart contract acts as a <strong>safe and trustless</br>third party</strong> which garanties the seller to be paid, and the buyer&nbsp;
+				to receive the object or service.
 			</a>
 		</div>
 
+	<form id="mForm">
+
 		<div id="button_menu">
-			<div id="new_deal_def">
-				<!--<a>Start a new deal </br>as a Buyer</a></br></br>-->
-				<a href="/newDeal"><button>New Deal</button></a>
-		  </div>
+				<div id="new_deal_def">
+					<div id="new_deal_color" onmouseover="blob('new_deal_color')">
+						<button class="button_left"
+						onmouseover="color_over('button_left')"
+						onmouseleave="color_leave('button_left')"
+						onclick="onClick('newDeal1Content'); return false;">New Deal</button>
+					</div>
+			  </div>
 
-			<div id="get_deal_def">
-				<!--<a>Access and interact </br>with a deal</a></br></br>-->
-				<a href="/getdeal"><button>Get Deal</button></a>
+			<div style="margin-left: 250px; display: inline-block;"></div>
 
-      </div>
+				<div id="get_deal_def" >
+					<div id="get_deal_color" onmouseover="blob('get_deal_color')">
+						<button class="button_right"
+						onmouseover="color_over('button_right')"
+						onmouseleave="color_leave('button_right')"
+						onclick="onClick('getDeal'); return false;">Get Deal</button>
+					</div>
+	      </div>
 		</div>
 
-{> "views/footer.dust"/}
+	</form>
+
+</div>

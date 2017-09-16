@@ -1,20 +1,24 @@
-{> "views/header.dust"/}
+<div id="logo" style="margin-bottom: 15px;">
+	<a href="./"><img src="./imgs/logo_blue.png" width="70px" style="position: relative; top:12px;"/></a>
+	&nbsp;<a href="./">Ethermediary</a>
+</div>
 
-	<div id="content" class="gradient">
+<div id="definition" style="margin-top: 0px; margin-bottom: 70px;">
+	<a><strong>How it works</strong></a>
+</div>
 
-		<div id="definition">
-      <a>We believe into <strong>mutual responsability</strong>. That's why both the Buyer and Seller should send a <strong>caution</strong>&nbsp;
-        to the contract as a garanty of their <strong>good will</strong>.</br></br>The caution makes cheating a&nbsp;
-        <strong>non-profitable behavior</strong>. Of course, if everything goes okay, you will <strong>get your caution back</strong>.
-      </a>
-		</div>
+<form id="mForm"></form>
 
-		<div id="start">
-			<form method="POST" action="/simulation">
-				<input type="submit" value="Simulation"></input>
-			</form>
-		</div>
+<div id="definition">
+  <a>We believe into <strong>mutual responsability</strong>. That's why both the Buyer and Seller should send a <strong>caution</strong>&nbsp;
+    to the contract as a garanty of their <strong>good will</strong>.</br></br>The caution makes cheating a&nbsp;
+    <strong>non-profitable behavior</strong>. Of course, if everything goes okay, you will <strong>get your caution back</strong>.
+  </a>
+</div></br>
 
-	</div>
-
-{> "views/footer.dust"/}
+<div id="get_deal_color" onmouseover="blob('get_deal_color')" style="width:375px; margin: auto;">
+<button id="submit" class="button" style="width: 375px;"
+	onmouseover="color_over('button')"
+	onmouseleave="color_leave('button')"
+	onclick="onClick('simulation'); return false;">Simulation</button>
+</div>

@@ -1,8 +1,13 @@
-<div id="state" data-state="3"></div>
+<div id="logo" style="margin-bottom: 70px;">
+	<a href="./"><img src="./imgs/logo_blue.png" width="70px" style="position: relative; top:12px;"/></a>
+	&nbsp;<a href="./">Ethermediary</a>
+</div>
+
+<div id="state" data-state="newDeal3Content"></div>
 <div id="deal" data-deal="{jsonData}"></div>
 
-<div id="definition" style="margin-bottom: 70px;">
-	<a>Please <strong>carefully review</strong> these informations before </br><strong>validating the deal</strong> :</br>
+<div id="definition" style="margin-bottom: 30px;">
+	<a>Please <strong>carefully review</strong> these informations before </br><strong>validating the deal</strong> :
 	</a>
 </div>
 
@@ -15,10 +20,16 @@
 	<a>Seller email address : <strong><span class="clear">{dealData.seller_email}</span></strong></a></br></br>
 
 	<a>These information are not correct ?</br> Go back to the&nbsp;
-	<a href="/newDeal" style="text-decoration: underline;"><strong>previous fields</strong></a>.</a></br></br></br></br>
+	<a style="text-decoration: underline; cursor: pointer;" onclick="onClick('newDeal1Content'); return false;">
+		<strong>previous fields</strong></a>.</a></br></br></br>
 
-	<form id="mForm" onsubmit="onClick(); return false;" style="margin-left: 210px;">
-			<button class="inline" style="width: 375px; margin: 0px;" type="submit">Validate</button>
+	<form id="mForm" style="margin-left: 210px;">
+			<div id="get_deal_color" onmouseover="blob('get_deal_color')" style="width:375px;">
+			<button id="submit" class="button" style="width: 375px;"
+				onmouseover="color_over('button')"
+				onmouseleave="color_leave('button')"
+				onclick="onClick('newDealDone'); return false;">Validate</button>
+			</div>
 	</form>
 
 </div>

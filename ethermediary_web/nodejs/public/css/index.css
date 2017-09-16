@@ -1,57 +1,81 @@
 html {
   height: 100%;
+  overflow: hidden;
+
+}
+
+#svgbg {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -2;
 }
 
 a{
   text-decoration: none;
-  color: inherit;
+  color: #112266;
 }
 
 body{
   background-color: #112266;
   font-family: 'Raleway', sans-serif;
   box-sizing: inherit;
-  height: 600px;
-  padding: 20px;
-  padding-top: 0px;
   margin-top: 0px;
+  height: inherit;
+  overflow: hidden;
 }
 
 #logo {
   position: relative;
-  margin-top: 10px;
+  margin-top: 20px;
+  margin-bottom: 45px;
   width: 1000px;
   margin-left: auto;
   margin-right: auto;
-  font-size: 60px;
+  font-size: 80px;
   text-align: center;
-  color: #FFFFFF;
+  color: #252E67;
   letter-spacing: 3px;
 }
 
 #content{
   position: relative;
-  margin-top: 0px;
   width: 1100px;
   height: 700px;
   border: 0px solid White;
+  border-radius: 5px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
     margin-left: auto;
     margin-right: auto;
-  /border-bottom-right-radius: 10px;
-  /border-bottom-left-radius: 10px;
   padding: 20px;
   color: Black;
   font-size: 30px;
+  background-color: rgba(154, 236, 255, 0.90);
 }
 
 #definition{
   width: 1000px;
   height: auto;
-  margin-top: 30px;
-  margin-bottom: 50px;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 60px;
+  font-size: 32px;
+}
+
+.button_left{
+  width: 300px;
+  height: 60px;
+  border-radius: 4px;
+  font-size: 25px;
+}
+.button_right{
+  width: 300px;
+  height: 60px;
+  border-radius: 4px;
+  font-size: 25px;
 }
 
 .note {font-size: 20px;}
@@ -74,8 +98,9 @@ font-size: 15px;
 
 .side{
   position: relative;
-  width: 520px;
+  width: 540px;
   display: inline-block;
+  float: left;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
@@ -151,25 +176,24 @@ a.info:hover span:after{ /*the span will display just on :hover state*/
   margin-bottom: 110px;
 }
 
-/*Transaction.html*/
 input[type=submit], button{
   width: 274px;
   height: 50px;
   background-color: #112266;
-  border: 2px solid #112266;
+  border: 3px solid #112266;
   border-radius: 3px;
   color: White;
-  font-size: 30px;
+  font-size: 20px;
   margin-left: auto;
   margin-right: auto;
 }
 
-input[type=submit]:hover, button:hover{
+button{ cursor: pointer; }
+
+/*input[type=submit]:hover, button:hover{
   background-color: rgba(255, 255, 255, 0);
-  color: #112266;
   border: 4px solid #112266;
-  font-weight: bold;
-}
+}*/
 
 input[type=text]{
   position: relative;
@@ -181,6 +205,7 @@ input[type=text]{
   padding-left: 10px;
   padding-right: 10px;
   font-size: 15px;
+  margin-right: 40px;
 }
 
 input[type=store]{display: none;}
@@ -190,7 +215,7 @@ button[type=simul], input[type=simul]{
   background-color: #FFFFFF;
   font-size: 15px;
   color: Black;
-  margin: 10px;
+  margin: 5px;
   border: solid #18469E 2px;
   border-radius: 3px;
   padding-left: 10px;
@@ -199,8 +224,6 @@ button[type=simul], input[type=simul]{
   margin-right: auto;
 }
 
-#foo{}
-
 #alert{
   position: relative;
   top: 10px;
@@ -208,46 +231,33 @@ button[type=simul], input[type=simul]{
 
 #new_deal_def{
   position: relative;
-  width: 400px;
-  height: 200px;
+  height: 70px;
   display: inline-block;
-  float: left;
   margin-top: 10px;
-  margin-left: 100px;
-  text-align: center;
-  font-size: 35px;
 }
 
 #get_deal_def{
   position: relative;
-  width: 400px;
-  height: 200px;
+  height: 70px;
   display: inline-block;
-  float: right;
   margin-top: 10px;
-  margin-right: 100px;
-  text-align: center;
-  font-size: 35px;
 }
 
 #button_menu{
   position: relative;
-  width: 1000px;
+  width: 1100px;
   height: auto;
-  margin-left: auto;
-  margin-right: auto;
   margin-top: 50px;
   margin-bottom: 0px;
+  margin-left: 125px;;
 }
 
-/*Input*/
 #new_deal_button{
   position: relative;
   width: 274px;
   height: 50px;
 }
 
-/*new_deal_done*/
 #receipt{
   position: relative;
   width: 800px;
@@ -256,12 +266,11 @@ button[type=simul], input[type=simul]{
   margin-right: auto;
 }
 
-/*footer and stuff*/
 #footer{
-  position: fixed;
-  float: left;
+  position: relative;
   width: 1060px;
   height: 50px;
-  top: 700px;
-  margin-left: 8px;
+  top: -35px;
+  margin-left: auto;
+  margin-right: auto;
 }

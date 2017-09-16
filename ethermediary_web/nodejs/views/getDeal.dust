@@ -1,0 +1,28 @@
+<div id="logo" style="margin-bottom: 15px;">
+	<a href="./"><img src="./imgs/logo_blue.png" width="70px" style="position: relative; top:12px;"/></a>
+	&nbsp;<a href="./">Ethermediary</a>
+</div>
+
+<div id="definition" style="margin-top: 0px; margin-bottom: 50px;">
+	<a><strong>Access and interact with a Deal </strong></a>
+</div>
+
+<form id="mForm"></form>
+
+<div id="definition"></br></br>
+	<a>To access a specific <strong>deal</strong>, please enter the <strong>deal's ID</strong>
+	</a>
+</div>
+
+<div id="button_menu" class="align" style="width:375px; margin: auto;">
+	  <form method="POST" >
+		  <input type="text" placeholder="Deal's ID" name="deal_id" style="margin-right: 0px; border: 4px solid #18469E;"/></br></br>
+			<div id="get_deal_color" onmouseover="blob('get_deal_color')" style="width:375px; margin: auto;">
+				<button id="submit" class="button" style="width: 275px;"
+					onmouseover="color_over('button')"
+					onmouseleave="color_leave('button')"
+					onclick="onClick('myDeal'); return false;">Next</button>
+			</div>
+		</div>
+		</form>
+</div>

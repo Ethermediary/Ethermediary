@@ -1,21 +1,23 @@
 
-function onClick(){
+function onClick(content){
     try{
-        sendPost();
+        sendPost(content);
     }catch(err){
         console.error(err);
     }
 }
 
-function sendPost(){
+function sendPost(content){
     let data = extractForm(document.getElementById("mForm"));
     if(document.getElementById("deal")){
         data.dealData = document.getElementById("deal").getAttribute("data-deal");
     }
-    let state = document.getElementById("state").getAttribute("data-state");
+    //let state = document.getElementById("state").getAttribute("data-state");
+    console.log('Page content was requested: ' + content);
+    console.log(data);
 
     $.ajax({
-        url: document.location.origin + "/setInfo"  + state,
+        url: document.location.origin + "/"  + content,
         type: 'POST',
         data: JSON.stringify(data),
         processData: false,
@@ -34,7 +36,6 @@ function sendPost(){
 
 function extractForm(form) {
     var data = {};
-
     for (var x=0; x < form.elements.length; x++) {
         var field = form.elements[x];
         if (field.name && field.type !== "submit") {

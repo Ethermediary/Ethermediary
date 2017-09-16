@@ -5,7 +5,13 @@ const contractInteraction = require("./contractInteraction.js");
 
 module.exports = router;
 
-router.post('/setInfo1', function(req, res){
+// First newDeal page
+router.post('/newDeal1Content', function(req, res){
+  res.render('newDeal1Content');
+});
+
+// Second newDeal page, serious sh*t right here
+router.post('/newDeal2Content', function(req, res){
     req.sanitizeBody('meta').trim();
     req.sanitizeBody('amount').trim();
 
@@ -19,7 +25,6 @@ router.post('/setInfo1', function(req, res){
                     meta: req.body.meta,
                     amount: req.body.amount
                 };
-
                 res.render('newDeal2Content',{
                     jsonData: JSON.stringify(toSave)
                 });
@@ -38,7 +43,8 @@ router.post('/setInfo1', function(req, res){
         });
 });
 
-router.post('/setInfo2',function(req,res){
+// Review page before validating
+router.post('/newDeal3Content',function(req,res){
     let dealData = JSON.parse(req.body.dealData);
 
     req.sanitizeBody('buyer_address').trim();
@@ -60,8 +66,6 @@ router.post('/setInfo2',function(req,res){
         .isAlphanumeric();
     req.checkBody("seller_email", "Please enter a valid email for the Seller")
         .isEmail();
-    /*req.checkBody("refund_duration", "Please enter a valid integer for the number of days")
-        .isInt({ min: 7, max: 365 });*/
 
     req.getValidationResult()
         .then(function (results) {
@@ -72,13 +76,12 @@ router.post('/setInfo2',function(req,res){
                 dealData.seller_email = req.body.seller_email;
 
                 res.render('newDeal3Content', {
-                  req: req, // Pour remplir le formulaire de review
+                  req: req,
                   dealData: dealData,
                   jsonData: JSON.stringify(dealData)
                 });
             } else {
                 let errors = results.array();
-
                 //ici errors contient donc la list d'objet décrite dans le paragraphe plus haut
                 //on utilise Array.prototype.filter pour récuperer seulement les membres
                 //qui ont comme valeur de "param" le nom de l'erreur qu'on veut
@@ -99,7 +102,40 @@ router.post('/setInfo2',function(req,res){
         });
 });
 
-router.post('/setInfo3',function(req,res){
+// This is for the newDealDone page, choosing between metamask or not accordingly
+router.post('/newDealDone',function(req,res){
+    if(!("dealData" in req.body)){
+        res.status(400).send("you should provide the deal data");
+        return;
+    }
+    let dealData = JSON.parse(req.body.dealData);
+    console.log(dealData);
+
+    contractInteraction.createBuyerBridge(dealData)
+        .then(function(address){
+            res.render("newDealDone_web", {
+                amount: parseInt(dealData.amount)*1.1,
+                address: address
+            })
+        })
+        .fail(function(err){
+            console.log(err);
+            res.status(500).send("error sorry");
+        });
+});
+
+// Below is all about getDeal and further interraction with Ethermediary
+router.post('/getDeal',function(req,res){
+    res.render('getDeal');
+});
+
+router.post('/myDeal',function(req,res){
+    res.render('myDeal');
+});
+
+/*
+// This is the page for the classic unsecure sh*tty transaction
+router.post('/newDealDone_web',function(req,res){
     if(!("dealData" in req.body)){
         res.status(400).send("you should provide the deal data");
         return;
@@ -119,6 +155,7 @@ router.post('/setInfo3',function(req,res){
         });
 });
 
+// This is the page for metamask
 router.post("/dealCreated", function(req, res){
     if(!("transactionHash" in req.body)){
         res.status(400).send("you should provide the transactionHash");
@@ -127,14 +164,16 @@ router.post("/dealCreated", function(req, res){
     res.render("newDealDone_metamask", {
         transactionHash: req.body.transactionHash
     });
+});*/
+
+router.post('/terms',function(req,res){
+    res.render('terms');
 });
 
-router.post('/mydeal',function(req,res){
-    var deal_id = req.body.deal_id;
-    res.render('mydeal');
+router.post('/howitworks',function(req,res){
+    res.render('howitworks');
 });
 
 router.post('/simulation',function(req,res){
-    var deal_id = req.body.deal_id;
     res.render('simulation');
 });

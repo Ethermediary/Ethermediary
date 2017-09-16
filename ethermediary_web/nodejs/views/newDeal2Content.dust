@@ -1,13 +1,17 @@
-<div id="state" data-state="2"></div>
-<div id="deal" data-deal="{jsonData}"></div>
-<div id="definition" style="margin-bottom: 60px;">
-	<a>The <strong>buyer</strong> have to initialise the <strong>deal</strong> and make an offer to the <strong>seller</strong>.</br>
-		Copy and paste is the way to go = ]
-	</a>
+<div id="logo" style="margin-bottom: 50px;">
+	<a href="./"><img src="./imgs/logo_blue.png" width="70px" style="position: relative; top:12px;"/></a>
+	&nbsp;<a href="./">Ethermediary</a>
 </div>
 
-<div id="button_menu" class="note" style="margin-left: 90px; margin-top: 50px;">
-	<form id="mForm" onsubmit="onClick(); return false;">
+<div id="state" data-state="newDeal2Content"></div>
+<div id="deal" data-deal="{jsonData}"></div>
+
+<div id="definition" >
+	<a>Copy and paste is the way to go = ]</a>
+</div>
+
+<div id="button_menu" class="note" style="margin-left: 110px; margin-top: 50px;">
+	<form id="mForm">
 			{?error_buyer_address}
 				<div id="alert">
 					<a class="info">
@@ -16,7 +20,7 @@
 				</div>
 			{/error_buyer_address}
 			<input type="text" style="width: 352px;" placeholder="Buyer public address" name="buyer_address" value="{req.body.buyer_address}"/>
-			<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy and paste is the way to go &nbsp;= ]</a></br></br>
+			<a>Copy and paste is the way to go &nbsp;= ]</a></br></br>
 
 			{?error_buyer_email}
 				<div id="alert">
@@ -26,7 +30,7 @@
 				</div>
 			{/error_buyer_email}
 			<input type="text" style="width: 352px;" placeholder="Buyer's email" name="buyer_email" value="{req.body.buyer_email}"/>
-			<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email of the Buyer</a></br></br>
+			<a>Email of the Buyer</a></br></br>
 
 			{?error_seller_address}
 				<div id="alert">
@@ -36,7 +40,7 @@
 				</div>
 			{/error_seller_address}
 			<input type="text" style="width: 352px;" placeholder="Seller public address" name="seller_address" value="{req.body.seller_address}"/>
-			<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is where the contract will send your paiement</a></br></br>
+			<a>This is where the contract will send your paiement</a></br></br>
 
 			{?error_seller_email}
 				<div id="alert">
@@ -46,18 +50,13 @@
 				</div>
 			{/error_seller_email}
 			<input type="text" style="width: 352px;" placeholder="Seller's email" name="seller_email" value="{req.body.seller_email}"/>
-			<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email of the Seller</a></br></br></br>
+			<a>Email of the Seller</a></br></br></br>
 
-			<!--{?error_refund_duration}
-				<div id="alert">
-					<a class="info">
-						<img src="./imgs/alert.png" width="30px"><span>{#error_refund_duration}Error : {.msg}<br/>{/error_refund_duration}</span></img>
-					</a>
-				</div>
-			{/error_refund_duration}
-			<input type="text" placeholder="Minimum duration before refund in days" name="refund_duration" value="{req.body.refund_duration}"/>
-			<a>&nbsp;&nbsp;&nbsp;The minimum amount of days before the buyer could ask for a refund</a></br></br></br>	-->
-
-			<button class="inline" style="width: 375px;" type="submit">Next</button>
+			<div id="get_deal_color" onmouseover="blob('get_deal_color')" style="width:375px;">
+			<button id="submit" class="button" style="width: 375px;"
+				onmouseover="color_over('button')"
+				onmouseleave="color_leave('button')"
+				onclick="onClick('newDeal3Content'); return false;">Next</button>
+			</div>
 		</form>
 </div>

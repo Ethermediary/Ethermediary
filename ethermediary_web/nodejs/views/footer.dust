@@ -1,7 +1,8 @@
     <div id="footer" class="note">
-      <a href="terms" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terms of use</a>
+      &nbsp;<a style="cursor: pointer;" onclick="onClick('terms'); return false;" >Terms of use</a>
 
-      <a class="marge" href="./howitworks">How it works</a>
+      <a style="cursor: pointer;" onclick="onClick('howitworks'); return false;"
+         class="marge">How it works</a>
 
       <a href="https://github.com/Ethermediary" style="float: right;">
         <img src="./imgs/GitHub-Mark/PNG/GitHub-Mark-64px.png" width="25px"/>
@@ -11,16 +12,22 @@
     	<script id="transferScript" src="/js/transferBaseInfo.js"></script>
     	<script src="/js/jquery-2.2.0.min.js"></script>
 
-      </br></br>
+      <!--</br></br>
       <div id="donate" style="font-size: 13px; text-align: center; color: #64E9F9;">
         <span class="clear">
           <a href="/donate">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <!--<strong>Donate ETH = ]</strong>&nbsp;&nbsp;&nbsp;0x296Da2A1D10f2Bc816edbdDdD4E039D2a05D483d</a>-->
+            <strong>Donate ETH = ]</strong>&nbsp;&nbsp;&nbsp;0x296Da2A1D10f2Bc816edbdDdD4E039D2a05D483d</a>
         </span>
-      </div>
-
+      </div>-->
     </div>
 
   </div>
+
+  <svg id="svgbg" style="position:absolute"></svg>
+  <script src="/js/delaunay.js"></script>
+  <script src="/js/bg.js"></script>
+
+  <script src="/js/anime.min.js"></script>
+  <script src="/js/myanim.js"></script>
 
 </body>

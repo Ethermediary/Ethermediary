@@ -1,23 +1,22 @@
-{> "views/header.dust"/}
+<div id="logo" style="margin-bottom: 15px;">
+	<a href="./"><img src="./imgs/logo_blue.png" width="70px" style="position: relative; top:12px;"/></a>
+	&nbsp;<a href="./">Ethermediary</a>
+</div>
 
-	<div id="content" class="gradient">
+<div id="definition" style="margin-top: 0px; margin-bottom: 30px;">
+	<a><strong>Terms of use</strong></a>
+</div>
 
-		<div id="definition" style="margin-top: 20px; margin-bottom: 35px;">
-			<a><strong>Terms of use</strong></a>
-		</div>
+<form id="mForm"></form>
 
-		<div id="receipt" class="note" style="width: 1000px; text-align: justify;">
-      <a>By using this web page, you understand and agree with the following terms :</br></br>
-        - Ethermediary is a smart contract based on the Ethereum blockchain, therefore after release&nbsp;
-          it's inner working does not depends on the devellopers or any other entities but rather on the entire Ethereum nodes arount the world.</br></br>
-        - We as devellopers do not have access to the funds temporaly secured on the Ethermediary smart contract and cannot change it's behavior under any circumstances.</br></br>
-        - Ethermediary does what it's meant to do, only what what it's meant to do, and absolutely nothing else : you can check the <a href="https://github.com/Ethermediary" target="_blank"><strong>source code</strong></a> for more informations.</br></br>
-        - Under the circonstances descibe <a href="/howitworks"><strong>here</strong></a>, you might loose forever your caution and/or your paiement, and that the devellopers are absolutely helpless about that.</br></br>
-        - This web application is just a web interface interracting with the Ethermediary smart contract through an Ethereum node running on our server (a remote control). If you want, you too can directly access the Ethermediary smart contract with this <a href="/#"><strong>specific API</strong></a>.
-      </a>
+<div id="receipt" class="note" style="width: 1000px; text-align: justify;">
+  <a>By using this web page, you understand and agree with the following terms :</br></br>
+    - Ethermediary is a smart contract based on the Ethereum blockchain, therefore after release&nbsp;
+      it's inner working does not depends on the devellopers or any other entities but rather on the entire Ethereum nodes arount the world.</br></br>
+    - We as devellopers do not have access to the funds temporaly secured on the Ethermediary smart contract and cannot change it's behavior under any circumstances.</br></br>
+    - Ethermediary does what it's meant to do, only what what it's meant to do, and absolutely nothing else : you can check the <a href="https://github.com/Ethermediary" target="_blank"><strong>source code</strong></a> for more informations.</br></br>
+    - Under the circonstances describe <a style="cursor: pointer;" onclick="onClick('howitworks'); return false;"><strong>here</strong></a>, you might loose forever your caution and/or your paiement, and the devellopers are absolutely helpless about that.</br></br>
+    - This web application is just a web interface interracting with the Ethermediary smart contract through an Ethereum node running on our server (a remote control). If you want, you too can directly access the Ethermediary smart contract with this <a href="/#"><strong>specific API</strong></a>.
+  </a>
 
-		</div>
-
-	</div>
-
-{> "views/footer.dust"/}
+</div>

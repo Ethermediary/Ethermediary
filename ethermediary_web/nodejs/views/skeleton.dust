@@ -1,0 +1,10 @@
+{> "views/header.dust"/}
+
+		{> "views/index.dust"/}
+
+{> "views/footer.dust"/}
+
+
+
+
+<!--<a href="./newdealtwo"><button id="new_deal_button" >Next</button></a>-->

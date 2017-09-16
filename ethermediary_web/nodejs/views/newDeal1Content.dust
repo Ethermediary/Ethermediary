@@ -1,12 +1,18 @@
-<div id="state" data-state="1"></div>
+<div id="logo">
+	<a href="./"><img src="./imgs/logo_blue.png" width="70px" style="position: relative; top:12px;"/></a>
+	&nbsp;<a href="./">Ethermediary</a>
+</div></br>
+
+<div id="state" data-state="newDeal1Content"/>
+
 <div id="definition">
 	<a>The <strong>buyer</strong> have to initialise the <strong>deal</strong> and make an offer to the <strong>seller</strong>.
 	</a>
-</div></br>
+</div>
 
-<div id="button_menu" class="note">
+<div id="button_menu" class="note" style="margin-left: 60px; margin-top: 80px;">
 
-	<form id="mForm" onsubmit="onClick(); return false;">
+	<form id="mForm">
 
 		{?error_meta}
 			<div id="alert">
@@ -16,7 +22,7 @@
 			</div>
 		{/error_meta}
 		<input type="text" placeholder="Object or service associated" name="meta" value="{req.body.meta}"/>
-		<a>&nbsp;&nbsp;&nbsp;The object or service associated with the Deal</a></br></br>
+		<a>The object or service associated with the Deal</a></br></br>
 
 		{?error_amount}
 			<div id="alert">
@@ -26,9 +32,14 @@
 			</div>
 		{/error_amount}
 		<input type="text" placeholder="Amount of tokens" name="amount" value="{req.body.amount}"/>
-		<a>&nbsp;&nbsp;&nbsp;The contract will be waiting for this amount coming from your public adress</a></br></br></br>
+		<a>The contract will be waiting for this amount coming from your public adress</a></br></br></br>
 
-		<button id="submitButton">Next</button>
+		<div id="get_deal_color" onmouseover="blob('get_deal_color')" style="width:275px;">
+		<button id="submit" class="button"
+			onmouseover="color_over('button')"
+			onmouseleave="color_leave('button')"
+			onclick="onClick('newDeal2Content'); return false;">Next</button>
+		</div>
 	</form>
 
 </div>
