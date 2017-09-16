@@ -17,8 +17,8 @@
 </div></br>
 
 <div id="get_deal_color" onmouseover="blob('get_deal_color')" style="width:375px; margin: auto;">
-<button id="submit" class="button" style="width: 375px;"
+<button id="submit" type="button" class="button" style="width: 375px;"
 	onmouseover="color_over('button')"
 	onmouseleave="color_leave('button')"
-	onclick="onClick('simulation'); return false;">Simulation</button>
+	onclick="onClick('simulation');">Simulation</button>
 </div>

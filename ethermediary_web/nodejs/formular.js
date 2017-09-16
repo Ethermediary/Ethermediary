@@ -102,40 +102,8 @@ router.post('/newDeal3Content',function(req,res){
         });
 });
 
-// This is for the newDealDone page, choosing between metamask or not accordingly
-router.post('/newDealDone',function(req,res){
-    if(!("dealData" in req.body)){
-        res.status(400).send("you should provide the deal data");
-        return;
-    }
-    let dealData = JSON.parse(req.body.dealData);
-    console.log(dealData);
-
-    contractInteraction.createBuyerBridge(dealData)
-        .then(function(address){
-            res.render("newDealDone_web", {
-                amount: parseInt(dealData.amount)*1.1,
-                address: address
-            })
-        })
-        .fail(function(err){
-            console.log(err);
-            res.status(500).send("error sorry");
-        });
-});
-
-// Below is all about getDeal and further interraction with Ethermediary
-router.post('/getDeal',function(req,res){
-    res.render('getDeal');
-});
-
-router.post('/myDeal',function(req,res){
-    res.render('myDeal');
-});
-
-/*
 // This is the page for the classic unsecure sh*tty transaction
-router.post('/newDealDone_web',function(req,res){
+router.post('/newDealDone',function(req,res){
     if(!("dealData" in req.body)){
         res.status(400).send("you should provide the deal data");
         return;
@@ -164,16 +132,12 @@ router.post("/dealCreated", function(req, res){
     res.render("newDealDone_metamask", {
         transactionHash: req.body.transactionHash
     });
-});*/
-
-router.post('/terms',function(req,res){
-    res.render('terms');
 });
 
-router.post('/howitworks',function(req,res){
-    res.render('howitworks');
-});
-
-router.post('/simulation',function(req,res){
-    res.render('simulation');
+router.post("/:page", function(req, res, next){
+    try{
+        res.render(req.params.page);
+    }catch(e){
+        next();
+    }
 });

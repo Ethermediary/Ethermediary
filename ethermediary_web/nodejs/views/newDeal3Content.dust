@@ -20,15 +20,15 @@
 	<a>Seller email address : <strong><span class="clear">{dealData.seller_email}</span></strong></a></br></br>
 
 	<a>These information are not correct ?</br> Go back to the&nbsp;
-	<a style="text-decoration: underline; cursor: pointer;" onclick="onClick('newDeal1Content'); return false;">
+	<a style="text-decoration: underline; cursor: pointer;" onclick="onClick('newDeal1Content');">
 		<strong>previous fields</strong></a>.</a></br></br></br>
 
 	<form id="mForm" style="margin-left: 210px;">
 			<div id="get_deal_color" onmouseover="blob('get_deal_color')" style="width:375px;">
-			<button id="submit" class="button" style="width: 375px;"
+			<button id="submit" type="button" class="button" style="width: 375px;"
 				onmouseover="color_over('button')"
 				onmouseleave="color_leave('button')"
-				onclick="onClick('newDealDone'); return false;">Validate</button>
+				onclick="onClick('newDealDone');">Validate</button>
 			</div>
 	</form>
 

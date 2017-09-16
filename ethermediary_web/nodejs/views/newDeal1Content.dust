@@ -35,10 +35,10 @@
 		<a>The contract will be waiting for this amount coming from your public adress</a></br></br></br>
 
 		<div id="get_deal_color" onmouseover="blob('get_deal_color')" style="width:275px;">
-		<button id="submit" class="button"
+		<button id="submit" type="button" class="button"
 			onmouseover="color_over('button')"
 			onmouseleave="color_leave('button')"
-			onclick="onClick('newDeal2Content'); return false;">Next</button>
+			onclick="onClick('newDeal2Content');">Next</button>
 		</div>
 	</form>
 

@@ -38,7 +38,6 @@ function init()
     svgbg.setAttribute("width", window.outerWidth);
     svgbg.setAttribute("height", window.outerHeight);
 
-
     var mesh = new Mesh();
     for(let i = 0; i < 200; i++){
         mesh.points.push(getRandomPoint());
@@ -64,15 +63,6 @@ function makeTriangle(triangle){
     element.style = "fill:" + triangle.getColor() + ";stroke:black;stroke-width:2";
     return element;
 }
-
-function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
 
 function lerpColor(a, b, amount) {
     var ah = parseInt(a.replace(/#/g, ''), 16),

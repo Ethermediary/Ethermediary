@@ -1,21 +1,31 @@
 
 function onClick(content){
     try{
-        sendPost(content);
+        if(content == "newDealDone"){
+            let data = extractPageData();
+            sendPost('loading', () => sendPostFull(content, data));
+            ;
+        }else{
+            sendPost(content);
+        }
     }catch(err){
         console.error(err);
     }
 }
 
-function sendPost(content){
+function extractPageData(){
     let data = extractForm(document.getElementById("mForm"));
     if(document.getElementById("deal")){
         data.dealData = document.getElementById("deal").getAttribute("data-deal");
     }
-    //let state = document.getElementById("state").getAttribute("data-state");
-    console.log('Page content was requested: ' + content);
-    console.log(data);
+    return data;
+}
 
+function sendPost(content, callback){
+    sendPostFull(content, extractPageData(), callback);
+}
+
+function sendPostFull(content, data, callback){
     $.ajax({
         url: document.location.origin + "/"  + content,
         type: 'POST',
@@ -27,9 +37,9 @@ function sendPost(content){
             console.log(err);
         },
         success: function (data) {
-            //document.getElementById("content").innerHTML = data;
-            //by using jquery to replace the innerHTML we allow inserted script tags to be evaluated
             $("#content").html(data);
+            if(callback)
+                callback();
         }
     });
 }

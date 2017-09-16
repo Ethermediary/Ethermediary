@@ -20,10 +20,10 @@
 		<div id="button_menu">
 				<div id="new_deal_def">
 					<div id="new_deal_color" onmouseover="blob('new_deal_color')">
-						<button class="button_left"
+						<button class="button_left" type="button"
 						onmouseover="color_over('button_left')"
 						onmouseleave="color_leave('button_left')"
-						onclick="onClick('newDeal1Content'); return false;">New Deal</button>
+						onclick="onClick('newDeal1Content');">New Deal</button>
 					</div>
 			  </div>
 
@@ -31,10 +31,10 @@
 
 				<div id="get_deal_def" >
 					<div id="get_deal_color" onmouseover="blob('get_deal_color')">
-						<button class="button_right"
+						<button class="button_right" type="button"
 						onmouseover="color_over('button_right')"
 						onmouseleave="color_leave('button_right')"
-						onclick="onClick('getDeal'); return false;">Get Deal</button>
+						onclick="onClick('getDeal');">Get Deal</button>
 					</div>
 	      </div>
 		</div>

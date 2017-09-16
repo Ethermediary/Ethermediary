@@ -80,14 +80,7 @@ function parseAbiAndAddress(callback){
             $.ajax({
                 url: "/eth/managerAddress",
                 success: function(file_content) {
-<<<<<<< HEAD
-                    console.log("window.managerAddress='" + file_content.trim() + "';");
-                    eval("window.managerAddress='" + file_content.trim() + "';");
-                    //console.log(file_content.trim());
-                    //window.managerAddress = file_content.trim();
-=======
                     window.managerAddress = file_content.trim();
->>>>>>> plenituz
                     callback();
                 },
                 error: function(err){
@@ -104,10 +97,4 @@ function parseAbiAndAddress(callback){
             console.log(err);
         }
     });
-
-
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> plenituz
