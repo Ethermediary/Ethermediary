@@ -8,7 +8,7 @@ module.exports = function(deployer) {
  /* deployer.deploy(ConvertLib);
   deployer.link(ConvertLib, MetaCoin);
   deployer.deploy(MetaCoin);*/
-  deployer.deploy(DealManager,{gas: 900000})
+  deployer.deploy(DealManager/*,{gas: 900000}*/)
   .then(function(){
     console.log("deal manager address:" + DealManager.address);
   })

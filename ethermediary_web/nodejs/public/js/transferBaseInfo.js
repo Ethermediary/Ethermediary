@@ -1,4 +1,3 @@
-
 function onClick(content){
     try{
         if(content == "newDealDone"){

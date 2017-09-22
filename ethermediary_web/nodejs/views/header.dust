@@ -7,5 +7,5 @@
 	<link href="https://fonts.googleapis.com/css?family=Raleway:500" rel="stylesheet">
 	<title>Ethermediary</title>
 </head>
-
+<script src="/js/ethermediaryClientSide.js"></script>
 <body class="grad_body" title="This is a generative background !">

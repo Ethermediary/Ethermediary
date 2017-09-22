@@ -25,6 +25,7 @@ module.exports = {
 
   startWatchingContract: function(){
     let event = DealManager.NewDeal({});
+    console.log("wathcing")
     event.watch(onNewDeal);
   },
 
@@ -43,7 +44,7 @@ module.exports = {
               from: web3.eth.coinbase, 
               gas: 3000000, 
               data: buyerBridgeCode
-          }, 
+          },
           function(err, res){
               if(!done){
                   //the callback fires TWICE HAHAHAHAHA

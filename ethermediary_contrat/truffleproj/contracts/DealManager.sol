@@ -18,6 +18,7 @@ contract DealManager {
 		uint cautionSeller;
 		uint cautionBuyer;
 		State state;
+		uint encryptionAddress;
 	}
 
 	enum State{
@@ -31,106 +32,94 @@ contract DealManager {
 	uint private taxCollected;
 	bool public muted = false;
 	mapping(uint => Deal) deals;
-	mapping(address => uint) recoveries;
-	mapping(uint => address) reverseRecoveries;
+	mapping(uint => uint) encryptors;
 
-	event NewDeal(uint id, address buyer, string emailBuyer, address seller, string emailSeller, uint value);
-	event DealAnswered(uint id, bool answer);
-	event SellerAskedCancel(uint id);
-	event BuyerAskedCancel(uint id);
-	event SellerRefusedCancel(uint id);
-	event BuyerRefusedCancel(uint id);
-	event DealOver(string buyerEmail, string sellerEmail, string reason);
+	event NewDeal(uint id, address buyer, string emailBuyer, 
+		address seller, string emailSeller, 
+		uint value, uint encryptionAddress);
+	event DealAnswered(uint id, bool answer, uint encryptionAddress);
+	event SellerAskedCancel(uint id, uint encryptionAddress);
+	event BuyerAskedCancel(uint id, uint encryptionAddress);
+	event SellerRefusedCancel(uint id, uint encryptionAddress);
+	event BuyerRefusedCancel(uint id, uint encryptionAddress);
+	event DealOver(string buyerEmail, string sellerEmail, string reason, uint encryptionAddress);
 
-	//same as BUYER_createDeal but add the sender address to the recovery dictionnary
-	//so that you can recover your deal id from the BuyerBridge address
-	function BUYERBRIDGE_createDeal(uint amount, address buyer, string myEmail, address seller, string sellerEmail)
-		payable condition(!muted) returns (bool)
-	{
-		if(!(msg.value >= (amount*11)/10)){
-			return false;
-		}
-
-		uint uuid = createDeal(amount, buyer, myEmail, seller, sellerEmail);
-		
-		recoveries[msg.sender] = uuid;
-		reverseRecoveries[uuid] = msg.sender;
-		return true;
-	}
-
-	function BUYER_createDeal(uint amount, address buyer, string myEmail, address seller, string sellerEmail) 
+	function BUYER_createDeal(uint amount, string myEmail, 
+		address seller, string sellerEmail, uint encryptionAddress) 
 		payable condition(!muted)
 	{
  		require(msg.value >= (amount*11)/10);
-		createDeal(amount, buyer, myEmail, seller, sellerEmail);
+		uint uuid = createDeal(amount, myEmail, seller, sellerEmail, encryptionAddress);
+		NewDeal(uuid, msg.sender, myEmail, seller, sellerEmail, msg.value, encryptionAddress);
 	}
 
-	function createDeal(uint amount, address buyer, string myEmail, address seller, string sellerEmail) 
+	function createDeal(uint amount, string myEmail, address seller, 
+		string sellerEmail, uint encryptionAddress) 
 		private returns(uint)
 	{
 		uint uuid = generateUUID();
 		Deal storage newDeal = deals[uuid];
 
-		newDeal.buyer._address = buyer;
+		newDeal.buyer._address = msg.sender;
 		newDeal.buyer.email = myEmail;
 		newDeal.seller._address = seller;
 		newDeal.seller.email = sellerEmail;
 		newDeal.offer = amount;
 		newDeal.cautionBuyer = msg.value - amount;
 		newDeal.state = State.OFFER_MADE;
-		NewDeal(uuid, buyer, myEmail, seller, sellerEmail, msg.value);
+		newDeal.encryptionAddress = encryptionAddress;
 		return uuid;
 	}
 
-	function BUYER_cancelOffer(uint id) inState(id, State.OFFER_MADE) onlyBuyer(id) {
-		refund(id);
+	function BUYER_cancelOffer(uint id, uint encryptionAddress) inState(id, State.OFFER_MADE) onlyBuyer(id) {
+		refund(id, encryptionAddress);
 	}
 
-	function BUYER_receivedPackage(uint id) onlyBuyer(id) inState(id, State.ACCEPTED){
-		finishTransaction(id);
+	function BUYER_receivedPackage(uint id, uint encryptionAddress) onlyBuyer(id) inState(id, State.ACCEPTED){
+		finishTransaction(id, encryptionAddress);
 	}
 
-	function BUYER_askCancel(uint id) onlyBuyer(id) inState(id, State.ACCEPTED) {
+	function BUYER_askCancel(uint id, uint encryptionAddress) onlyBuyer(id) inState(id, State.ACCEPTED) {
 		deals[id].state = State.BUYER_ASKED_CANCEL;
-		BuyerAskedCancel(id);
+		BuyerAskedCancel(id, encryptionAddress);
 	}
 
-	function BUYER_acceptCancel(uint id) onlyBuyer(id) inState(id, State.SELLER_ASKED_CANCEL) {
-		refund(id);
+	function BUYER_acceptCancel(uint id, uint encryptionAddress) onlyBuyer(id) inState(id, State.SELLER_ASKED_CANCEL) {
+		refund(id, encryptionAddress);
 	}
 
-	function BUYER_refuseCancel(uint id) onlyBuyer(id) inState(id, State.SELLER_ASKED_CANCEL) {
+	function BUYER_refuseCancel(uint id, uint encryptionAddress) onlyBuyer(id) inState(id, State.SELLER_ASKED_CANCEL) {
 		deals[id].state = State.ACCEPTED;
-		BuyerRefusedCancel(id);
+		BuyerRefusedCancel(id, encryptionAddress);
 	}
 
-	function SELLER_answerOffer(uint id, bool answer) payable onlySeller(id) inState(id, State.OFFER_MADE){
+	function SELLER_answerOffer(uint id, bool answer, uint encryptionAddress) payable onlySeller(id) inState(id, State.OFFER_MADE){
 		Deal storage deal = deals[id];
 		if(answer){
 			require(msg.value >= deal.offer/10);
 			deal.state = State.ACCEPTED;
 			deal.cautionSeller = msg.value;
 		}else{
-			refund(id);
+			refund(id, encryptionAddress);
 		}
-		DealAnswered(id, answer);
+		DealAnswered(id, answer, encryptionAddress);
 	}
 
-	function SELLER_askCancel(uint id) onlySeller(id) inState(id, State.ACCEPTED){
+	function SELLER_askCancel(uint id, uint encryptionAddress) onlySeller(id) inState(id, State.ACCEPTED){
 		deals[id].state = State.SELLER_ASKED_CANCEL;
-		SellerAskedCancel(id);
+		SellerAskedCancel(id, encryptionAddress);
 	}
 
-	function SELLER_acceptCancel(uint id) onlySeller(id) inState(id, State.BUYER_ASKED_CANCEL) {
-		refund(id);
+	function SELLER_acceptCancel(uint id, uint encryptionAddress) onlySeller(id) inState(id, State.BUYER_ASKED_CANCEL) {
+		refund(id, encryptionAddress);
 	}
 
-	function SELLER_refuseCancel(uint id) onlySeller(id) inState(id, State.BUYER_ASKED_CANCEL) {
+	function SELLER_refuseCancel(uint id, uint encryptionAddress) onlySeller(id) inState(id, State.BUYER_ASKED_CANCEL) {
 		deals[id].state = State.ACCEPTED;
-		SellerRefusedCancel(id);
+		SellerRefusedCancel(id, encryptionAddress);
 	}
 
-	function buyerCheated(uint id) onlyTaxCollector {
+	function buyerCheated(uint id, uint encryptionAddress) onlyTaxCollector {
 		Deal storage deal = deals[id];
 		uint toSeller = deal.cautionSeller + deal.offer;
 		deal.cautionSeller = 0;
@@ -141,11 +130,11 @@ contract DealManager {
 
 		deal.seller._address.transfer(toSeller);
 
-		DealOver(deal.buyer.email, deal.seller.email, "buyerCheated");	
+		DealOver(deal.buyer.email, deal.seller.email, "buyerCheated", encryptionAddress);	
 		deleteDeal(id);
 	}
 
-	function sellerCheated(uint id) onlyTaxCollector {
+	function sellerCheated(uint id, uint encryptionAddress) onlyTaxCollector {
 		Deal storage deal = deals[id];
 		
 		uint toBuyer = deal.cautionBuyer + deal.offer;
@@ -156,7 +145,7 @@ contract DealManager {
 
 		deal.buyer._address.transfer(toBuyer);
 
-		DealOver(deal.buyer.email, deal.seller.email, "sellerCheated");	
+		DealOver(deal.buyer.email, deal.seller.email, "sellerCheated", encryptionAddress);	
 		deleteDeal(id);
 	}
 
@@ -188,11 +177,26 @@ contract DealManager {
 		taxCollector.transfer(taxCollected);
 	}
 
-	function getTax() onlyTaxCollector returns (uint) {
+	function getTax() constant onlyTaxCollector returns (uint) {
 		return taxCollected;
 	}
+
+	function generateEncryptorUUID() constant returns (uint res){
+		uint i = 0;
+		do{
+			res = rand(0, 9007199254740991, block.timestamp + i);
+			i++;
+		}while(encryptors[res] != 0);	
+
+		return res;
+	}
+
+	function reserveEncryptorUUID(uint id) {
+		require(encryptors[id] == 0);
+		encryptors[id] = id;
+	}
 	
-	function refund(uint id) private {
+	function refund(uint id, uint encryptionAddress) private {
 		Deal storage ref = deals[id];
 
 		var toBuyer = ref.offer + ref.cautionBuyer;
@@ -206,11 +210,11 @@ contract DealManager {
 			ref.seller._address.transfer(toSeller);
 		}
 
-		DealOver(ref.buyer.email, ref.seller.email, "refund");
+		DealOver(ref.buyer.email, ref.seller.email, "refund", encryptionAddress);
 		deleteDeal(id);
 	}
 
-	function finishTransaction(uint id) private {
+	function finishTransaction(uint id, uint encryptionAddress) private {
 		Deal storage ref = deals[id];
 
 		var toSeller = ref.offer + ref.cautionSeller;
@@ -222,13 +226,11 @@ contract DealManager {
 		ref.seller._address.transfer(toSeller);
 		ref.buyer._address.transfer(toBuyer);
 		
-		DealOver(ref.buyer.email, ref.seller.email, "finish");		
+		DealOver(ref.buyer.email, ref.seller.email, "finish", encryptionAddress);		
 		deleteDeal(id);
 	}
 
 	function deleteDeal(uint id) private {
-		delete recoveries[reverseRecoveries[id]];
-		delete reverseRecoveries[id];
 		delete deals[id];
 	}
 

@@ -5,33 +5,16 @@
       "constant": false,
       "inputs": [
         {
-          "name": "amount",
+          "name": "id",
           "type": "uint256"
         },
         {
-          "name": "buyer",
-          "type": "address"
-        },
-        {
-          "name": "myEmail",
-          "type": "string"
-        },
-        {
-          "name": "seller",
-          "type": "address"
-        },
-        {
-          "name": "sellerEmail",
-          "type": "string"
-        }
-      ],
-      "name": "BUYERBRIDGE_createDeal",
-      "outputs": [
-        {
-          "name": "",
+          "name": "answer",
           "type": "bool"
         }
       ],
+      "name": "SELLER_answerOffer",
+      "outputs": [],
       "payable": true,
       "type": "function"
     }
@@ -39,5 +22,5 @@
   "unlinked_binary": "0x",
   "networks": {},
   "schema_version": "0.0.5",
-  "updated_at": 1505491412857
+  "updated_at": 1505826497938
 }

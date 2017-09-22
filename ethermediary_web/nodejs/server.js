@@ -14,6 +14,12 @@ const formular = require('./formular.js');
 const contractInteraction = require("./contractInteraction.js");
 const mailer = require("./mailer.js");
 
+
+app.use(function(req, res, next){
+  console.log(req.method + ":" + req.url);
+  next();
+});
+
 // Set path ...
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -30,11 +36,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view cache', doCache);
 app.enable('trust proxy');
 
-app.use(function(req, res, next){
-  console.log(req.method + ":" + req.url);
-  next();
-})
-
 contractInteraction.startWatchingContract();
 
 // var interval = setInterval(function(){
@@ -43,7 +44,6 @@ contractInteraction.startWatchingContract();
 //   if(i > 49)
 //     clearInterval(interval);
 // }, 1000);
-
 
 ////////////////////////////////////////////////////////////////////////////////
 
