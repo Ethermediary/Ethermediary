@@ -31,14 +31,26 @@ module.exports = {
 
     getDealInfo: function(dealId){
         assertWeb3();
-        return new Promise(function(resolve, reject){
-            DealManager.getDealInfo.call(dealId, function(err, data){
-                if(err)
-                    return reject(err);
-                else
-                    return resolve(data);  
-            });
+        return Q.nfcall(DealManager.getDealInfo.call, dealId)
+        .catch(function(err){
+            throw new Error("dealId " + dealId + " not found");
         })
+        .then(function(data){
+          // uint dealId, address buyer, string emailBuyer, 
+          // address seller, string emailSeller, uint offer, 
+          // uint cautionSeller, uint cautionBuyer, State state
+            return {
+                dealId: data[0],
+                buyer: data[1],
+                emailBuyer: data[2],
+                seller: data[3],
+                emailSeller: data[4],
+                offer: data[5],
+                cautionSeller: data[6],
+                cautionBuyer: data[7],
+                state: data[8].toNumber()
+            };
+        });
     },
 
     retreiveDealId: function(transactionHash){
@@ -62,7 +74,7 @@ module.exports = {
                 return;
               }  
               var res = data.filter(e => e.transactionHash == transactionHash);
-              defer.resolve(res[0].args);
+              defer.resolve(res[0].args.id.toNumber());
           })
 
           return defer.promise;
