@@ -18,36 +18,21 @@ function overrideOnClick(){
 }
 
 function makeTransaction(){
-    console.log("salut");
-    //get the abi and address of the manager contract from the server, in case it got updated
-    //and put it in window.managerAbi and window.managerAddress
-    window.dealData = JSON.parse(document.getElementById("deal").getAttribute("data-deal"));
-    parseAbiAndAddress(executeTransaction);
-}
+    var dealData = JSON.parse(document.getElementById("deal").getAttribute("data-deal"));
 
-function executeTransaction(){
-    window.managerContract = window.web3.eth.contract(window.managerAbi).at(window.managerAddress);
-
-
-    window.managerContract.BUYER_createDeal(
-        window.web3.toWei(window.dealData.amount, 'ether'),
-        window.dealData.buyer_email,
-        window.dealData.seller_address,
-        window.dealData.seller_email,
-        {
-            value: window.web3.toWei(parseInt(window.dealData.amount) * 1.1, 'ether'),
-            from: window.web3.eth.accounts[0],
-            gas: 300000
-        },
-        function(err, res){
-            if(err){
-                console.log("error:" + err);
-            }else{
-                console.log("transaction result:")
-                console.log(res);
-                sendServerTransactionHash(res);
-            }
-        });
+    ethermediary.createDealManager();
+    var buyer = ethermediary.buyer(web3.eth.accounts[0]);
+    
+    buyer.createDeal(dealData.amount, dealData.buyer_email,
+        dealData.seller_address, dealData.seller_email)
+    .then(function(transactionHash){
+        console.log("transaction sent, here is your transaction hash: " + transactionHash);
+        sendServerTransactionHash(transactionHash);
+    })
+    .catch(function(err){
+        console.log("error sending transaction:");
+        console.log(err);
+    });
 }
 
 function sendServerTransactionHash(transactionHash){
@@ -67,34 +52,6 @@ function sendServerTransactionHash(transactionHash){
         },
         success: function (data) {
             $("#content").html(data);
-        }
-    });
-}
-
-function parseAbiAndAddress(callback){
-    $.ajax({
-        url: "/eth/managerAbi",
-        success: function(file_content) {
-            eval("window.managerAbi=" + file_content);
-
-            $.ajax({
-                url: "/eth/managerAddress",
-                success: function(file_content) {
-                    window.managerAddress = file_content.trim();
-                    callback();
-                },
-                error: function(err){
-                    console.log("error parsing address:");
-                    //TODO proper error handling
-                    console.log(err);
-                }
-            });
-
-        },
-        error: function(err){
-            console.log("error parsing abi:");
-            //TODO proper error handling
-            console.log(err);
         }
     });
 }

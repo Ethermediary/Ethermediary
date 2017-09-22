@@ -522,9 +522,6 @@ const dealManagerAbi = [
   }
 ];
 
-window.addEventListener("load", function(){
-    window.DealManager = web3.eth.contract(dealManagerAbi).at(dealManagerAddress);
-})
 var ethermediary = (function(){
     function makePromise(func, args){
         return new Promise(function(resolve, reject){
@@ -536,13 +533,17 @@ var ethermediary = (function(){
         });
     }
     return {
+        createDealManager: function(){
+          window.DealManager = web3.eth.contract(dealManagerAbi).at(dealManagerAddress);          
+        },
+
         seller: function(fromAddress, encryptorUUID){
             if(!encryptorUUID)
                 encryptorUUID = 1;
             return {
                 answerOffer: function(cautionETH, id, answer){
                     return makePromise(
-                        DealManager.SELLER_answerOffer,
+                        window.DealManager.SELLER_answerOffer,
                         [
                           id, answer, encryptorUUID, 
                           {
@@ -554,19 +555,19 @@ var ethermediary = (function(){
 
                 askCancel: function(id){
                     return makePromise(
-                        DealManager.SELLER_askCancel,
+                        window.DealManager.SELLER_askCancel,
                         [id, encryptorUUID, {from: fromAddress}]);
                 },
 
                 acceptCancel: function(id){
                     return makePromise(
-                        DealManager.SELLER_acceptCancel,
+                        window.DealManager.SELLER_acceptCancel,
                         [id, encryptorUUID, {from: fromAddress}]);
                 },
 
                 refuseCancel: function(id){
                     return makePromise(
-                        DealManager.SELLER_refuseCancel,
+                        window.DealManager.SELLER_refuseCancel,
                         [id, encryptorUUID, {from: fromAddress}]);
                 },
                 
@@ -580,7 +581,7 @@ var ethermediary = (function(){
             return {
                 createDeal: function(amountETH, buyerMail, seller, sellerEmail){
                     //TODO encryption emails 
-                    return makePromise(DealManager.BUYER_createDeal, [
+                    return makePromise(window.DealManager.BUYER_createDeal, [
                       web3.toWei(amountETH, "ether"),
                       buyerMail, 
                       seller,
@@ -612,7 +613,7 @@ var ethermediary = (function(){
 
                 cancelOffer: function(id){
                   return makePromise(
-                      DealManager.BUYER_cancelOffer, 
+                      window.DealManager.BUYER_cancelOffer, 
                       [id, encryptorUUID, {from: fromAddress}]);
                     // return new Promise(function(resolve, reject){
                     //     DealManager.BUYER_cancelOffer(id, encryptorUUID, 
@@ -627,7 +628,7 @@ var ethermediary = (function(){
 
                 receivedPackage: function(id){
                     return makePromise(
-                        DealManager.BUYER_receivedPackage,
+                        window.DealManager.BUYER_receivedPackage,
                         [id, encryptorUUID, {from: fromAddress}]);
                     // return new Promise(function(resolve, reject){
                     //     DealManager.BUYER_receivedPackage(id, this.encryptorUUID,
@@ -642,8 +643,8 @@ var ethermediary = (function(){
 
                 askCancel: function(id){
                     return makePromise(
-                      DealManager.BUYER_askCancel,
-                      [id, encryptorUUID, {from: fromAddress}]);
+                        window.DealManager.BUYER_askCancel,
+                        [id, encryptorUUID, {from: fromAddress}]);
 
                     // return new Promise(function(resolve, reject){
                     //     DealManager.BUYER_askCancel(id, this.encryptorUUID, 
@@ -658,14 +659,14 @@ var ethermediary = (function(){
 
                 acceptCancel: function(id){
                     return makePromise(
-                      DealManager.BUYER_acceptCancel,
-                      [id, encryptorUUID, {from: fromAddress}]);
+                        window.DealManager.BUYER_acceptCancel,
+                        [id, encryptorUUID, {from: fromAddress}]);
                 },
 
                 refuseCancel: function(refuseCancel){
                     return makePromise(
-                      DealManager.BUYER_refuseCancel,
-                      [id, encryptorUUID, {from: fromAddress}]);
+                        window.DealManager.BUYER_refuseCancel,
+                        [id, encryptorUUID, {from: fromAddress}]);
                 }
             };
         }

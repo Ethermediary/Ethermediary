@@ -34,4 +34,5 @@
 
 </div>
 <script src="/js/web3.min.js"></script>
+<script src="/js/ethermediaryClientSide.js"></script>
 <script src="/js/metamaskHandler.js"></script>
