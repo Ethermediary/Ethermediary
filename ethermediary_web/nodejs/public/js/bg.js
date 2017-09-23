@@ -111,7 +111,7 @@ function init()
     requestAnimationFrame(update);
 }
 
-function update(){    
+function update(){
     for(var i = 0; i < mesh.points.length; i++){
         var point = mesh.points[i];
         var home = mesh.homePoints[i];
@@ -142,7 +142,7 @@ function update(){
     }
 
     mesh.triangleObjs.forEach(t => t.updateDOM());
-    
+
     if(going)
         requestAnimationFrame(update);
 }

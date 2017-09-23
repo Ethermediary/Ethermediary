@@ -1,6 +1,4 @@
-html {
-  height: 100%;
-}
+html {height: 100%;}
 
 a{
   text-decoration: none;
@@ -15,6 +13,20 @@ body{
   padding: 20px;
   padding-top: 0px;
   margin-top: 0px;
+}
+
+#toggle{
+  position: fixed;
+  z-index: 2;
+  top: 10px;
+}
+
+.toggle{
+  font-size: 15px;
+  height: 30px;
+  width: 100px;
+  background-color: rgba(255, 255, 255, 0);
+  color: #112266;
 }
 
 #logo {
@@ -153,12 +165,12 @@ input[type=submit], button{
 
 .red{
   background-color: #C12A34;
-  border: 4px solid #C12A34;
+  border: 2px solid #C12A34;
 }
 
 .green{
   background-color: #009113;
-  border: 4px solid #009113;
+  border: 2px solid #009113;
 }
 
 input[type=submit]:hover, button:hover{

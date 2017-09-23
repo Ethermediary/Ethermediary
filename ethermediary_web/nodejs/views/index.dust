@@ -1,5 +1,7 @@
 <div id="content">
 
+<div id="toggle"><button class="toggle" onclick="switchBg();">Toggle</button></div>
+
 <div id="logo">
 	<a href="./"><img src="./imgs/logo_blue.png" width="70px" style="position: relative; top:12px;"/></a>
 	&nbsp;<a href="./">Ethermediary</a>
