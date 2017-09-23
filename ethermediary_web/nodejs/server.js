@@ -57,9 +57,13 @@ app.get('/', function (req, res) {
   res.render('skeleton.dust', {req : req});
 });
 
-var ser = app.listen(3000, function () {
-  console.log('Listening on port 3000!');
+var ip = require('ip');
+var ipadress = ip.address();
+var ser = app.listen(3000, "127.0.0.1",
+    function () {
+        console.log("Server running from " + ipadress + " on port " + "3000");
 });
+
 
 // Event management with sockets.io
 //io.sockets.on('connection', function (socket) {

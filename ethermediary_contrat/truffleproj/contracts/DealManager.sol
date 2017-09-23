@@ -22,11 +22,11 @@ contract DealManager {
 	}
 
 	enum State{
-		INIT,
-		OFFER_MADE,
-		ACCEPTED,
-		BUYER_ASKED_CANCEL,
-		SELLER_ASKED_CANCEL
+		INIT,//0
+		OFFER_MADE,//1
+		ACCEPTED,//2
+		BUYER_ASKED_CANCEL,//3
+		SELLER_ASKED_CANCEL//4
 	}
 	address private taxCollector;
 	uint private taxCollected;
@@ -136,7 +136,7 @@ contract DealManager {
 
 	function sellerCheated(uint id, uint encryptionAddress) onlyTaxCollector {
 		Deal storage deal = deals[id];
-		
+
 		uint toBuyer = deal.cautionBuyer + deal.offer;
 		taxCollected += deal.cautionSeller;
 		deal.cautionSeller = 0;
@@ -163,17 +163,17 @@ contract DealManager {
 	}
 
 	function getDealInfo(uint id) constant
-		returns (uint dealId, address buyer, string emailBuyer, 
-			address seller, string emailSeller, uint offer, 
+		returns (uint dealId, address buyer, string emailBuyer,
+			address seller, string emailSeller, uint offer,
 			uint cautionSeller, uint cautionBuyer, State state)
 	{
 		Deal storage deal = deals[id];
 		require(deal.state != State.INIT);
-		require(msg.sender == deal.buyer._address 
-			|| msg.sender == deal.seller._address 
+		require(msg.sender == deal.buyer._address
+			|| msg.sender == deal.seller._address
 			|| msg.sender == taxCollector);
-		return (id, deal.buyer._address, deal.buyer.email, 
-			deal.seller._address, deal.seller.email, deal.offer, 
+		return (id, deal.buyer._address, deal.buyer.email,
+			deal.seller._address, deal.seller.email, deal.offer,
 			deal.cautionSeller, deal.cautionBuyer, deal.state);
 	}
 
@@ -281,7 +281,7 @@ contract DealManager {
 		do{
 			res = rand(0, 9007199254740991, block.timestamp + i);
 			i++;
-		}while(deals[res].state != State.INIT);	
+		}while(deals[res].state != State.INIT);
 
 		return res;
 	}

@@ -1,19 +1,20 @@
+// All about elastic movement
 anime({ // Only when the user load the page
   targets: '.button_left',
   scaleY: [
-    { value: 1, delay: 25},
+    { value: 1, delay: 0},
     { value: 1.2, duration: 120, easing: 'easeOutExpo' },
     { value: 1, duration: 1500, elasticity:850}
-  ],
+  ]
 });
 
 anime({ // Only when the user load the page
   targets: '.button_right',
   scaleY: [
-    { value: 1, delay: 25},
+    { value: 1, delay: 0},
     { value: 1.2, duration: 120, easing: 'easeOutExpo' },
     { value: 1, duration: 1500, elasticity:850}
-  ],
+  ]
 });
 
 function blob(x){
@@ -27,32 +28,68 @@ function blob(x){
   });
 };
 
+// All about color over
 function color_over(x){
   var cla = document.getElementsByClassName(x);
   anime({
     targets: cla,
     backgroundColor: [{value: '#91E6FA'}],
-    easing: 'linear',
-    duration: 400
-  });
-  anime({
-    targets: cla,
     color: [{value: '#112266'}],
     easing: 'linear',
     duration: 400
   });
 };
 
+function color_over_red(x){
+  var cla = document.getElementsByClassName(x);
+  anime({
+    targets: cla,
+    backgroundColor: [{value: '#FFA0A7'}],
+    color: [{value: '#C12A34'}],
+    easing: 'linear',
+    duration: 400
+  });
+};
+
+function color_over_green(x){
+  var cla = document.getElementsByClassName(x);
+  anime({
+    targets: cla,
+    backgroundColor: [{value: '#8DE599'}],
+    color: [{value: '#009113'}],
+    easing: 'linear',
+    duration: 400
+  });
+};
+
+// All about color leave
 function color_leave(x){
   var cla = document.getElementsByClassName(x);
   anime({
     targets: cla,
     backgroundColor: [{value: '#112266'}],
+    color: [{value: '#FFFFFF'}],
     easing: 'linear',
     duration: 400
   });
+};
+
+function color_leave_red(x){
+  var cla = document.getElementsByClassName(x);
   anime({
     targets: cla,
+    backgroundColor: [{value: '#C12A34'}],
+    color: [{value: '#FFFFFF'}],
+    easing: 'linear',
+    duration: 400
+  });
+};
+
+function color_leave_green(x){
+  var cla = document.getElementsByClassName(x);
+  anime({
+    targets: cla,
+    backgroundColor: [{value: '#009113'}],
     color: [{value: '#FFFFFF'}],
     easing: 'linear',
     duration: 400

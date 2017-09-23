@@ -3,11 +3,11 @@
 	&nbsp;<a href="./">Ethermediary</a>
 </div>
 
+<div id="deal" data-deal="{jsonData}"></div>
+
 <div id="definition" style="margin-top: 0px; margin-bottom: 50px;">
 	<a><strong>Access and interact with a Deal </strong></a>
 </div>
-
-<form id="mForm"></form>
 
 <div id="definition"></br></br>
 	<a>To access a specific <strong>deal</strong>, please enter the <strong>deal's ID</strong>
@@ -15,14 +15,24 @@
 </div>
 
 <div id="button_menu" class="align" style="width:375px; margin: auto;">
-	  <form method="POST" >
-		  <input type="text" placeholder="Deal's ID" name="deal_id" style="margin-right: 0px; border: 4px solid #18469E;"/></br></br>
+	  <form id="mForm">
+
+			{?error_deal_id}
+				<div id="alert">
+					<a class="info" style="left: 10px; top: -3px;">
+						<img src="/imgs/alert.png" width="30px"><span>{#error_deal_id}Error : {.msg}<br/>{/error_deal_id}</span></img>
+					</a>
+				</div>
+			{/error_deal_id}
+		  <input type="text" placeholder="Deal's ID" value="{req.body.deal_id}" name="deal_id" style="margin-right: 0px;"/></br></br>
+
 			<div id="get_deal_color" onmouseover="blob('get_deal_color')" style="width:375px; margin: auto;">
 				<button id="submit" type="button" class="button" style="width: 275px;"
 					onmouseover="color_over('button')"
 					onmouseleave="color_leave('button')"
 					onclick="onClick('myDeal');">Next</button>
 			</div>
+
 		</div>
 		</form>
 </div>

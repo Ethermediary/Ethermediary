@@ -4,6 +4,27 @@ const path = require('path');
 
 module.exports = router;
 
+function frozenTime(creation_time){
+  var remaining_time = 42;
+  return remaining_time;
+};
+
+function getInfo(transaction){
+  transaction.isBuyer = "1";
+  transaction.isSeller = "0";
+  transaction.state = "2";
+  transaction.meta = "A tourte"; transaction.amount = "666";
+  transaction.buyer_email = "buyer@gmx.com";
+  transaction.seller_email = "seller@gmx.com";
+  transaction.buyer_address = "petaouchnok";
+  transaction.seller_address = "ouzbekistany";
+  transaction.creation_date = "010117";
+  // return 0 if transaction do not exist
+  // return 1 if transaction exist
+  transaction.exist = 1;
+  return 0;
+};
+
 // First newDeal page
 router.post('/newDeal1Content', function(req, res){
   res.render('newDeal1Content');
@@ -133,10 +154,82 @@ router.post("/dealCreated", function(req, res){
     });
 });
 
-router.post("/:page", function(req, res, next){
+router.post('/getDeal', function(req, res){
+  res.render('getDeal');
+});
+
+// This is the page for myDeal
+router.post("/myDeal", function(req, res){
+    req.sanitizeBody('deal_id').trim();
+
+    req.checkBody("deal_id", "Please enter a valid deal ID").notEmpty();
+    //req.checkBody("deal_id", "Your user ID should be at least 42 caracters").len(42);
+    // Because it's boring to dev with it
+
+    /*var transaction = {isBuyer, isSeller, state, meta,
+    amount, buyer_email, seller_email,
+    creation_date, exist};*/
+    //Call la fonction qui récupère les infos sur le contrat
+    //Return 0 or 1 and get informations about it
+    var transaction = {};
+    getInfo(transaction);
+
+    remaining_time = frozenTime(transaction.creation_date);
+    //calculate remaining time before freezing
+
+    req.getValidationResult()
+        .then(function (results) {
+            if (results.isEmpty() && (transaction.exist == 1)) {
+                let toSave = {
+                    deal_id: req.body.deal_id,
+                };
+
+                res.render('myDeal',{
+                  jsonData: JSON.stringify(toSave),
+                  isBuyer: transaction.isBuyer,
+                  isSeller: transaction.isSeller,
+                  state: transaction.state,
+                  meta: transaction.meta,
+                  amount: transaction.amount,
+                  buyer_email: transaction.buyer_email,
+                  seller_email: transaction.seller_email,
+                  buyer_address: transaction.buyer_address,
+                  seller_address: transaction.seller_address,
+                  remaining_time: remaining_time
+                });
+            } else {
+                // Verification of the deal's ID validity
+                // Redirection to the right state windows
+
+                let errors = results.array();
+                res.render('getDeal', {
+                    req: req,
+                    error_deal_id: errors.filter(e => e.param == "deal_id"),
+                });
+            }
+        })
+        .catch(function (err) {
+            console.log("error while validating: " + err);
+            res.status(500).send("error validating results");
+        });
+});
+
+router.post('/howitworks', function(req, res){
+  res.render('howitworks');
+});
+
+router.post('/terms', function(req, res){
+  res.render('terms');
+});
+
+router.post('/simulation', function(req, res){
+  res.render('simulation');
+});
+
+/*router.post("/:page", function(req, res, next){
     try{
         res.render(req.params.page);
     }catch(e){
         next();
     }
-});
+});*/

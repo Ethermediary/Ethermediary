@@ -7,7 +7,7 @@
 
 <div id="state" data-state="index"></div>
 
-		<div id="definition">
+		<div id="definition" style="margin-bottom: 90px;">
 			<a><strong>Ethermediary</strong> is an Ethereum based <strong>smart contract</strong>.</br>It allows you to <strong>safely trade</strong> objects and services for money on the internet.
 				&nbsp;You can use <strong>Ether</strong> or any other <strong>ERC20 tokens</strong>.</br></br>
 				The <strong>Ethermediary</strong> smart contract acts as a <strong>safe and trustless</br>third party</strong> which garanties the seller to be paid, and the buyer&nbsp;
@@ -27,7 +27,7 @@
 					</div>
 			  </div>
 
-			<div style="margin-left: 250px; display: inline-block;"></div>
+			<div style="margin-left: 250px; display: inline-block; float: left;"></div>
 
 				<div id="get_deal_def" >
 					<div id="get_deal_color" onmouseover="blob('get_deal_color')">

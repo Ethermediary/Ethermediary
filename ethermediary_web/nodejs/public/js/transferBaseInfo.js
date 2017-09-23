@@ -14,6 +14,8 @@ function onClick(content){
 
 function extractPageData(){
     let data = extractForm(document.getElementById("mForm"));
+    console.log("Form data:");
+    console.log(data);
     if(document.getElementById("deal")){
         data.dealData = document.getElementById("deal").getAttribute("data-deal");
     }
@@ -45,6 +47,7 @@ function sendPostFull(content, data, callback){
 
 function extractForm(form) {
     var data = {};
+    //console.log(form.elements.length)
     for (var x=0; x < form.elements.length; x++) {
         var field = form.elements[x];
         if (field.name && field.type !== "submit") {
