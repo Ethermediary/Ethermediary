@@ -1,4 +1,4 @@
-const dealManagerAddress = "0xf7ba6726c76a7eb4a9a9540fc7575f841d83e746";
+const dealManagerAddress = "0xc5cc65999ec38152f7bcb08573a0f434f1ac90b7";
 const dealManagerAbi = [
   {
     "constant": true,
@@ -228,6 +228,28 @@ const dealManagerAbi = [
       {
         "name": "",
         "type": "bool"
+      }
+    ],
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "name": "sender",
+        "type": "address"
+      }
+    ],
+    "name": "getRole",
+    "outputs": [
+      {
+        "name": "",
+        "type": "string"
       }
     ],
     "payable": false,
@@ -592,69 +614,24 @@ var ethermediary = (function(){
                           from: fromAddress
                       }
                     ]);
-                    // return new Promise(function(resolve, reject){
-                    //     DealManager.BUYER_createDeal(
-                    //         web3.toWei(amountETH, "ether"),
-                    //         buyerMail, 
-                    //         seller,
-                    //         sellerEmail,
-                    //         encryptorUUID, 
-                    //         {
-                    //             value: web3.toWei(amountETH*1.1, "ether"), 
-                    //             from: fromAddress
-                    //         }, 
-                    //         function(err, data){
-                    //             if(err)
-                    //                 throw err;
-                    //             return resolve(data);
-                    //         });
-                    // });
                 },
 
                 cancelOffer: function(id){
                   return makePromise(
                       window.DealManager.BUYER_cancelOffer, 
                       [id, encryptorUUID, {from: fromAddress}]);
-                    // return new Promise(function(resolve, reject){
-                    //     DealManager.BUYER_cancelOffer(id, encryptorUUID, 
-                    //         {from: this.fromAddress}, 
-                    //         function(err, data){
-                    //             if(err)
-                    //                 return reject(err);
-                    //             resolve(data);
-                    //         });
-                    // });
                 },
 
                 receivedPackage: function(id){
                     return makePromise(
                         window.DealManager.BUYER_receivedPackage,
                         [id, encryptorUUID, {from: fromAddress}]);
-                    // return new Promise(function(resolve, reject){
-                    //     DealManager.BUYER_receivedPackage(id, this.encryptorUUID,
-                    //         {from: this.fromAddress},
-                    //     function(err, data){
-                    //         if(err)
-                    //             return reject(err);
-                    //         resolve(data);
-                    //     });
-                    // });
                 },
 
                 askCancel: function(id){
                     return makePromise(
                         window.DealManager.BUYER_askCancel,
                         [id, encryptorUUID, {from: fromAddress}]);
-
-                    // return new Promise(function(resolve, reject){
-                    //     DealManager.BUYER_askCancel(id, this.encryptorUUID, 
-                    //         {from: this.fromAddress},
-                    //     function(err, data){
-                    //         if(err)
-                    //             return reject(err);
-                    //         resolve(data);
-                    //     });
-                    // });
                 },
 
                 acceptCancel: function(id){

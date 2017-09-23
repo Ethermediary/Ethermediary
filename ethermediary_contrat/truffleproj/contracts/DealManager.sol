@@ -153,6 +153,15 @@ contract DealManager {
 		muted = true;
 	}
 
+	function getRole(uint id, address sender) constant returns (string){
+		Deal storage deal = deals[id];
+		if(sender == deal.buyer._address)
+			return "buyer";
+		if(sender == deal.seller._address)
+			return "seller";
+		return "null";
+	}
+
 	function getDealInfo(uint id) constant
 		returns (uint dealId, address buyer, string emailBuyer, 
 			address seller, string emailSeller, uint offer, 

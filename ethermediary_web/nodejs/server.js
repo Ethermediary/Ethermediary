@@ -36,7 +36,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view cache', doCache);
 app.enable('trust proxy');
 
-contractInteraction.startWatchingContract();
+//contractInteraction.startWatchingContract();
 
 // var interval = setInterval(function(){
 //   mailer.sendMail("plenituz@gmail.com", "petit pd des bois", "salut sdfsdf petit pd des bois"+i);

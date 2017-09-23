@@ -4,20 +4,46 @@ var Q = require("q");
 var web3;
 var DealManager;
 
-function assertWeb3(){ 
-    if(!web3)
-        throw new Error('you need to provide a web3 provider using setWeb3Provider'); 
-}
-
 module.exports = {
     setWeb3Provider: function(provider){
         web3 = new Web3(provider);
         DealManager = web3.eth.contract(dealManagerAbi).at(dealManagerAddress);
     },
 
+    getRole: function(id, fromAddress){
+        return Q.nfcall(DealManager.getRole.call, id, fromAddress);
+    },
+
+    watchSellerAskerCancel: function(callback){
+        DealManager.SellerAskedCancel(callback);
+    },
+
+    watchBuyerAskedCancel: function(callback){
+        DealManager.BuyerAskedCancel(callback);
+    },
+
+    watchSellerRefusedCancel: function(callback){
+        DealManager.SellerRefusedCancel(callback);
+    },
+
+    watchBuyerRefusedCancel: function(callback){
+        DealManager.BuyerRefusedCancel(callback);
+    },
+
+    watchNewDeal: function(callback){
+        DealManager.NewDeal().watch(callback);
+    },
+
+    watchDealAnswered: function(callback){
+        DealManager.DealAnswered().watch(callback);
+    },
+
+    watchDealOver: function(callback){
+        DealManager.DealOver().watch(callback);
+    },
+
     generateApiUUID: function(){
         return new Promise(function(resolve, reject){
-          assertWeb3();
           var uuid = DealManager.generateEncryptorUUID.call();
 
           DealManager.reserveEncryptorUUID(uuid,{from: web3.personal.listAccounts[0], to: dealManagerAddress}, function(err, res){
@@ -30,7 +56,6 @@ module.exports = {
     },
 
     getDealInfo: function(dealId){
-        assertWeb3();
         return Q.nfcall(DealManager.getDealInfo.call, dealId)
         .catch(function(err){
             throw new Error("dealId " + dealId + " not found");
@@ -54,7 +79,6 @@ module.exports = {
     },
 
     retreiveDealId: function(transactionHash){
-        assertWeb3();
         return Q.nfcall(web3.eth.getTransactionReceipt, transactionHash)
         .then(function(transactionInfo){
             if(!transactionInfo)
@@ -63,7 +87,7 @@ module.exports = {
             {
               fromBlock: transactionInfo.blockNumber, 
               toBlock: transactionInfo.blockNumber,
-            });            
+            });
         })
         .then(function(event){
           var defer = Q.defer();
@@ -86,7 +110,7 @@ module.exports = {
 
 };
 
-const dealManagerAddress = "0xf7ba6726c76a7eb4a9a9540fc7575f841d83e746";
+const dealManagerAddress = "0xc5cc65999ec38152f7bcb08573a0f434f1ac90b7";
 const dealManagerAbi = [
   {
     "constant": true,
@@ -316,6 +340,28 @@ const dealManagerAbi = [
       {
         "name": "",
         "type": "bool"
+      }
+    ],
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "name": "sender",
+        "type": "address"
+      }
+    ],
+    "name": "getRole",
+    "outputs": [
+      {
+        "name": "",
+        "type": "string"
       }
     ],
     "payable": false,
