@@ -555,14 +555,30 @@ var ethermediary = (function(){
         });
     }
     return {
+        /*
+            create the representation of the DealManager contract, should be called before 
+            any other function
+        */
         createDealManager: function(){
           window.DealManager = web3.eth.contract(dealManagerAbi).at(dealManagerAddress);          
         },
 
+        /*
+            create a "seller" object, used to access the seller related methods
+            you have to provide an address that is the sending address of the transaction 
+            and an encryptor uuid.
+            the encryptor uuid default as 1 which is handled by our personnal server.
+        */
         seller: function(fromAddress, encryptorUUID){
+            if(!fromAddress)
+                throw new Error("you have to provide an address, you can just use web3.eth.accounts[0]"); 
             if(!encryptorUUID)
                 encryptorUUID = 1;
             return {
+                /*
+                    answer an offer with a boolean, you also have to provide the mount to 
+                    send as a caution. It should be the price of the sent object*0.1
+                */
                 answerOffer: function(cautionETH, id, answer){
                     return makePromise(
                         window.DealManager.SELLER_answerOffer,
@@ -574,19 +590,25 @@ var ethermediary = (function(){
                           }
                         ]);
                 },
-
+                /*
+                    ask the buyer for a mutual cancel
+                */
                 askCancel: function(id){
                     return makePromise(
                         window.DealManager.SELLER_askCancel,
                         [id, encryptorUUID, {from: fromAddress}]);
                 },
-
+                /*
+                    accept a mutual cancel from the buyer
+                */
                 acceptCancel: function(id){
                     return makePromise(
                         window.DealManager.SELLER_acceptCancel,
                         [id, encryptorUUID, {from: fromAddress}]);
                 },
-
+                /*
+                    refuse a mutual cancel from the buyer
+                */
                 refuseCancel: function(id){
                     return makePromise(
                         window.DealManager.SELLER_refuseCancel,
@@ -596,11 +618,20 @@ var ethermediary = (function(){
             }
         },
 
+        /*
+            create a buyer object, you should provide the sending address and an encryptor uuid
+            the encryptor uuid default as 1 which is handled by our personnal server.
+        */
         buyer: function(fromAddress, encryptorUUID){
             if(!encryptorUUID)
                 encryptorUUID = 1;
 
             return {
+                /*
+                    create a deal based on the given parameters. the amount given MUST be 
+                    in base unit (eg ETHER for ETH, not WEI)
+                    The actual amount the user will have to send is amountETH*1.1
+                */
                 createDeal: function(amountETH, buyerMail, seller, sellerEmail){
                     //TODO encryption emails 
                     return makePromise(window.DealManager.BUYER_createDeal, [
@@ -615,31 +646,41 @@ var ethermediary = (function(){
                       }
                     ]);
                 },
-
+                /*
+                    cancel an offer previously made, resulting on the deal ID being deleted
+                */
                 cancelOffer: function(id){
                   return makePromise(
                       window.DealManager.BUYER_cancelOffer, 
                       [id, encryptorUUID, {from: fromAddress}]);
                 },
-
+                /*
+                    tell the contract the buyer received the package/service, ending the deal
+                */
                 receivedPackage: function(id){
                     return makePromise(
                         window.DealManager.BUYER_receivedPackage,
                         [id, encryptorUUID, {from: fromAddress}]);
                 },
-
+                /*
+                    ask the seller for a mutual cancel
+                */
                 askCancel: function(id){
                     return makePromise(
                         window.DealManager.BUYER_askCancel,
                         [id, encryptorUUID, {from: fromAddress}]);
                 },
-
+                /*
+                    accept a mutual cancel proposed by the seller
+                */
                 acceptCancel: function(id){
                     return makePromise(
                         window.DealManager.BUYER_acceptCancel,
                         [id, encryptorUUID, {from: fromAddress}]);
                 },
-
+                /*
+                    refuse a mutual cancel proposed by the seller
+                */
                 refuseCancel: function(refuseCancel){
                     return makePromise(
                         window.DealManager.BUYER_refuseCancel,
