@@ -5,43 +5,77 @@ var web3;
 var DealManager;
 
 module.exports = {
+    /*
+        set the web3 provider, first function you should call before calling any other
+        otherwise nothing will work
+    */
     setWeb3Provider: function(provider){
         web3 = new Web3(provider);
         DealManager = web3.eth.contract(dealManagerAbi).at(dealManagerAddress);
     },
 
+    /*
+        returns the role of the given address on the given deal
+        can return "null", "buyer" or "seller" (or crash)
+    */
     getRole: function(id, fromAddress){
         return Q.nfcall(DealManager.getRole.call, id, fromAddress);
     },
 
-    watchSellerAskerCancel: function(callback){
+    /*
+        watch for the "SellerAskedCancel" event on the contract 
+    */
+    watchSellerAskedCancel: function(callback){
         DealManager.SellerAskedCancel(callback);
     },
 
+    /*
+        watch for the "BuyerAskedCancel" event on the contract 
+    */
     watchBuyerAskedCancel: function(callback){
         DealManager.BuyerAskedCancel(callback);
     },
 
+    /*
+        watch for the "SellerRefusedCancel" event on the contract 
+    */
     watchSellerRefusedCancel: function(callback){
         DealManager.SellerRefusedCancel(callback);
     },
 
+    /*
+        watch for the "BuyerRefusedCancel" event on the contract 
+    */
     watchBuyerRefusedCancel: function(callback){
         DealManager.BuyerRefusedCancel(callback);
     },
 
+    /*
+        watch for the "NewDeal" event on the contract 
+    */
     watchNewDeal: function(callback){
         DealManager.NewDeal().watch(callback);
     },
 
+    /*
+        watch for the "DealAnswered" event on the contract 
+    */
     watchDealAnswered: function(callback){
         DealManager.DealAnswered().watch(callback);
     },
 
+    /*
+        watch for the "DealOver" event on the contract 
+    */
     watchDealOver: function(callback){
         DealManager.DealOver().watch(callback);
     },
 
+    /*
+        generate an API ID that's not taken by another api user
+        WARNING: using this will reserve the UUID so nobody else can use it,
+        so don't abuse this function
+    */
     generateApiUUID: function(){
         return new Promise(function(resolve, reject){
           var uuid = DealManager.generateEncryptorUUID.call();
@@ -55,6 +89,11 @@ module.exports = {
         });
     },
 
+    /*
+        retreive information about a given deal
+        anybody can retreive info of a deal, that's why you should encode your
+        user's email addresses
+    */
     getDealInfo: function(dealId){
         return Q.nfcall(DealManager.getDealInfo.call, dealId)
         .catch(function(err){
@@ -78,6 +117,10 @@ module.exports = {
         });
     },
 
+    /*
+        retreive the deal id from the transaction id given to the user 
+        when he created the deal
+    */
     retreiveDealId: function(transactionHash){
         return Q.nfcall(web3.eth.getTransactionReceipt, transactionHash)
         .then(function(transactionInfo){
@@ -105,7 +148,13 @@ module.exports = {
         });
     },
 
+    /*
+        contains the main contract's ABI
+    */
     dealManagerAbi: "",
+    /*
+        contains the main contract's address
+    */
     dealManagerAddress: ""
 
 };
