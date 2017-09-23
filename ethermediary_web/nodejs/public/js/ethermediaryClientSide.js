@@ -690,3 +690,9 @@ var ethermediary = (function(){
         }
     }
 })();
+
+try{
+  module.exports = ethermediary;
+}catch(e){
+
+}
