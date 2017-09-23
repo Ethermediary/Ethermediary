@@ -1,7 +1,6 @@
 const express = require('express');
 const router = new express.Router();
 const path = require('path');
-const contractInteraction = require("./contractInteraction.js");
 
 module.exports = router;
 

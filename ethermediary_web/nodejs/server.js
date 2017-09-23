@@ -11,7 +11,6 @@ const expressValidator = require('express-validator');
 //server = require('http').createServer(app);
 //io = require('socket.io')(server);
 const formular = require('./formular.js');
-const contractInteraction = require("./contractInteraction.js");
 const mailer = require("./mailer.js");
 
 
