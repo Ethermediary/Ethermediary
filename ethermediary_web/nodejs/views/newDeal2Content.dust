@@ -3,7 +3,6 @@
 	&nbsp;<a href="./">Ethermediary</a>
 </div>
 
-<div id="state" data-state="newDeal2Content"></div>
 <div id="deal" data-deal="{jsonData}"></div>
 
 <div id="definition" >

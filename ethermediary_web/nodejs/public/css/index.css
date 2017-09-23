@@ -1,81 +1,56 @@
 html {
   height: 100%;
-  overflow: hidden;
-
-}
-
-#svgbg {
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: -2;
 }
 
 a{
   text-decoration: none;
-  color: #112266;
+  color: inherit;
 }
 
 body{
   background-color: #112266;
   font-family: 'Raleway', sans-serif;
   box-sizing: inherit;
+  height: 600px;
+  padding: 20px;
+  padding-top: 0px;
   margin-top: 0px;
-  height: inherit;
-  overflow: hidden;
 }
 
 #logo {
   position: relative;
-  margin-top: 20px;
-  margin-bottom: 45px;
+  margin-top: 10px;
   width: 1000px;
   margin-left: auto;
   margin-right: auto;
-  font-size: 80px;
+  font-size: 60px;
   text-align: center;
-  color: #252E67;
+  color: #112266;
   letter-spacing: 3px;
 }
 
 #content{
   position: relative;
+  margin-top: 0px;
   width: 1100px;
   height: 700px;
   border: 0px solid White;
-  border-radius: 5px;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-    margin-left: auto;
-    margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
   padding: 20px;
   color: Black;
   font-size: 30px;
-  background-color: rgba(154, 236, 255, 0.90);
+  background-color: rgba(145, 230, 250, 0.95);
 }
 
 #definition{
   width: 1000px;
   height: auto;
+  margin-top: 30px;
+  margin-bottom: 50px;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 60px;
-  font-size: 32px;
-}
-
-.button_left{
-  width: 300px;
-  height: 60px;
-  border-radius: 4px;
-  font-size: 25px;
-}
-.button_right{
-  width: 300px;
-  height: 60px;
-  border-radius: 4px;
-  font-size: 25px;
 }
 
 .note {font-size: 20px;}
@@ -92,15 +67,16 @@ font-size: 15px;
   margin-left: 335px;
 }
 
+.margo{margin-right: 40px;}
+
 .inline {
   display: inline-block;
 }
 
 .side{
   position: relative;
-  width: 540px;
+  width: 520px;
   display: inline-block;
-  float: left;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
@@ -108,18 +84,6 @@ font-size: 15px;
 
 .clear{
   font-family: cursive;
-}
-
-.grad_body{
-  background: #36d1dc; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #36d1dc, #112266); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #36d1dc, #112266); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
-.grad_content{
-background: #B2FEFA;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to bottom, #0ED2F7, #B2FEFA);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to bottom, #0ED2F7, #B2FEFA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 a.info{
@@ -147,10 +111,8 @@ a.info:hover span{ /*the span will display just on :hover state*/
     display: flex;
     justify-content: center; /* align horizontal */
     align-items: center; /* align vertical */
-    background: #6FECF9;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to top, #0ED2F7, #6FECF9);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to top, #0ED2F7, #6FECF9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  }
+    background-color: rgba(145, 230, 250, 0.95);
+}
 a.info:hover span:after{ /*the span will display just on :hover state*/
   content:'';
   position:absolute;
@@ -159,7 +121,7 @@ a.info:hover span:after{ /*the span will display just on :hover state*/
   height:10px;
   border-bottom: 3px solid #112266;
   border-right: 3px solid #112266;
-  background-color: #0ED2F7;
+  background-color: rgba(145, 230, 250, 0.95);
   left:50%;
   margin-left:-5px;
   -moz-transform:rotate(45deg);
@@ -176,6 +138,7 @@ a.info:hover span:after{ /*the span will display just on :hover state*/
   margin-bottom: 110px;
 }
 
+/*Transaction.html*/
 input[type=submit], button{
   width: 274px;
   height: 50px;
@@ -183,17 +146,25 @@ input[type=submit], button{
   border: 3px solid #112266;
   border-radius: 3px;
   color: White;
-  font-size: 20px;
+  font-size: 30px;
   margin-left: auto;
   margin-right: auto;
 }
 
-button{ cursor: pointer; }
+.red{
+  background-color: #C12A34;
+  border: 4px solid #C12A34;
+}
 
-/*input[type=submit]:hover, button:hover{
+.green{
+  background-color: #009113;
+  border: 4px solid #009113;
+}
+
+input[type=submit]:hover, button:hover{
   background-color: rgba(255, 255, 255, 0);
-  border: 4px solid #112266;
-}*/
+  color: #112266;
+}
 
 input[type=text]{
   position: relative;
@@ -205,7 +176,7 @@ input[type=text]{
   padding-left: 10px;
   padding-right: 10px;
   font-size: 15px;
-  margin-right: 40px;
+  margin-right: 20px;
 }
 
 input[type=store]{display: none;}
@@ -215,7 +186,7 @@ button[type=simul], input[type=simul]{
   background-color: #FFFFFF;
   font-size: 15px;
   color: Black;
-  margin: 5px;
+  margin: 10px;
   border: solid #18469E 2px;
   border-radius: 3px;
   padding-left: 10px;
@@ -224,6 +195,8 @@ button[type=simul], input[type=simul]{
   margin-right: auto;
 }
 
+#foo{}
+
 #alert{
   position: relative;
   top: 10px;
@@ -231,46 +204,76 @@ button[type=simul], input[type=simul]{
 
 #new_deal_def{
   position: relative;
-  height: 70px;
+  width: 400px;
+  height: 200px;
   display: inline-block;
+  float: left;
   margin-top: 10px;
+  margin-left: 100px;
+  text-align: center;
+  font-size: 35px;
 }
 
 #get_deal_def{
   position: relative;
-  height: 70px;
+  width: 400px;
+  height: 200px;
   display: inline-block;
+  float: right;
   margin-top: 10px;
+  margin-right: 100px;
+  text-align: center;
+  font-size: 35px;
 }
 
 #button_menu{
   position: relative;
-  width: 1100px;
+  width: 1050px;
   height: auto;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 50px;
   margin-bottom: 0px;
-  margin-left: 125px;;
 }
 
+/*Input*/
 #new_deal_button{
   position: relative;
   width: 274px;
   height: 50px;
 }
 
+#left, #separator, #right {
+  position: relative;
+  width: 380px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#separator{
+  border-radius: 2px;
+  width: 2px;
+  height: 350px;
+  background-color: #18469E;
+  margin-right: 50px;
+  margin-left: 70px;
+}
+
+/*new_deal_done*/
 #receipt{
   position: relative;
-  width: 800px;
+  width: 900px;
   height: auto;
   margin-left: auto;
   margin-right: auto;
 }
 
+/*footer and stuff*/
 #footer{
   position: relative;
   width: 1060px;
   height: 50px;
-  top: -35px;
+  top: -38px;
   margin-left: auto;
   margin-right: auto;
 }

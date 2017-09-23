@@ -21,11 +21,11 @@ contract DealManager {
 	}
 
 	enum State{
-		INIT,
-		OFFER_MADE,
-		ACCEPTED,
-		BUYER_ASKED_CANCEL,
-		SELLER_ASKED_CANCEL
+		INIT,//0
+		OFFER_MADE,//1
+		ACCEPTED,//2
+		BUYER_ASKED_CANCEL,//3
+		SELLER_ASKED_CANCEL//4
 	}
 	address private taxCollector;
 	uint private taxCollected;
@@ -52,20 +52,20 @@ contract DealManager {
 		}
 
 		uint uuid = createDeal(amount, buyer, myEmail, seller, sellerEmail);
-		
+
 		recoveries[msg.sender] = uuid;
 		reverseRecoveries[uuid] = msg.sender;
 		return true;
 	}
 
-	function BUYER_createDeal(uint amount, address buyer, string myEmail, address seller, string sellerEmail) 
+	function BUYER_createDeal(uint amount, address buyer, string myEmail, address seller, string sellerEmail)
 		payable condition(!muted)
 	{
  		require(msg.value >= (amount*11)/10);
 		createDeal(amount, buyer, myEmail, seller, sellerEmail);
 	}
 
-	function createDeal(uint amount, address buyer, string myEmail, address seller, string sellerEmail) 
+	function createDeal(uint amount, address buyer, string myEmail, address seller, string sellerEmail)
 		private returns(uint)
 	{
 		uint uuid = generateUUID();
@@ -141,13 +141,13 @@ contract DealManager {
 
 		deal.seller._address.transfer(toSeller);
 
-		DealOver(deal.buyer.email, deal.seller.email, "buyerCheated");	
+		DealOver(deal.buyer.email, deal.seller.email, "buyerCheated");
 		deleteDeal(id);
 	}
 
 	function sellerCheated(uint id) onlyTaxCollector {
 		Deal storage deal = deals[id];
-		
+
 		uint toBuyer = deal.cautionBuyer + deal.offer;
 		taxCollected += deal.cautionSeller;
 		deal.cautionSeller = 0;
@@ -156,7 +156,7 @@ contract DealManager {
 
 		deal.buyer._address.transfer(toBuyer);
 
-		DealOver(deal.buyer.email, deal.seller.email, "sellerCheated");	
+		DealOver(deal.buyer.email, deal.seller.email, "sellerCheated");
 		deleteDeal(id);
 	}
 
@@ -165,17 +165,17 @@ contract DealManager {
 	}
 
 	function getDealInfo(uint id) constant
-		returns (uint dealId, address buyer, string emailBuyer, 
-			address seller, string emailSeller, uint offer, 
+		returns (uint dealId, address buyer, string emailBuyer,
+			address seller, string emailSeller, uint offer,
 			uint cautionSeller, uint cautionBuyer, State state)
 	{
 		Deal storage deal = deals[id];
 		require(deal.state != State.INIT);
-		require(msg.sender == deal.buyer._address 
-			|| msg.sender == deal.seller._address 
+		require(msg.sender == deal.buyer._address
+			|| msg.sender == deal.seller._address
 			|| msg.sender == taxCollector);
-		return (id, deal.buyer._address, deal.buyer.email, 
-			deal.seller._address, deal.seller.email, deal.offer, 
+		return (id, deal.buyer._address, deal.buyer.email,
+			deal.seller._address, deal.seller.email, deal.offer,
 			deal.cautionSeller, deal.cautionBuyer, deal.state);
 	}
 
@@ -191,7 +191,7 @@ contract DealManager {
 	function getTax() onlyTaxCollector returns (uint) {
 		return taxCollected;
 	}
-	
+
 	function refund(uint id) private {
 		Deal storage ref = deals[id];
 
@@ -221,8 +221,8 @@ contract DealManager {
 
 		ref.seller._address.transfer(toSeller);
 		ref.buyer._address.transfer(toBuyer);
-		
-		DealOver(ref.buyer.email, ref.seller.email, "finish");		
+
+		DealOver(ref.buyer.email, ref.seller.email, "finish");
 		deleteDeal(id);
 	}
 
@@ -270,7 +270,7 @@ contract DealManager {
 		do{
 			res = rand(0, 9007199254740991, block.timestamp + i);
 			i++;
-		}while(deals[res].state != State.INIT);	
+		}while(deals[res].state != State.INIT);
 
 		return res;
 	}

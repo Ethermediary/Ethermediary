@@ -1,0 +1,22 @@
+Test Ethermediary with testrpc:
+
+- installer truffle via npm
+- installer testrpc via npm (c'est une fake node ethereum pour le test)
+- dans une console : testrpc
+- ouvre une autre console dans ethermediary/ethermediary_contrat/truffleproj
+- truffle migrate
+- dans la console ya plein de truc qui s'affiche tu cherche cette ligne la:
+
+Deploying DealManager...
+  ... 0xaa6e53e817db637efb735e1d97a3a460432561d11c0c9fac4740fb2fef326ca7
+  DealManager: 0xca346967b0a8fa59324268f96af53adbd4aaa4d1
+
+Ce qui t'interresse c'est l'address derriere DealManager: 0x....
+- tu la copie et la colle dans le fichier ethermediary/ethermediary_web/nodejs/public/eth/managerAddress
+- lance le server node
+- tu peux sur la page web ca devrait marcher
+
+pour install truffle:
+npm install -g truffle
+et npm install -g testrpc
+-g pour que ca soit une command accessible partout

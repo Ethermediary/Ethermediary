@@ -2,7 +2,7 @@
       &nbsp;<a style="cursor: pointer;" onclick="onClick('terms');" >Terms of use</a>
 
       <a style="cursor: pointer;" onclick="onClick('howitworks');"
-         class="marge">How it works</a>
+         class="marge">&nbsp;&nbsp;&nbsp;How it works</a>
 
       <a href="https://github.com/Ethermediary" style="float: right;">
         <img src="./imgs/GitHub-Mark/PNG/GitHub-Mark-64px.png" width="25px"/>
@@ -23,7 +23,7 @@
 
   </div>
 
-  <svg id="svgbg" style="position:absolute"></svg>
+  <svg id="svgbg" style="position:fixed; top: 0px; right: 0px; z-index: -2;"></svg>
   <script src="/js/delaunay.js"></script>
   <script src="/js/bg.js"></script>
 
