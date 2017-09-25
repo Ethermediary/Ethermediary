@@ -1,4 +1,4 @@
-const dealManagerAddress = "0xc5cc65999ec38152f7bcb08573a0f434f1ac90b7";
+const dealManagerAddress = "0xdb57de63d557743a3ec00faefbaf4ffb5e9d3fb3";
 const dealManagerAbi = [
   {
     "constant": true,
