@@ -96,18 +96,6 @@ function color_leave_green(x){
   });
 };
 
-//The background switch button
-function bgSwitch(){
-  var id = document.getElementById('circle');
-  style = window.getComputedStyle(id),
-  bgcolor = style.getPropertyValue('background-color');
-
-  if(bgcolor == 'rgb(38, 47, 103)')
-    id.style.backgroundColor = 'rgb(145, 230, 250)';
-  else
-    id.style.backgroundColor = '#262F67';
-};
-
 //Initial background switch button
 function initialSwitch(){
   var going = localStorage.getItem("ethermediary-bg") == "true";
