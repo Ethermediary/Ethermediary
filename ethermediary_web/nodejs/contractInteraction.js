@@ -25,24 +25,24 @@ module.exports = {
 
   startWatchingContract: function(){
     let event = DealManager.NewDeal({});
-    console.log("wathcing")
+    console.log("watching")
     event.watch(onNewDeal);
   },
 
   createBuyerBridge: function(dealData){
       var defer = Q.defer();
       let done = false;
-      
+
       BuyerBridge.new(
-          dealManagerAddress, 
+          dealManagerAddress,
           web3.toWei(dealData.amount, 'ether'),
           dealData.buyer_address,
           dealData.buyer_email,
           dealData.seller_address,
           dealData.seller_email,
           {
-              from: web3.eth.coinbase, 
-              gas: 3000000, 
+              from: web3.eth.coinbase,
+              gas: 3000000,
               data: buyerBridgeCode
           },
           function(err, res){
@@ -64,22 +64,22 @@ module.exports = {
       return defer.promise;
   },
 
-  retreiveIdFromHash : function(transactionHash){  
+  retreiveIdFromHash : function(transactionHash){
     let event = contract.NewDeal ({},
         {fromBlock: blockNumber, toBlock: blockNumber});
     var blockNumber;
 
     return Q.nfcall(web3.eth.getTransactionReceipt, transactionHash)
       .then(function(result){
-          blockNumber = result.blockNumber; 
+          blockNumber = result.blockNumber;
           return Q.nfcall(event.get);
       })
       .then(function(){
           let filtered = res.filter (e => e.transactionHash == transactionHash);
           if(filtered.length == 0)
-              throw new Error("no id found for transaction number:" + transactionHash);
+              throw new Error("No id found for transaction number:" + transactionHash);
           if(filtered.length > 1)
-              console.log("WARNING: that weird, this transaction has several NewDeal events:" + transactionHash);
+              console.log("WARNING: that's weird, this transaction has several NewDeal events:" + transactionHash);
           return filtered[0].args.id.toNumber();
       });
   }

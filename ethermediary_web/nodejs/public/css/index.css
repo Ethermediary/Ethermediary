@@ -5,6 +5,10 @@ a{
   color: inherit;
 }
 
+span{
+  font-size: 20px;
+}
+
 body{
   background-color: #112266;
   font-family: 'Raleway', sans-serif;
@@ -18,7 +22,8 @@ body{
 #toggle{
   position: fixed;
   z-index: 2;
-  top: 10px;
+  left: 230px;
+  top: 7px;
 }
 
 .toggle{
@@ -27,6 +32,16 @@ body{
   width: 100px;
   background-color: rgba(255, 255, 255, 0);
   color: #112266;
+}
+
+#circle{
+  position: fixed;
+  top: 15px;
+  width: 20px;
+  height: 20px;
+  background-color: #262F67;
+  border: 4px solid #262F67;
+  border-radius: 15px;
 }
 
 #logo {
@@ -63,6 +78,13 @@ body{
   text-align: center;
   margin-left: auto;
   margin-right: auto;
+}
+
+#return{
+  position: absolute;
+  top: 180px;
+  width: 50px;
+  height: 50px;
 }
 
 .note {font-size: 20px;}

@@ -1,0 +1,22 @@
+<div id="circle" onclick="bgSwitch('circle'); switchBg();" ></div>
+
+<div id="logo" style="margin-bottom: 15px;">
+	<a href="./"><img src="./imgs/logo_blue.png" width="70px" style="position: relative; top:12px;"/></a>
+	&nbsp;<a href="./">Ethermediary</a>
+</div>
+
+<div id="definition" style="margin-top: 0px; margin-bottom: 50px;">
+	<a><strong></strong></a>
+</div>
+
+<div id="receipt" style="width: 1000px; text-align: center; vertical-align: middle;">
+  <a>The browser plugin <a href="https://metamask.io/" target="_blank"><strong>Metamask</strong></a> is either <strong>not installed</strong>&nbsp;
+		or <strong>not connected</strong> to the Ethereum blockchain.<span></br></br><strong>Metamask</strong> allows you to&nbsp;
+		directly access the <strong>Ethereum blockchain</strong> and your <strong>wallet</strong> inside your browser&nbsp;
+		<strong>without sharing your personal informations</strong> with anybody.</a></br></br>
+		<a href="https://metamask.io/" target="_blank"><img src="./imgs/metamask.png" style="display: inline-block;" width="200px"/></br></br></span>
+		<a><strong>It is the best option for your security</strong></a>.
+		</a></br>
+
+	<div id="return"></div>
+</div>

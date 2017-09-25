@@ -2,11 +2,28 @@
 //so no window.onload here
 if (typeof web3 !== 'undefined') {
     window.web3 = new Web3(web3.currentProvider);
-    console.log("metamask found");
+    console.log("Metamask found");
     onClick = overrideOnClick;
     //override the on click to use web3 myself
 }else{
-    console.log("metamask not found using web server");
+    console.log("Metamask is either not installed or not connected to the Ethereum blockchain.");
+    onClick = needMeta;
+}
+
+function needMeta(){  //Redirect to /needMeta page is metamask not installed
+    $.ajax({
+        url: document.location.origin + "/needMeta",
+        type: 'POST',
+        processData: false,
+        contentType: "application/json; charset=utf-8",
+        error: function(err){
+            console.log("error:");
+            console.log(err);
+        },
+        success: function (data) {
+            $("#content").html(data);
+        }
+    });
 }
 
 function overrideOnClick(){
@@ -22,7 +39,7 @@ function makeTransaction(){
 
     ethermediary.createDealManager();
     var buyer = ethermediary.buyer(web3.eth.accounts[0]);
-    
+
     buyer.createDeal(dealData.amount, dealData.buyer_email,
         dealData.seller_address, dealData.seller_email)
     .then(function(transactionHash){

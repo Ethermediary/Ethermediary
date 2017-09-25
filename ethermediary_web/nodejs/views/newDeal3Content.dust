@@ -1,4 +1,4 @@
-<div id="toggle"><button class="toggle" onclick="switchBg();">Toggle</button></div>
+<div id="circle" onclick="bgSwitch('circle'); switchBg();" ></div>
 
 <div id="logo" style="margin-bottom: 70px;">
 	<a href="./"><img src="./imgs/logo_blue.png" width="70px" style="position: relative; top:12px;"/></a>

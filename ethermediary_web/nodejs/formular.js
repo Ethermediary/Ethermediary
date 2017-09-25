@@ -226,6 +226,10 @@ router.post('/simulation', function(req, res){
   res.render('simulation');
 });
 
+router.post('/needMeta', function(req, res){
+  res.render('needMeta');
+});
+
 /*router.post("/:page", function(req, res, next){
     try{
         res.render(req.params.page);

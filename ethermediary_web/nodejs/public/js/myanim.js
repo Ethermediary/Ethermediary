@@ -95,3 +95,15 @@ function color_leave_green(x){
     duration: 400
   });
 };
+
+//The background switch button
+function bgSwitch(x){
+  var id = document.getElementById(x);
+  style = window.getComputedStyle(id),
+  bgcolor = style.getPropertyValue('background-color');
+
+  if(bgcolor == 'rgb(38, 47, 103)'){
+    document.getElementById(x).style.backgroundColor = 'rgb(145, 230, 250)';
+  }
+  else { document.getElementById(x).style.backgroundColor = '#262F67'; }
+};

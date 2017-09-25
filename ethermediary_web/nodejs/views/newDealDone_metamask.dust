@@ -1,3 +1,4 @@
+<div id="circle" onclick="bgSwitch('circle'); switchBg();" ></div>
 
 <div id="definition">
 	<a><strong>Your deal has been confirmed.</strong></br></br>Here is your transaction ID which will allow you to recover your deal ID if&nbsp;
