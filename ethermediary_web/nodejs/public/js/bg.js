@@ -1,5 +1,9 @@
 var interval = null;
-var going = true;
+var going = localStorage.getItem("ethermediary-bg") == "true";
+if(going == null){
+    going = true;
+    localStorage.setItem("ethermediary-bg", true);
+}
 
 window.addEventListener("resize", resize);
 window.addEventListener("load", init);
@@ -64,6 +68,7 @@ function Mesh(){
 
 function switchBg(){
     going = !going;
+    localStorage.setItem("ethermediary-bg", going);
     if(going)
         requestAnimationFrame(update);
 }
@@ -108,7 +113,9 @@ function init()
     for(let i = 0; i < mesh.triangleObjs.length; i++){
         svgbg.appendChild(mesh.triangleObjs[i].DOM);
     }
-    requestAnimationFrame(update);
+
+    if(going)
+        requestAnimationFrame(update);
 }
 
 function update(){

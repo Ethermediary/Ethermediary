@@ -25,11 +25,6 @@ function getInfo(transaction){
   return 0;
 };
 
-// First newDeal page
-router.post('/newDeal1Content', function(req, res){
-  res.render('newDeal1Content');
-});
-
 // Second newDeal page, serious sh*t right here
 router.post('/newDeal2Content', function(req, res){
     req.sanitizeBody('meta').trim();
@@ -214,26 +209,16 @@ router.post("/myDeal", function(req, res){
         });
 });
 
-router.post('/howitworks', function(req, res){
-  res.render('howitworks');
-});
+var allowedPosts = ['simulation', 'terms', 'howitworks', 'newDeal1Content'];
+router.post("/:page", function(req, res, next){
+    if(allowedPosts.indexOf(req.params.page) == -1){
+        return next();
+        console.log("refused");
+    }
 
-router.post('/terms', function(req, res){
-  res.render('terms');
-});
-
-router.post('/simulation', function(req, res){
-  res.render('simulation');
-});
-
-router.post('/needMeta', function(req, res){
-  res.render('needMeta');
-});
-
-/*router.post("/:page", function(req, res, next){
     try{
         res.render(req.params.page);
     }catch(e){
         next();
     }
-});*/
+});
