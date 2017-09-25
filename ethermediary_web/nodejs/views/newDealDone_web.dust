@@ -1,3 +1,5 @@
+<div id="circle" onclick="switchBg();" ></div>
+
 <div id="definition">
 	<a><strong>Your deal has been confirmed.</strong></br></br>Send <strong>{amount} ETH</strong> to the following address to start the deal&nbsp;
 		</br></br><strong>Please thoroughly note it !</strong></br>

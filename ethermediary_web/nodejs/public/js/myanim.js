@@ -99,7 +99,7 @@ function color_leave_green(x){
 //The background switch button
 function bgSwitch(){
   var id = document.getElementById('circle');
-  style = window.getComputedStyle('circle'),
+  style = window.getComputedStyle(id),
   bgcolor = style.getPropertyValue('background-color');
 
   if(bgcolor == 'rgb(38, 47, 103)')

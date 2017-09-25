@@ -74,6 +74,7 @@ function switchBg(){
     }else{
         clearInterval(window.updateInterval);
     }
+    bgSwitch();
 }
 
 function resize(){
@@ -123,12 +124,12 @@ function init()
     }
 }
 
-function update(){  
+function update(){
     for(var i = 0; i < mesh.points.length; i++){
         var point = mesh.points[i];
         var home = mesh.homePoints[i];
         var distance = distanceSquared(point, home);
-        
+
         if(distance > mesh.radiuses[i]){
             var randomPoint = normalize(randomVector());
             //randomPoint = mesh.homePoint[i] + randomPoint;
@@ -154,7 +155,7 @@ function update(){
     }
 
     mesh.triangleObjs.forEach(t => t.updateDOM());
-    
+
     // if(going)
     //     requestAnimationFrame(update);
 }

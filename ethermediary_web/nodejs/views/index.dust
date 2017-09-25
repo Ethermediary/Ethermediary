@@ -1,6 +1,6 @@
 <div id="content">
 
-	<div id="circle" onclick="bgSwitch(); switchBg();" ></div>
+<div id="circle" onclick="switchBg();" ></div>
 
 <div id="logo">
 	<a href="./"><img src="./imgs/logo_blue.png" width="70px" style="position: relative; top:12px;"/></a>
