@@ -1,5 +1,3 @@
-<div id="circle" onclick="bgSwitch('circle'); switchBg();" ></div>
-
 <div id="logo" style="margin-bottom: 15px;">
 	<a href="./"><img src="./imgs/logo_blue.png" width="70px" style="position: relative; top:12px;"/></a>
 	&nbsp;<a href="./">Ethermediary</a>

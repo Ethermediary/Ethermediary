@@ -97,13 +97,23 @@ function color_leave_green(x){
 };
 
 //The background switch button
-function bgSwitch(x){
-  var id = document.getElementById(x);
-  style = window.getComputedStyle(id),
+function bgSwitch(){
+  var id = document.getElementById('circle');
+  style = window.getComputedStyle('circle'),
   bgcolor = style.getPropertyValue('background-color');
 
-  if(bgcolor == 'rgb(38, 47, 103)'){
-    document.getElementById(x).style.backgroundColor = 'rgb(145, 230, 250)';
-  }
-  else { document.getElementById(x).style.backgroundColor = '#262F67'; }
+  if(bgcolor == 'rgb(38, 47, 103)')
+    id.style.backgroundColor = 'rgb(145, 230, 250)';
+  else
+    id.style.backgroundColor = '#262F67';
 };
+
+//Initial background switch button
+function initialSwitch(){
+  var going = localStorage.getItem("ethermediary-bg") == "true";
+  if(going)
+    document.getElementById("circle").style.backgroundColor = '#262F67';
+  else
+    document.getElementById("circle").style.backgroundColor = 'rgb(145, 230, 250)';
+}
+initialSwitch();

@@ -39,6 +39,7 @@ function sendPostFull(content, data, callback){
         },
         success: function (data) {
             $("#content").html(data);
+            initialSwitch();
             if(callback)
                 callback();
         }
