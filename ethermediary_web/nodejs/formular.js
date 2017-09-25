@@ -1,28 +1,18 @@
 const express = require('express');
 const router = new express.Router();
 const path = require('path');
+const Web3 = require("web3");
+const ethermediary = require('./ethermediary.js');
+ethermediary.setWeb3Provider(new Web3.providers.HttpProvider("http://192.168.1.23:8545"));
+ethermediary.retreiveDealId("0xc4af52cbd5c7f5c09fe1e571740eeaf0b19f441ac064c873e78b287fbc59b9c6")
+.then(console.log)
+.fail(console.log);
 
 module.exports = router;
 
 function frozenTime(creation_time){
   var remaining_time = 42;
   return remaining_time;
-};
-
-function getInfo(transaction){
-  transaction.isBuyer = "1";
-  transaction.isSeller = "0";
-  transaction.state = "2";
-  transaction.meta = "A tourte"; transaction.amount = "666";
-  transaction.buyer_email = "buyer@gmx.com";
-  transaction.seller_email = "seller@gmx.com";
-  transaction.buyer_address = "petaouchnok";
-  transaction.seller_address = "ouzbekistany";
-  transaction.creation_date = "010117";
-  // return 0 if transaction do not exist
-  // return 1 if transaction exist
-  transaction.exist = 1;
-  return 0;
 };
 
 // Second newDeal page, serious sh*t right here
@@ -149,67 +139,78 @@ router.post("/dealCreated", function(req, res){
     });
 });
 
-router.post('/getDeal', function(req, res){
-  res.render('getDeal');
-});
-
 // This is the page for myDeal
 router.post("/myDeal", function(req, res){
+    var dealInfo;
+    if(!("dealData" in req.body)){
+        res.status(400).send("you should provide the address in deal data");
+        return;
+    }
+
     req.sanitizeBody('deal_id').trim();
-
     req.checkBody("deal_id", "Please enter a valid deal ID").notEmpty();
-    //req.checkBody("deal_id", "Your user ID should be at least 42 caracters").len(42);
-    // Because it's boring to dev with it
-
-    /*var transaction = {isBuyer, isSeller, state, meta,
-    amount, buyer_email, seller_email,
-    creation_date, exist};*/
-    //Call la fonction qui récupère les infos sur le contrat
-    //Return 0 or 1 and get informations about it
-    var transaction = {};
-    getInfo(transaction);
-
-    remaining_time = frozenTime(transaction.creation_date);
-    //calculate remaining time before freezing
-
+    req.checkBody("deal_id", "Deal ID must be an integer").isInt();
+    
     req.getValidationResult()
         .then(function (results) {
-            if (results.isEmpty() && (transaction.exist == 1)) {
-                let toSave = {
-                    deal_id: req.body.deal_id,
-                };
-
-                res.render('myDeal',{
-                  jsonData: JSON.stringify(toSave),
-                  isBuyer: transaction.isBuyer,
-                  isSeller: transaction.isSeller,
-                  state: transaction.state,
-                  meta: transaction.meta,
-                  amount: transaction.amount,
-                  buyer_email: transaction.buyer_email,
-                  seller_email: transaction.seller_email,
-                  buyer_address: transaction.buyer_address,
-                  seller_address: transaction.seller_address,
-                  remaining_time: remaining_time
-                });
+            console.log("got validation results");
+            if (results.isEmpty()) {
+                console.log("no errors");
+                return;
             } else {
                 // Verification of the deal's ID validity
                 // Redirection to the right state windows
-
+                console.log("validation errors", results.array());
                 let errors = results.array();
                 res.render('getDeal', {
                     req: req,
                     error_deal_id: errors.filter(e => e.param == "deal_id"),
                 });
+                throw new Error("validation errors");
             }
         })
+        .then(function(){
+            console.log("etting deal info")
+            return ethermediary.getDealInfo(req.body.deal_id);
+        })
+        .then(function(info){
+            console.log("deal found", info);
+            dealInfo = info;
+            dealInfo.remaining_time = frozenTime(transaction.creation_date);
+            return ethermediary.getRole(req.body.deal_id, req.body.dealData);
+        })
+        .then(function(role){
+            dealInfo.role = role;
+            
+            res.render('myDeal',{
+                dealInfo: dealInfo
+                // isBuyer: transaction.isBuyer,
+                // isSeller: transaction.isSeller,
+                // state: transaction.state,
+                // meta: transaction.meta,
+                // amount: transaction.amount,
+                // buyer_email: transaction.buyer_email,
+                // seller_email: transaction.seller_email,
+                // buyer_address: transaction.buyer_address,
+                // seller_address: transaction.seller_address,
+                // remaining_time: remaining_time
+            });          
+        })
         .catch(function (err) {
-            console.log("error while validating: " + err);
-            res.status(500).send("error validating results");
+            console.log("error", err);
+            if(err.message.indexOf("deal") != -1){
+                res.render('dealNotFound', {dealId: req.body.deal_id});
+                return;
+            }
+            if(err.message == "validation errors"){
+                return;        
+            }
+            res.status(500).send("internal error sorry");
         });
 });
 
-var allowedPosts = ['simulation', 'terms', 'howitworks', 'newDeal1Content'];
+var allowedPosts = ['simulation', 'terms', 'howitworks', 
+'newDeal1Content', 'getDeal', 'no_metamask'];
 router.post("/:page", function(req, res, next){
     if(allowedPosts.indexOf(req.params.page) == -1){
         return next();

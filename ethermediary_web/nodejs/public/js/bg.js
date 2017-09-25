@@ -69,8 +69,11 @@ function Mesh(){
 function switchBg(){
     going = !going;
     localStorage.setItem("ethermediary-bg", going);
-    if(going)
-        requestAnimationFrame(update);
+    if(going){
+        window.updateInterval = setInterval(update, 1000/10);
+    }else{
+        clearInterval(window.updateInterval);
+    }
 }
 
 function resize(){
@@ -114,32 +117,34 @@ function init()
         svgbg.appendChild(mesh.triangleObjs[i].DOM);
     }
 
-    if(going)
-        requestAnimationFrame(update);
+    if(going){
+        console.log("interval");
+        window.updateInterval = setInterval(update, 1000/10);
+    }
 }
 
-function update(){
+function update(){  
     for(var i = 0; i < mesh.points.length; i++){
         var point = mesh.points[i];
         var home = mesh.homePoints[i];
-        let distance = distanceSquared(home, point);
-
+        var distance = distanceSquared(point, home);
+        
         if(distance > mesh.radiuses[i]){
             var randomPoint = normalize(randomVector());
             //randomPoint = mesh.homePoint[i] + randomPoint;
-            randomPoint = addVectors(mesh.homePoints[i], randomPoint);
+            randomPoint = addVectors(randomPoint, mesh.homePoints[i]);
             //normalize(randomPoint - point);
             var vector = normalize(substractVectors(randomPoint, point));
-            mesh.directions[i] = vector
+            mesh.directions[i] = vector;
         }
 
         var vect = mesh.directions[i];
         var vel = mesh.velocity[i];
-        vel[0] += vect[0]*(1/60.0);
-        vel[1] += vect[1]*(1/60.0);
+        vel[0] += vect[0]*(1/30.0);
+        vel[1] += vect[1]*(1/30.0);
 
         var velLength = vectorLength(vel);
-        if(velLength > 1){
+        if(velLength > 10){
             velLength = Math.sqrt(velLength);
             multiplyVector(vel, 1.0/velLength);
         }
@@ -149,9 +154,9 @@ function update(){
     }
 
     mesh.triangleObjs.forEach(t => t.updateDOM());
-
-    if(going)
-        requestAnimationFrame(update);
+    
+    // if(going)
+    //     requestAnimationFrame(update);
 }
 
 function normalize(v){
@@ -176,11 +181,13 @@ function multiplyVector(v, val){
 }
 
 function addVectors(v1, v2){
-    return [ v1[0] + v2[0], v1[1] + v2[1] ];
+    v1[0] = v1[0] + v2[0];
+    v1[1] = v1[1] + v2[1];
+    return v1;
 }
 
 function substractVectors(v1, v2) {
-    return [ v1[0] - v2[0], v1[1] - v2[1] ];
+    return [v1[0] - v2[0], v1[1] - v2[1]];
 }
 
 function getRandomColor(){

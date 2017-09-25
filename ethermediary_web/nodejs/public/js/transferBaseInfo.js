@@ -1,9 +1,9 @@
 function onClick(content){
     try{
+        console.log("asked:" + content);
         if(content == "newDealDone"){
             let data = extractPageData();
             sendPost('loading', () => sendPostFull(content, data));
-            ;
         }else{
             sendPost(content);
         }

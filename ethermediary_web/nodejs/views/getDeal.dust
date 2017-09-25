@@ -38,3 +38,5 @@
 		</div>
 		</form>
 </div>
+
+<script src="/js/getDealAddressHandler.js"></script>

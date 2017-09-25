@@ -10,7 +10,7 @@
 </div>
 
 <div id="definition" style="margin-bottom: 0px;">
-		{@select key=state type="string"}
+		{@select key=dealInfo.state type="string"}
 			{@eq value="0"}
 				<a>This Deal does not exist</a></br></br>
 			{/eq}
@@ -33,20 +33,20 @@
 
 	<div id="left" style="text-align: left; top: 0px;">
 	  <a>Object or service of the Deal : <strong>{meta}</strong></a></br></br>
-	  <a>Amount of token : <strong>{amount}</strong></a></br></br>
-	  <a>Email of the Buyer : <strong>{buyer_email}</strong></a></br></br>
-	  <a>Email of the Seller : <strong>{seller_email}</strong></a></br></br>
-		<a>Public address of the Buyer : <strong>{buyer_address}</strong> </a></br></br>
-		<a>Public address of the Seller : <strong>{seller_address}</strong> </a></br></br>
-	  <a>Remaining days before frozing : <strong>{remaining_time}</strong> </a></br></br>
+	  <a>Amount of token : <strong>{dealInfo.amount}</strong></a></br></br>
+	  <a>Email of the Buyer : <strong>{dealInfo.buyer_email}</strong></a></br></br>
+	  <a>Email of the Seller : <strong>{dealInfo.seller_email}</strong></a></br></br>
+		<a>Public address of the Buyer : <strong>{dealInfo.buyer_address}</strong> </a></br></br>
+		<a>Public address of the Seller : <strong>{dealInfo.seller_address}</strong> </a></br></br>
+	  <a>Remaining days before frozing : <strong>{dealInfo.remaining_time}</strong> </a></br></br>
 	</div>
 
 	<div id="separator"></div>
 
 	<div id="right" style="font-size: 30px; margin-top: 20px; margin-left: 10px; font-weight: bold;"><span>
 		<!-- Buyer page -->
-		{@select key=isBuyer type="string"}{@eq value="1"}
-		  {@select key=state type="string"}
+		{@select key=dealInfo.isBuyer type="string"}{@eq value="1"}
+		  {@select key=dealInfo.state type="string"}
 			  {@eq value="0"}
 					<a>This Deal does not exist</a></br></br>
 				{/eq}
@@ -89,8 +89,8 @@
 		{/eq}{/select}
 
 		<!-- Seller page -->
-		{@select key=isSeller type="string"}{@eq value="1"}
-		  {@select key=state type="string"}
+		{@select key=dealInfo.isSeller type="string"}{@eq value="1"}
+		  {@select key=dealInfo.state type="string"}
 			  {@eq value="0"}
 					<a>This Deal does not exist</a></br>
 				{/eq}
