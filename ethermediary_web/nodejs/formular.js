@@ -150,7 +150,7 @@ router.post("/myDeal", function(req, res){
     req.sanitizeBody('deal_id').trim();
     req.checkBody("deal_id", "Please enter a valid deal ID").notEmpty();
     req.checkBody("deal_id", "Deal ID must be an integer").isInt();
-    
+
     req.getValidationResult()
         .then(function (results) {
             console.log("got validation results");
@@ -181,7 +181,7 @@ router.post("/myDeal", function(req, res){
         })
         .then(function(role){
             dealInfo.role = role;
-            
+
             res.render('myDeal',{
                 dealInfo: dealInfo
                 // isBuyer: transaction.isBuyer,
@@ -194,7 +194,7 @@ router.post("/myDeal", function(req, res){
                 // buyer_address: transaction.buyer_address,
                 // seller_address: transaction.seller_address,
                 // remaining_time: remaining_time
-            });          
+            });
         })
         .catch(function (err) {
             console.log("error", err);
@@ -203,13 +203,13 @@ router.post("/myDeal", function(req, res){
                 return;
             }
             if(err.message == "validation errors"){
-                return;        
+                return;
             }
             res.status(500).send("internal error sorry");
         });
 });
 
-var allowedPosts = ['simulation', 'terms', 'howitworks', 
+var allowedPosts = ['simulation', 'terms', 'howitworks', 'needMeta',
 'newDeal1Content', 'getDeal', 'no_metamask'];
 router.post("/:page", function(req, res, next){
     if(allowedPosts.indexOf(req.params.page) == -1){

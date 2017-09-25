@@ -1,8 +1,6 @@
-console.log("zdfsfsdfsdf");
-
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
     module.exports = identity;
-    
+
     /**
      * Set a mat4 to the identity matrix
      *
@@ -30,7 +28,7 @@ console.log("zdfsfsdfsdf");
     };
     },{}],2:[function(require,module,exports){
     module.exports = invert;
-    
+
     /**
      * Inverts a mat4
      *
@@ -43,7 +41,7 @@ console.log("zdfsfsdfsdf");
             a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7],
             a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
             a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15],
-    
+
             b00 = a00 * a11 - a01 * a10,
             b01 = a00 * a12 - a02 * a10,
             b02 = a00 * a13 - a03 * a10,
@@ -56,15 +54,15 @@ console.log("zdfsfsdfsdf");
             b09 = a21 * a32 - a22 * a31,
             b10 = a21 * a33 - a23 * a31,
             b11 = a22 * a33 - a23 * a32,
-    
+
             // Calculate the determinant
             det = b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
-    
-        if (!det) { 
-            return null; 
+
+        if (!det) {
+            return null;
         }
         det = 1.0 / det;
-    
+
         out[0] = (a11 * b11 - a12 * b10 + a13 * b09) * det;
         out[1] = (a02 * b10 - a01 * b11 - a03 * b09) * det;
         out[2] = (a31 * b05 - a32 * b04 + a33 * b03) * det;
@@ -81,14 +79,14 @@ console.log("zdfsfsdfsdf");
         out[13] = (a00 * b09 - a01 * b07 + a02 * b06) * det;
         out[14] = (a31 * b01 - a30 * b03 - a32 * b00) * det;
         out[15] = (a20 * b03 - a21 * b01 + a22 * b00) * det;
-    
+
         return out;
     };
     },{}],3:[function(require,module,exports){
     var identity = require('./identity');
-    
+
     module.exports = lookAt;
-    
+
     /**
      * Generates a look-at matrix with the given eye position, focal point, and up axis
      *
@@ -109,22 +107,22 @@ console.log("zdfsfsdfsdf");
             centerx = center[0],
             centery = center[1],
             centerz = center[2];
-    
+
         if (Math.abs(eyex - centerx) < 0.000001 &&
             Math.abs(eyey - centery) < 0.000001 &&
             Math.abs(eyez - centerz) < 0.000001) {
             return identity(out);
         }
-    
+
         z0 = eyex - centerx;
         z1 = eyey - centery;
         z2 = eyez - centerz;
-    
+
         len = 1 / Math.sqrt(z0 * z0 + z1 * z1 + z2 * z2);
         z0 *= len;
         z1 *= len;
         z2 *= len;
-    
+
         x0 = upy * z2 - upz * z1;
         x1 = upz * z0 - upx * z2;
         x2 = upx * z1 - upy * z0;
@@ -139,11 +137,11 @@ console.log("zdfsfsdfsdf");
             x1 *= len;
             x2 *= len;
         }
-    
+
         y0 = z1 * x2 - z2 * x1;
         y1 = z2 * x0 - z0 * x2;
         y2 = z0 * x1 - z1 * x0;
-    
+
         len = Math.sqrt(y0 * y0 + y1 * y1 + y2 * y2);
         if (!len) {
             y0 = 0;
@@ -155,7 +153,7 @@ console.log("zdfsfsdfsdf");
             y1 *= len;
             y2 *= len;
         }
-    
+
         out[0] = x0;
         out[1] = y0;
         out[2] = z0;
@@ -172,12 +170,12 @@ console.log("zdfsfsdfsdf");
         out[13] = -(y0 * eyex + y1 * eyey + y2 * eyez);
         out[14] = -(z0 * eyex + z1 * eyey + z2 * eyez);
         out[15] = 1;
-    
+
         return out;
     };
     },{"./identity":1}],4:[function(require,module,exports){
     module.exports = multiply;
-    
+
     /**
      * Multiplies two mat4's
      *
@@ -191,26 +189,26 @@ console.log("zdfsfsdfsdf");
             a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7],
             a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
             a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15];
-    
+
         // Cache only the current line of the second matrix
-        var b0  = b[0], b1 = b[1], b2 = b[2], b3 = b[3];  
+        var b0  = b[0], b1 = b[1], b2 = b[2], b3 = b[3];
         out[0] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
         out[1] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
         out[2] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
         out[3] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
-    
+
         b0 = b[4]; b1 = b[5]; b2 = b[6]; b3 = b[7];
         out[4] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
         out[5] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
         out[6] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
         out[7] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
-    
+
         b0 = b[8]; b1 = b[9]; b2 = b[10]; b3 = b[11];
         out[8] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
         out[9] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
         out[10] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
         out[11] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
-    
+
         b0 = b[12]; b1 = b[13]; b2 = b[14]; b3 = b[15];
         out[12] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
         out[13] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
@@ -220,7 +218,7 @@ console.log("zdfsfsdfsdf");
     };
     },{}],5:[function(require,module,exports){
     module.exports = perspective;
-    
+
     /**
      * Generates a perspective projection matrix with the given bounds
      *
@@ -254,7 +252,7 @@ console.log("zdfsfsdfsdf");
     };
     },{}],6:[function(require,module,exports){
     module.exports = rotate;
-    
+
     /**
      * Rotates a mat4 by the given angle
      *
@@ -274,27 +272,27 @@ console.log("zdfsfsdfsdf");
             b00, b01, b02,
             b10, b11, b12,
             b20, b21, b22;
-    
+
         if (Math.abs(len) < 0.000001) { return null; }
-        
+
         len = 1 / len;
         x *= len;
         y *= len;
         z *= len;
-    
+
         s = Math.sin(rad);
         c = Math.cos(rad);
         t = 1 - c;
-    
+
         a00 = a[0]; a01 = a[1]; a02 = a[2]; a03 = a[3];
         a10 = a[4]; a11 = a[5]; a12 = a[6]; a13 = a[7];
         a20 = a[8]; a21 = a[9]; a22 = a[10]; a23 = a[11];
-    
+
         // Construct the elements of the rotation matrix
         b00 = x * x * t + c; b01 = y * x * t + z * s; b02 = z * x * t - y * s;
         b10 = x * y * t - z * s; b11 = y * y * t + c; b12 = z * y * t + x * s;
         b20 = x * z * t + y * s; b21 = y * z * t - x * s; b22 = z * z * t + c;
-    
+
         // Perform rotation-specific matrix multiplication
         out[0] = a00 * b00 + a10 * b01 + a20 * b02;
         out[1] = a01 * b00 + a11 * b01 + a21 * b02;
@@ -308,7 +306,7 @@ console.log("zdfsfsdfsdf");
         out[9] = a01 * b20 + a11 * b21 + a21 * b22;
         out[10] = a02 * b20 + a12 * b21 + a22 * b22;
         out[11] = a03 * b20 + a13 * b21 + a23 * b22;
-    
+
         if (a !== out) { // If the source and destination differ, copy the unchanged last row
             out[12] = a[12];
             out[13] = a[13];
@@ -319,7 +317,7 @@ console.log("zdfsfsdfsdf");
     };
     },{}],7:[function(require,module,exports){
     module.exports = transformMat4;
-    
+
     /**
      * Transforms the vec3 with a mat4.
      * 4th vector component is implicitly '1'
@@ -1765,7 +1763,7 @@ console.log("zdfsfsdfsdf");
         }
       ]
     }
-    
+
     },{}],9:[function(require,module,exports){
     var perspective = require('gl-mat4/perspective')
     var multiply = require('gl-mat4/multiply')
@@ -1774,33 +1772,33 @@ console.log("zdfsfsdfsdf");
     var rotate = require('gl-mat4/rotate')
     var transform = require('gl-vec3/transformMat4')
     var foxJSON = require('./fox.json')
-    
+
     var SVG_NS = 'http://www.w3.org/2000/svg'
-    
+
     function createNode (type) {
       return document.createElementNS(SVG_NS, type)
     }
-    
+
     function setAttribute (node, attribute, value) {
       node.setAttributeNS(null, attribute, value)
     }
-    
-    
+
+
     module.exports = function createLogo (options_) {
       var options = options_ || {}
-    
+
       var followCursor = !!options.followMouse
       var slowDrift = !!options.slowDrift
       var shouldRender = true
-    
+
       var DISTANCE = 400
       var lookCurrent = [0, 0]
       var lookRate = 0.3
-    
+
       var width = options.width || 400
       var height = options.height || 400
       var container = createNode('svg')
-    
+
       if (!options.pxNotRatio) {
         width = (window.innerWidth * (options.width || 0.25)) | 0
         height = ((window.innerHeight * options.height) || width) | 0
@@ -1809,10 +1807,10 @@ console.log("zdfsfsdfsdf");
           height = (options.minWidth * options.height / options.width) | 0
         }
       }
-    
+
       setAttribute(container, 'width', width + 'px')
       setAttribute(container, 'height', height + 'px')
-    
+
       var mouse = {
         x: 0,
         y: 0
@@ -1826,20 +1824,20 @@ console.log("zdfsfsdfsdf");
           setLookAt(target)
         }
       })
-    
+
       function setLookAt(target) {
         var bounds = container.getBoundingClientRect()
         mouse.x = 1.0 - 2.0 * (target.x - bounds.left) / bounds.width
         mouse.y = 1.0 - 2.0 * (target.y - bounds.top) / bounds.height
       }
-    
+
       document.body.appendChild(container)
-    
+
       var NUM_VERTS = foxJSON.positions.length
-    
+
       var positions = new Float32Array(3 * NUM_VERTS)
       var transformed = new Float32Array(3 * NUM_VERTS)
-    
+
       ;(function () {
         var pp = foxJSON.positions
         var ptr = 0
@@ -1850,13 +1848,13 @@ console.log("zdfsfsdfsdf");
           }
         }
       })()
-    
+
       function Polygon (svg, indices) {
         this.svg = svg
         this.indices = indices
         this.zIndex = 0
       }
-    
+
       var polygons = (function () {
         var polygons = []
         for (var i = 0; i < foxJSON.chunks.length; ++i) {
@@ -1884,7 +1882,7 @@ console.log("zdfsfsdfsdf");
         }
         return polygons
       })()
-    
+
       var computeMatrix = (function () {
         var objectCenter = new Float32Array(3)
         var up = new Float32Array([0, 1, 0])
@@ -1899,11 +1897,11 @@ console.log("zdfsfsdfsdf");
         var invProjection = new Float32Array(16)
         var target = new Float32Array(3)
         var transformed = new Float32Array(16)
-    
+
         var X = new Float32Array([1, 0, 0])
         var Y = new Float32Array([0, 1, 0])
         var Z = new Float32Array([0, 0, 1])
-    
+
         return function () {
           var rect = container.getBoundingClientRect()
           var viewportWidth = rect.width
@@ -1931,14 +1929,14 @@ console.log("zdfsfsdfsdf");
             rotate(model, model, -0.1 + (Math.sin(time / 2) * 0.03), Z)
             rotate(model, model, 0.5 + (Math.sin(time / 3) * 0.2), Y)
           }
-    
+
           multiply(transformed, projection, view)
           multiply(transformed, transformed, model)
-    
+
           return transformed
         }
       })()
-    
+
       function updatePositions (M) {
         var m00 = M[0]
         var m01 = M[1]
@@ -1956,12 +1954,12 @@ console.log("zdfsfsdfsdf");
         var m31 = M[13]
         var m32 = M[14]
         var m33 = M[15]
-    
+
         for (var i = 0; i < NUM_VERTS; ++i) {
           var x = positions[3 * i]
           var y = positions[3 * i + 1]
           var z = positions[3 * i + 2]
-    
+
           var tw = x * m03 + y * m13 + z * m23 + m33
           transformed[3 * i] =
             (x * m00 + y * m10 + z * m20 + m30) / tw
@@ -1971,11 +1969,11 @@ console.log("zdfsfsdfsdf");
             (x * m02 + y * m12 + z * m22 + m32) / tw
         }
       }
-    
+
       function compareZ (a, b) {
         return b.zIndex - a.zIndex
       }
-    
+
       var toDraw = []
       function updateFaces () {
         var i
@@ -1986,7 +1984,7 @@ console.log("zdfsfsdfsdf");
         for (i = 0; i < polygons.length; ++i) {
           var poly = polygons[i]
           var indices = poly.indices
-    
+
           var i0 = indices[0]
           var i1 = indices[1]
           var i2 = indices[2]
@@ -2000,7 +1998,7 @@ console.log("zdfsfsdfsdf");
           if (det < 0) {
             continue
           }
-    
+
           var points = []
           var zmax = -Infinity
           var zmin = Infinity
@@ -2016,11 +2014,11 @@ console.log("zdfsfsdfsdf");
           }
           poly.zIndex = zmax + 0.25 * zmin
           var joinedPoints = points.join(' ')
-    
+
           if (joinedPoints.indexOf('NaN') === -1) {
             setAttribute(element, 'points', joinedPoints)
           }
-    
+
           toDraw.push(poly)
         }
         toDraw.sort(compareZ)
@@ -2029,24 +2027,24 @@ console.log("zdfsfsdfsdf");
           container.appendChild(toDraw[i].svg)
         }
       }
-    
+
       function renderScene () {
         if (!shouldRender) return
         window.requestAnimationFrame(renderScene)
-    
+
         var li = (1.0 - lookRate)
         var bounds = container.getBoundingClientRect()
-    
+
         lookCurrent[0] = li * lookCurrent[0] + lookRate * mouse.x
         lookCurrent[1] = li * lookCurrent[1] + lookRate * mouse.y + 0.085
-    
+
         var matrix = computeMatrix()
         updatePositions(matrix)
         updateFaces()
       }
-    
+
       renderScene()
-    
+
       return {
         container: container,
         lookAt: setLookAt,
@@ -2054,51 +2052,51 @@ console.log("zdfsfsdfsdf");
         stopAnimation: stopAnimation,
         startAnimation: startAnimation,
       }
-    
+
       function stopAnimation() {
         shouldRender = false
       }
-    
+
       function startAnimation() {
         shouldRender = true
       }
-    
+
       function setFollowMouse (state) {
         followCursor = state
       }
-    
+
     }
-    
+
     },{"./fox.json":8,"gl-mat4/invert":2,"gl-mat4/lookAt":3,"gl-mat4/multiply":4,"gl-mat4/perspective":5,"gl-mat4/rotate":6,"gl-vec3/transformMat4":7}],10:[function(require,module,exports){
     var ModelViewer = require('metamask-logo')
     var isMobile = !!detectMobile()
-    
+
     injectMascot()
-    
+
     function injectMascot(){
       // get container from DOM
       var container = document.getElementById('logo-container')
-    
+
       if (!container) return
-    
+
       // To render with fixed dimensions:
       var viewer = ModelViewer({
-    
+
         // Dictates whether width & height are px or multiplied
         pxNotRatio: false,
         width: 0.10,
         height: 0.10,
         minWidth: 200,
-    
+
         followMouse: !isMobile,
         slowDrift: isMobile,
       })
-    
+
       // add viewer to DOM
       container.appendChild(viewer.container)
-    
+
     }
-    
+
     function detectMobile() {
       return (
           navigator.userAgent.match(/Android/i)
@@ -2110,7 +2108,6 @@ console.log("zdfsfsdfsdf");
        || navigator.userAgent.match(/Windows Phone/i)
       )
     }
-    
-    
+
+
     },{"metamask-logo":9}]},{},[10]);
-setTimeout(() => document.body.removeChild(document.getElementById("tmp")), 1000);

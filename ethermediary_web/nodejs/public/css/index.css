@@ -19,17 +19,11 @@ body{
   margin-top: 0px;
 }
 
-#toggle{
-  position: fixed;
-  z-index: 2;
-  left: 230px;
-  top: 7px;
-}
-
 .toggle{
   font-size: 15px;
   height: 30px;
   width: 100px;
+  left: 250px;
   background-color: rgba(255, 255, 255, 0);
   color: #112266;
 }

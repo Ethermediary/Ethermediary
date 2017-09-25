@@ -1,6 +1,7 @@
 <div id="content">
 
 <div id="circle" onclick="switchBg();" ></div>
+<button class="toggle" onclick="onClick('needMeta');">Meta</button>
 
 <div id="logo">
 	<a href="./"><img src="./imgs/logo_blue.png" width="70px" style="position: relative; top:12px;"/></a>
