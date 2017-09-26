@@ -1,1 +1,23 @@
-<p>Deal {dealId} not found</p>
+<div id="circle" onclick="switchBg();" ></div>
+
+<div id="logo" style="margin-bottom: 15px;">
+	<a href="./"><img src="./imgs/logo_blue.png" width="70px" style="position: relative; top:12px;"/></a>
+	&nbsp;<a href="./">Ethermediary</a>
+</div>
+
+<div id="definition" style="margin-top: 0px; margin-bottom: 50px;">
+</br></br></br></br></br></br><a><strong>This is a bad ID ! {dealId}</strong></a>
+</div>
+
+<div id="receipt" style="width: 1000px; text-align: center;">
+  <form id="mForm" style="text-align: center;">
+			<div id="get_deal_color" onmouseover="blob('get_deal_color')" style="width:375px; display: inline-block; margin-left:15px;">
+			<button id="submit" type="button" class="button" style="width: 375px;"
+				onmouseover="color_over('button')"
+				onmouseleave="color_leave('button')"
+				onclick="onClick('getDeal');">Return</button>
+			</div>
+	</form>
+</div>
+
+<script src="/js/metamaskHead.js"></script>

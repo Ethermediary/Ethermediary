@@ -20,10 +20,11 @@ body{
 }
 
 .toggle{
+  position: relative;
   font-size: 15px;
   height: 30px;
   width: 100px;
-  left: 250px;
+  left: 100px;
   background-color: rgba(255, 255, 255, 0);
   color: #112266;
 }

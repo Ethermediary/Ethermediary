@@ -8,5 +8,5 @@ if (typeof web3 !== 'undefined') {
     //override the on click to use web3 myself
 }else{
     console.log("metamask not found using web server");
-    onClick('no_metamask');
+    //onClick('no_metamask');
 }

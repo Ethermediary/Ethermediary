@@ -15,10 +15,7 @@
 		directly access the <strong>Ethereum blockchain</strong> and your <strong>wallet</strong> inside your browser&nbsp;
 		<strong>without sharing your personal informations</strong> with anybody.</a></br></br></span>
 
-		<a href="https://metamask.io/" target="_blank">
-		<div id="logo-container"></div>
-		<!--<p id="tmp" style="display:none">We’re initially building MetaMask as a Chrome plugin, but eventually plan to support firefof and beyond</p>
-		--></a>
+		<a href="https://metamask.io/" target="_blank"><div id="logo-container"></div></a>
 
 		<a><strong>It is the best option for your security</strong></a>
 		</a></br>

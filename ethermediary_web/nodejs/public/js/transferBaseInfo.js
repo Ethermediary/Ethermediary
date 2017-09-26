@@ -1,7 +1,10 @@
 function onClick(content){
     try{
         console.log("asked:" + content);
-        if(content == "newDealDone"){
+        if (!hasMetamask()) {
+          sendPost('needMeta');
+        }
+        else if(content == "newDealDone"){
             let data = extractPageData();
             sendPost('loading', () => sendPostFull(content, data));
         }else{
@@ -56,4 +59,8 @@ function extractForm(form) {
         }
     }
     return data;
+}
+
+function hasMetamask(){
+    return (typeof web3 !== 'undefined') && (new Web3(web3.currentProvider).eth.accounts[0] != undefined);
 }

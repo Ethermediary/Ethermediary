@@ -209,7 +209,7 @@ router.post("/myDeal", function(req, res){
         });
 });
 
-var allowedPosts = ['simulation', 'terms', 'howitworks', 'needMeta',
+var allowedPosts = ['simulation', 'terms', 'howitworks', 'needMeta', 'dealNotFound',
 'newDeal1Content', 'getDeal', 'no_metamask'];
 router.post("/:page", function(req, res, next){
     if(allowedPosts.indexOf(req.params.page) == -1){
