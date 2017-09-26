@@ -1,13 +1,4 @@
-<div id="content">
-
-<div id="circle" onclick="switchBg();" ></div>
-<button class="toggle" onclick="onClick('needMeta');" style="left: 50px;">Meta</button>
-<button class="toggle" onclick="onClick('dealNotFound');">Wrong ID</button>
-
-<div id="logo">
-	<a href="./"><img src="./imgs/logo_blue.png" width="70px" style="position: relative; top:12px;"/></a>
-	&nbsp;<a href="./">Ethermediary</a>
-</div></br>
+</br>
 
 <div id="state" data-state="index"></div>
 
@@ -44,5 +35,3 @@
 		</div>
 
 	</form>
-
-</div>

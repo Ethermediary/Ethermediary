@@ -1,42 +1,20 @@
-//this script will be inserted after the window already loaded
-//so no window.onload here
-if (typeof web3 !== 'undefined') {
-    window.web3 = new Web3(web3.currentProvider);
-    console.log("Metamask found");
-    onClick = overrideOnClick;
-    //override the on click to use web3 myself
-}else{
-    console.log("Metamask is either not installed or not connected to the Ethereum blockchain.");
-    onClick = needMeta;
+var oldClick = onClick;
+onClick = overrideOnClick;
+
+function resetOverride(){
+    onClick = oldClick;
 }
 
-function needMeta(){  //Redirect to /needMeta page is metamask not installed
-    $.ajax({
-        url: document.location.origin + "/needMeta",
-        type: 'POST',
-        processData: false,
-        contentType: "application/json; charset=utf-8",
-        error: function(err){
-            console.log("error:");
-            console.log(err);
-        },
-        success: function (data) {
-            $("#content").html(data);
-        }
-    });
-}
-
-function overrideOnClick(){
-    try{
+function overrideOnClick(content){
+    if(content == "newDealDone"){
         makeTransaction();
-    }catch(err){
-        console.log(err);
+    }else{
+        resetOverride();
+        onClick(content);
     }
 }
 
 function makeTransaction(){
-    var dealData = JSON.parse(document.getElementById("deal").getAttribute("data-deal"));
-
     ethermediary.createDealManager();
     var buyer = ethermediary.buyer(web3.eth.accounts[0]);
 
@@ -44,31 +22,11 @@ function makeTransaction(){
         dealData.seller_address, dealData.seller_email)
     .then(function(transactionHash){
         console.log("transaction sent, here is your transaction hash: " + transactionHash);
-        sendServerTransactionHash(transactionHash);
+        dealData.transactionHash = transactionHash;
+        resetOverride();
+        onClick('newDealDone');
     })
     .catch(function(err){
-        console.log("error sending transaction:");
-        console.log(err);
-    });
-}
-
-function sendServerTransactionHash(transactionHash){
-    let data = {
-        transactionHash: transactionHash
-    };
-
-    $.ajax({
-        url: document.location.origin + "/dealCreated",
-        type: 'POST',
-        data: JSON.stringify(data),
-        processData: false,
-        contentType: "application/json; charset=utf-8",
-        error: function(err){
-            console.log("error:");
-            console.log(err);
-        },
-        success: function (data) {
-            $("#content").html(data);
-        }
+        console.log("error sending transaction:", err);
     });
 }

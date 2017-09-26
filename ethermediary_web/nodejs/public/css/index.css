@@ -52,7 +52,7 @@ body{
   letter-spacing: 3px;
 }
 
-#content{
+#frame{
   position: relative;
   margin-top: 0px;
   width: 1100px;
@@ -227,7 +227,7 @@ button[type=simul], input[type=simul]{
 
 #foo{}
 
-#alert{
+.alert{
   position: relative;
   top: 10px;
 }

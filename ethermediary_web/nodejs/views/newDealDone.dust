@@ -1,5 +1,3 @@
-<div id="circle" onclick="switchBg();" ></div>
-
 <div id="definition">
 	<a><strong>Your deal has been confirmed.</strong></br></br>Here is your transaction ID which will allow you to recover your deal ID if&nbsp;
 		you don't receive an email. </br></br><strong>Please thoroughly note it !</strong></br>
@@ -8,7 +6,7 @@
 
 <div id="receipt" class="note">
 
-	<a>{transactionHash}</a></br></br>
+	<a id="populate-transactionHash"></a></br></br>
 
 	<a>If nothing if displayed above, press F12 and look into the 'Console' tab</a>
 

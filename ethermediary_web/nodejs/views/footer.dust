@@ -29,5 +29,6 @@
 
   <script src="/js/anime.min.js"></script>
   <script src="/js/myanim.js"></script>
+  <script src="/js/validator.js"></script>
 
 </body>

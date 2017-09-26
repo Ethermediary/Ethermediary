@@ -1,65 +1,140 @@
+var pageWithLoading = ['myDeal']
+var pageToValidate = ['newDeal2Content', 'newDeal3Content', 'myDeal'];
+var noMetamaskNeeded = ['terms', 'howitworks'];
+var dealData = {};
+
 function onClick(content){
-    try{
-        console.log("asked:" + content);
-        if (!hasMetamask()) {
-          sendPost('needMeta');
-        }
-        else if(content == "newDealDone"){
-            let data = extractPageData();
-            sendPost('loading', () => sendPostFull(content, data));
-        }else{
-            sendPost(content);
-        }
-    }catch(err){
-        console.error(err);
+    console.log(content)
+    if (!hasMetamask() && noMetamaskNeeded.indexOf(content) == -1) {
+        sendPost('needMeta');
+        return;
+    }
+    console.log(pageToValidate.indexOf(content));
+    if(pageToValidate.indexOf(content) == -1){
+        requestPage(content);
+        return;
+    }
+
+    let validationResult = validator.validateForm("mForm", getValidationData());
+    if(validationResult.passed){
+        requestPage(content);
+    }else{
+        displayErrors(validationResult);
     }
 }
 
-function extractPageData(){
-    let data = {};
+///errorObj is {passed:bool, errors: [{inputName, errors:[str, str]}, {inputName, errors:[str,str]}]}
+function displayErrors(errorObj){
+    var alerts = document.getElementsByClassName("alert");
+    if(alerts.length == 0)
+        return;
+
+    clearErrors(alerts);
+
+    //disp current errors
+    for(let i = 0; i < errorObj.errors.length; i++){
+        //input Errors is {inputName, errors:[str, str]}
+        let inputErrors = errorObj.errors[i];
+        let disp = document.getElementById("alert-" + inputErrors.inputName + "-disp");
+        let text = document.getElementById("alert-" + inputErrors.inputName + "-text");
+        if(disp && text){
+            //set style to empty string, getting ride of "display:none"
+            disp.style = "";
+            text.innerHTML = getErrorHTML(inputErrors);
+        }
+    }
+}
+
+//get the error formated has HTML
+function getErrorHTML(inputErrors){
+    let html = "";
+    for(let k = 0; k < inputErrors.errors.length; k++){
+        html += inputErrors.errors[k];
+        if(k != inputErrors.errors.length - 1)
+            html += "<br/>";
+    }
+    return html;
+}
+
+function clearErrors(alerts){
+    //hide all the errors
+    for(let i = 0 ; i < alerts.length; i++){
+        alerts[i].style = "display:none";
+    }
+}
+
+function getValidationData(){
+    let validationData = document.getElementById("validation");
+    if(!validationData)
+        return null;
+    else
+        return JSON.parse(validationData.innerText);
+}
+
+function saveDealData(){
     let mForm = document.getElementById("mForm");
-    let deal = document.getElementById("deal");
-    if(mForm)
-        data = extractForm(mForm);
-    if(deal)
-        data.dealData = deal.getAttribute("data-deal");
-    return data;
+    if(!mForm)
+        return;    
+    let formData = validator.extractForm(mForm);
+
+    for(prop in formData){
+        dealData[prop] = formData[prop];
+    }
+}
+
+function populateFormWithDealData(){
+    let form = document.getElementById("mForm");
+    if(!form)
+        return;
+
+    for(prop in dealData){
+        setFormMember(form, prop, dealData[prop]);
+    }
+}
+
+function populateDealData(){
+    for(prop in dealData){
+        let element = document.getElementById("populate-" + prop);
+        if(!element)
+            continue;
+        element.innerText = dealData[prop];
+    }
+}
+
+function setFormMember(form, memberName, value){
+    for (var x=0; x < form.elements.length; x++) {
+        var field = form.elements[x];
+        if (field.name == memberName) {
+            field.value = value;
+        }
+    }
+}
+
+function requestPage(content){
+    saveDealData();
+    if(pageWithLoading.indexOf(content) != -1){
+        sendPost('loading', () => sendPost(content));
+    }else{
+        sendPost(content);
+    }
 }
 
 function sendPost(content, callback){
-    sendPostFull(content, extractPageData(), callback);
-}
-
-function sendPostFull(content, data, callback){
     $.ajax({
         url: document.location.origin + "/"  + content,
         type: 'POST',
-        data: JSON.stringify(data),
-        processData: false,
-        contentType: "application/json; charset=utf-8",
-        error: function(err){
-            console.log("error:");
-            console.log(err);
-        },
+      //  data: JSON.stringify(data),
+      //  processData: false,
+      //  contentType: "application/json; charset=utf-8",
+        error: console.log,
         success: function (data) {
             $("#content").html(data);
-            initialSwitch();
+            populateDealData();
+            populateFormWithDealData();
             if(callback)
                 callback();
         }
     });
-}
-
-function extractForm(form) {
-    var data = {};
-    //console.log(form.elements.length)
-    for (var x=0; x < form.elements.length; x++) {
-        var field = form.elements[x];
-        if (field.name && field.type !== "submit") {
-            data[field.name] = (field.type == "radio" || field.type == "checkbox") ? (field.checked == "checked") : field.value;
-        }
-    }
-    return data;
 }
 
 function hasMetamask(){

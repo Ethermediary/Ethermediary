@@ -1,9 +1,27 @@
-<div id="circle" onclick="switchBg();" ></div>
+<div id="validation" style="display:none">
+	[
+		{
+			"name":"meta",
+			"checks":[
+				{
+					"funcName":"notEmpty",
+					"msg":"Error: Please enter the transaction purpose"
+				}
+			]
+		},
+		{
+			"name":"amount",
+			"checks":[
+				{
+					"funcName":"isNumber",
+					"msg":"Error: Please enter a decimal number"
+				}
+			]
+		}
+	]
+</div>
 
-<div id="logo">
-	<a href="./"><img src="./imgs/logo_blue.png" width="70px" style="position: relative; top:12px;"/></a>
-	&nbsp;<a href="./">Ethermediary</a>
-</div></br>
+<br/>
 
 <div id="definition" style="margin-bottom: 120px;">
 	<a>The <strong>buyer</strong> have to initialise the <strong>deal</strong> and make an offer to the <strong>seller</strong>.
@@ -14,23 +32,25 @@
 
 	<form id="mForm">
 
-		{?error_meta}
-			<div id="alert">
-				<a class="info">
-					<img src="./imgs/alert.png" width="30px"><span>{#error_meta}Error : {.msg}<br/>{/error_meta}</span></img>
-				</a>
-			</div>
-		{/error_meta}
+		<div class="alert" style="display: none" id="alert-meta-disp">
+			<a class="info">
+				<img src="./imgs/alert.png" width="30px">
+					<span id="alert-meta-text"></span>
+				</img>
+			</a>
+		</div>
+
 		<input type="text" placeholder="Object or service associated" name="meta" value="{req.body.meta}"/>
 		<a>The object or service associated with the Deal</a></br></br>
 
-		{?error_amount}
-			<div id="alert">
-				<a class="info">
-					<img src="./imgs/alert.png" width="30px"><span>{#error_amount}Error : {.msg}<br/>{/error_amount}</span></img>
-				</a>
-			</div>
-		{/error_amount}
+		<div class="alert" style="display: none" id="alert-amount-disp">
+			<a class="info">
+				<img src="./imgs/alert.png" width="30px">
+					<span id="alert-amount-text"></span>
+				</img>
+			</a>
+		</div>
+
 		<input type="text" placeholder="Amount of tokens" name="amount" value="{req.body.amount}"/>
 		<a>The contract will be waiting for this amount coming from your public adress</a></br></br></br>
 

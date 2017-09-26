@@ -98,10 +98,13 @@ function color_leave_green(x){
 
 //Initial background switch button
 function initialSwitch(){
+  var elem = document.getElementById("circle");
+  if(!elem)
+    return;
   var going = localStorage.getItem("ethermediary-bg") == "true";
   if(going)
-    document.getElementById("circle").style.backgroundColor = '#262F67';
+    elem.style.backgroundColor = '#262F67';
   else
-    document.getElementById("circle").style.backgroundColor = 'rgb(145, 230, 250)';
+    elem.style.backgroundColor = 'rgb(145, 230, 250)';
 }
 initialSwitch();

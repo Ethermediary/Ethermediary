@@ -1,24 +1,15 @@
-<div id="circle" onclick="switchBg();" ></div>
-
-<div id="logo" style="margin-bottom: 70px;">
-	<a href="./"><img src="./imgs/logo_blue.png" width="70px" style="position: relative; top:12px;"/></a>
-	&nbsp;<a href="./">Ethermediary</a>
-</div>
-
-<div id="deal" data-deal="{jsonData}"></div>
-
 <div id="definition" style="margin-bottom: 30px;">
 	<a>Please <strong>carefully review</strong> these informations before </br><strong>validating the deal</strong> :
 	</a>
 </div>
 
 <div id="receipt" class="note">
-	<a>Object or Service : <strong><span class="clear">{dealData.meta}</span></strong></a></br>
-	<a>Amount of the transaction : <strong><span class="clear">{dealData.amount}</span></strong></a></br>
-	<a>Buyer public address : <strong><span class="clear">{dealData.buyer_address}</span></strong></a></br>
-	<a>Buyer email address: <strong><span class="clear">{dealData.buyer_email}</span></strong></a></br>
-	<a>Seller public address : <strong><span class="clear">{dealData.seller_address}</span></strong></a></br>
-	<a>Seller email address : <strong><span class="clear">{dealData.seller_email}</span></strong></a></br></br>
+	<a>Object or Service : <strong><span class="clear" id="populate-meta"></span></strong></a></br>
+	<a>Amount of the transaction : <strong><span class="clear" id="populate-amount"></span></strong></a></br>
+	<a>Buyer public address : <strong><span class="clear" id="populate-buyer_address"></span></strong></a></br>
+	<a>Buyer email address: <strong><span class="clear" id="populate-buyer_email"></span></strong></a></br>
+	<a>Seller public address : <strong><span class="clear" id="populate-seller_address"></span></strong></a></br>
+	<a>Seller email address : <strong><span class="clear" id="populate-seller_email"></span></strong></a></br></br>
 
 	<a>These information are not correct ?</br> Go back to the&nbsp;
 	<a style="text-decoration: underline; cursor: pointer;" onclick="onClick('newDeal1Content');">

@@ -1,12 +1,3 @@
-<div id="circle" onclick="switchBg();" ></div>
-
-<div id="logo" style="margin-bottom: 15px;">
-	<a href="./"><img src="./imgs/logo_blue.png" width="70px" style="position: relative; top:12px;"/></a>
-	&nbsp;<a href="./">Ethermediary</a>
-</div>
-
-<div id="deal" data-deal="{jsonData}"></div>
-
 <div id="definition" style="margin-top: 0px; margin-bottom: 50px;">
 	<a><strong>Access and interact with a Deal </strong></a>
 </div>
@@ -38,5 +29,3 @@
 		</div>
 		</form>
 </div>
-
-<script src="/js/getDealAddressHandler.js"></script>
