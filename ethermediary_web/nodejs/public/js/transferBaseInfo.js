@@ -16,12 +16,13 @@ function onClick(content){
 }
 
 function extractPageData(){
-    let data = extractForm(document.getElementById("mForm"));
-    console.log("Form data:");
-    console.log(data);
-    if(document.getElementById("deal")){
-        data.dealData = document.getElementById("deal").getAttribute("data-deal");
-    }
+    let data = {};
+    let mForm = document.getElementById("mForm");
+    let deal = document.getElementById("deal");
+    if(mForm)
+        data = extractForm(mForm);
+    if(deal)
+        data.dealData = deal.getAttribute("data-deal");
     return data;
 }
 

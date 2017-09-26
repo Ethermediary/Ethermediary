@@ -61,7 +61,7 @@ function Mesh(){
         for(let i = 0; i < this.points.length; i++){
             this.directions.push(normalize(randomVector()));
             this.velocity.push([0, 0]);
-            this.radiuses.push(Math.random()*200);
+            this.radiuses.push(Math.random()*50);
         }
     }
 }
@@ -74,7 +74,7 @@ function switchBg(){
     }else{
         clearInterval(window.updateInterval);
     }
-    bgSwitch();
+    initialSwitch();
 }
 
 function resize(){
@@ -119,7 +119,6 @@ function init()
     }
 
     if(going){
-        console.log("interval");
         window.updateInterval = setInterval(update, 1000/10);
     }
 }
