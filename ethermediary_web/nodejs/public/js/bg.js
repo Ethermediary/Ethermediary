@@ -1,4 +1,5 @@
 var interval = null;
+var width, height;
 var going = localStorage.getItem("ethermediary-bg") == "true";
 if(going == null){
     going = true;
@@ -59,7 +60,7 @@ function Mesh(){
         this.directions = [];
         this.velocity = [];
         for(let i = 0; i < this.points.length; i++){
-            this.directions.push(normalize(randomVector()));
+            this.directions.push(Vector.random());
             this.velocity.push([0, 0]);
             this.radiuses.push(Math.random()*50);
         }
@@ -108,8 +109,10 @@ function init()
         svgbg.removeChild(svgbg.firstChild);
     }
 
-    svgbg.setAttribute("width", window.outerWidth);
-    svgbg.setAttribute("height", window.outerHeight);
+    width = window.innerWidth;
+    height = window.innerHeight;
+    svgbg.setAttribute("width", width);
+    svgbg.setAttribute("height", height);
 
     window.mesh = populateMesh();
 
@@ -127,14 +130,14 @@ function update(){
     for(var i = 0; i < mesh.points.length; i++){
         var point = mesh.points[i];
         var home = mesh.homePoints[i];
-        var distance = distanceSquared(point, home);
+        var distance = Vector.distanceSquared(point, home);
 
         if(distance > mesh.radiuses[i]){
-            var randomPoint = normalize(randomVector());
+            var randomPoint = Vector.random();
             //randomPoint = mesh.homePoint[i] + randomPoint;
-            randomPoint = addVectors(randomPoint, mesh.homePoints[i]);
+            randomPoint = Vector.add(randomPoint, mesh.homePoints[i]);
             //normalize(randomPoint - point);
-            var vector = normalize(substractVectors(randomPoint, point));
+            var vector = Vector.normalize(Vector.substract(randomPoint, point));
             mesh.directions[i] = vector;
         }
 
@@ -143,10 +146,10 @@ function update(){
         vel[0] += vect[0]*(1/30.0);
         vel[1] += vect[1]*(1/30.0);
 
-        var velLength = vectorLength(vel);
+        var velLength = Vector.length(vel);
         if(velLength > 10){
             velLength = Math.sqrt(velLength);
-            multiplyVector(vel, 1.0/velLength);
+            Vector.multiply(vel, 1.0/velLength);
         }
 
         point[0] += vel[0];
@@ -159,49 +162,54 @@ function update(){
     //     requestAnimationFrame(update);
 }
 
-function normalize(v){
-    let length = Math.sqrt(v[0]*v[0] + v[1]*v[1]);
-    v[0] /= length;
-    v[1] /= length;
-    return v;
-}
+var Vector = (function(){
+    return {
+        normalize: function(v){
+            let length = Math.sqrt(v[0]*v[0] + v[1]*v[1]);
+            v[0] /= length;
+            v[1] /= length;
+            return v;
+        },
 
-function distanceSquared(p1, p2){
-    var diff = [p2[0] - p1[0], p2[1] - p1[1]];
-    return diff[0]*diff[0] + diff[1]*diff[1];
-}
+        distanceSquared: function(p1, p2){
+            var diff = [p2[0] - p1[0], p2[1] - p1[1]];
+            return diff[0]*diff[0] + diff[1]*diff[1];
+        },
 
-function vectorLength(v){
-    return v[0]*v[0] + v[1]*v[1];
-}
+        length: function(v){
+            return v[0]*v[0] + v[1]*v[1];
+        },
 
-function multiplyVector(v, val){
-    v[0] *= val;
-    v[1] *= val;
-}
+        multiply: function(v, val){
+            v[0] *= val;
+            v[1] *= val;
+        },
 
-function addVectors(v1, v2){
-    v1[0] = v1[0] + v2[0];
-    v1[1] = v1[1] + v2[1];
-    return v1;
-}
+        add: function(v1, v2){
+            v1[0] = v1[0] + v2[0];
+            v1[1] = v1[1] + v2[1];
+            return v1;
+        },
 
-function substractVectors(v1, v2) {
-    return [v1[0] - v2[0], v1[1] - v2[1]];
-}
+        substract: function(v1, v2) {
+            return [v1[0] - v2[0], v1[1] - v2[1]];
+        },
+
+        random: function(){
+            return Vector.normalize([Math.random(), Math.random()]);
+        }
+    };
+})();
+
 
 function getRandomColor(){
     return lerpColor("#252c65", "#4ec3d2", Math.random());
 }
 
 function getRandomPoint(){
-    let x = (Math.random()-0.1) * (window.outerWidth*1.2);
-    let y = (Math.random()-0.1) * (window.outerHeight*1.2);
+    let x = (Math.random()-0.1) * (width*1.2);
+    let y = (Math.random()-0.1) * (height*1.2);
     return [x, y];
-}
-
-function randomVector(){
-    return [Math.random(), Math.random()];
 }
 
 function lerpColor(a, b, amount) {

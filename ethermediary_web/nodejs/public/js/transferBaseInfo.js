@@ -4,12 +4,10 @@ var noMetamaskNeeded = ['terms', 'howitworks'];
 var dealData = {};
 
 function onClick(content){
-    console.log(content)
     if (!hasMetamask() && noMetamaskNeeded.indexOf(content) == -1) {
         sendPost('needMeta');
         return;
     }
-    console.log(pageToValidate.indexOf(content));
     if(pageToValidate.indexOf(content) == -1){
         requestPage(content);
         return;

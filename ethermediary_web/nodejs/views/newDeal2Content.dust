@@ -63,7 +63,7 @@
 				</a>
 			</div>
 
-			<input type="text" style="width: 352px;" placeholder="Buyer public address" name="buyer_address" value="{req.body.buyer_address}"/>
+			<input type="text" style="width: 352px;" placeholder="Buyer public address" name="buyer_address"/>
 			<a>Copy and paste is the way to go &nbsp;= ]</a></br></br>
 
 			<div class="alert" style="display:none" id="alert-buyer_email-disp">
@@ -74,7 +74,7 @@
 				</a>
 			</div>
 
-			<input type="text" style="width: 352px;" placeholder="Buyer's email" name="buyer_email" value="{req.body.buyer_email}"/>
+			<input type="text" style="width: 352px;" placeholder="Buyer's email" name="buyer_email"/>
 			<a>Email of the Buyer</a></br></br>
 
 			<div class="alert" style="display:none" id="alert-seller_address-disp">
@@ -85,7 +85,7 @@
 				</a>
 			</div>
 
-			<input type="text" style="width: 352px;" placeholder="Seller public address" name="seller_address" value="{req.body.seller_address}"/>
+			<input type="text" style="width: 352px;" placeholder="Seller public address" name="seller_address"/>
 			<a>This is where the contract will send your paiement</a></br></br>
 
 			<div class="alert" style="display:none" id="alert-seller_email-disp">
@@ -96,7 +96,7 @@
 				</a>
 			</div>
 
-			<input type="text" style="width: 352px;" placeholder="Seller's email" name="seller_email" value="{req.body.seller_email}"/>
+			<input type="text" style="width: 352px;" placeholder="Seller's email" name="seller_email"/>
 			<a>Email of the Seller</a></br></br></br>
 
 			<div id="get_deal_color" onmouseover="blob('get_deal_color')" style="width:375px;">
