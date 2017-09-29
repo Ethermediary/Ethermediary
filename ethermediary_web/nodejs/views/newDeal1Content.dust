@@ -40,7 +40,7 @@
 			</a>
 		</div>
 
-		<input type="text" placeholder="Object or service associated" name="meta" value="{req.body.meta}"/>
+		<input type="text" placeholder="Object or service associated" name="meta"/>
 		<a>The object or service associated with the Deal</a></br></br>
 
 		<div class="alert" style="display: none" id="alert-amount-disp">
@@ -51,7 +51,7 @@
 			</a>
 		</div>
 
-		<input type="text" placeholder="Amount of tokens" name="amount" value="{req.body.amount}"/>
+		<input type="text" placeholder="Amount of tokens" name="amount"/>
 		<a>The contract will be waiting for this amount coming from your public adress</a></br></br></br>
 
 		<div id="get_deal_color" onmouseover="blob('get_deal_color')" style="width:275px;">
