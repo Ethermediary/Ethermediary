@@ -1,0 +1,20 @@
+Dear {person},
+
+The transaction has been accepted. Here are the related informations:
+
+Object or service : {meta}
+Amount of ETH : {amount}
+Caution amount : {caution}
+Public address of the Buyer : {buyer_address}
+Public address of the Seller : {seller_address}
+Remaining days before frozing : {frozen_time} (What is it ?)
+
+The funds are secured onto the Ethermediary smart contract.
+{@isSeller}Please send the specified object or service to the Buyer.{/isSeller}
+{@isBuyer}If you received the object or service, please follow this link.{/isBuyer}
+
+You can also make a cancelation request if needed.
+
+Regards,
+
+The Ethermediary team

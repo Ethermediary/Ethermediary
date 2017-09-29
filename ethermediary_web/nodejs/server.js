@@ -12,6 +12,7 @@ const expressValidator = require('express-validator');
 //io = require('socket.io')(server);
 const formular = require('./formular.js');
 const mailer = require("./mailer.js");
+const monitor = require('./monitor.js');
 
 
 app.use(function(req, res, next){
@@ -50,6 +51,12 @@ app.enable('trust proxy');
 /*app.get('/:page', function(req, res) {
   res.render(req.params.page);
 });*/
+
+app.use(monitor);
+
+//Load the local logfile and happend to it, else create a new one
+var logfile = {};
+logload()
 
 app.use(formular);
 
