@@ -83,7 +83,10 @@ body{
   height: 50px;
 }
 
-.note {font-size: 20px;}
+.note {
+  font-size: 20px;
+  line-height: 130%;
+}
 
 .mininote {
 font-size: 15px;
@@ -113,7 +116,12 @@ font-size: 15px;
 }
 
 .clear{
-  font-family: cursive;
+  position: absolute;
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  letter-spacing: 3px;
+  left: 350px;
+  margin-top: -3px;
 }
 
 a.info{

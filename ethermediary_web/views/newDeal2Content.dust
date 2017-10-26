@@ -6,11 +6,11 @@
 				{
 					"funcName":"len",
 					"args":42,
-					"msg":"Error: The address should be made of 42 characters"
+					"msg":"Error : The address should be made of 42 characters"
 				},
 				{
 					"funcName":"isAlphanumeric",
-					"msg":"Error: The address should be made of alphanumeric characters"
+					"msg":"Error : The address should be made of alphanumeric characters"
 				}
 			]
 		},
@@ -19,7 +19,7 @@
 			"checks":[
 				{
 					"funcName":"isEmail",
-					"msg":"Error: Please enter a valid email for the Buyer"
+					"msg":"Error : Please enter a valid email for the Buyer"
 				}
 			]
 		},
@@ -29,11 +29,11 @@
 				{
 					"funcName":"len",
 					"args":42,
-					"msg":"Error: The address should be made of 42 characters"
+					"msg":"Error : The address should be made of 42 characters"
 				},
 				{
 					"funcName":"isAlphanumeric",
-					"msg":"Error: The address should be made of alphanumeric characters"
+					"msg":"Error : The address should be made of alphanumeric characters"
 				}
 			]
 		},
@@ -42,7 +42,7 @@
 			"checks":[
 				{
 					"funcName":"isEmail",
-					"msg":"Error: Please enter a valid email for the Seller"
+					"msg":"Error : Please enter a valid email for the Seller"
 				}
 			]
 		}

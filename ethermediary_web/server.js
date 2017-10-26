@@ -39,7 +39,7 @@ app.enable('trust proxy');
 //contractInteraction.startWatchingContract();
 
 // var interval = setInterval(function(){
-//   mailer.sendMail("plenituz@gmail.com", "petit pd des bois", "salut sdfsdf petit pd des bois"+i);
+//   mailer.sendMail("ethermediary@gmx.com", "YO. This is Ethermediary", "This is a test from the Ethermediary smart contract, test n°"+i);
 //   i++;
 //   if(i > 49)
 //     clearInterval(interval);

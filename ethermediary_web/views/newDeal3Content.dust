@@ -11,9 +11,9 @@
 	<a>Seller public address : <strong><span class="clear" id="populate-seller_address"></span></strong></a></br>
 	<a>Seller email address : <strong><span class="clear" id="populate-seller_email"></span></strong></a></br></br>
 
-	<a>These information are not correct ?</br> Go back to the&nbsp;
+	<a>These informations are not correct ?</br> Go back to the&nbsp;
 	<a style="text-decoration: underline; cursor: pointer;" onclick="onClick('newDeal1Content');">
-		<strong>previous fields</strong></a>.</a></br></br></br>
+		<strong>previous fields</strong></a></a></br></br></br>
 
 	<form id="mForm" style="text-align: center;">
 			<div id="get_deal_color" onmouseover="blob('get_deal_color')" style="width:375px; display: inline-block; margin-left:15px;">

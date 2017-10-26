@@ -10,7 +10,7 @@ var transporter = nodemailer.createTransport({
     debug:true,
     auth: {
         user: 'ethermediary@gmx.com',
-        pass: 'broforce98'
+        //pass: ''  //Password is needed here
     }
 },
 {
@@ -25,7 +25,7 @@ module.exports = {
             text: text,
           //  html: '<p>HTML version of the message</p>'
         };
-        
+
         console.log('Sending Mail');
         transporter.sendMail(message, (error, info) => {
             if (error) {
