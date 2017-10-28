@@ -47,7 +47,7 @@ router.post("/myDeal", function(req, res){
             }
         })
         .then(function(){
-            console.log("etting deal info")
+            console.log("getting deal info")
             return ethermediary.getDealInfo(req.body.deal_id);
         })
         .then(function(info){
@@ -77,7 +77,7 @@ router.post("/myDeal", function(req, res){
 });
 
 var allowedPosts = ['simulation', 'terms', 'howitworks', 'needMeta', 'dealNotFound',
-    'newDeal1Content', 'newDeal2Content', 'newDeal3Content', 
+    'newDeal1Content', 'newDeal2Content', 'newDeal3Content',
     'getDeal', 'loading', 'newDealDone', 'index'];
 router.post("/:page", function(req, res, next){
     if(allowedPosts.indexOf(req.params.page) == -1){
