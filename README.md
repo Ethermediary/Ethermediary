@@ -2,7 +2,7 @@
 
 Ethereum based smart contract acting as a neutral third party for object/service transaction against crypto. Access through custom API or online through @MetaMask
 
-
+![alt text](https://raw.githubusercontent.com/Ethermediary/Ethermediary/master/infos/ethermediary_readme.png)
 
 ## Setup
 
