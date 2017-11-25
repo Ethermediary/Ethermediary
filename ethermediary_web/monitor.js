@@ -42,7 +42,7 @@ function logload(){
 function logwrite(){
   console.log('Writing monitoring file ...')
 
-  var file = 'data.json';
+  var file = 'monitoring.json';
   var obj = {name: 'JP'};
 
   jsonfile.writeFile(file, obj, {flag: 'a'}, function (err) {

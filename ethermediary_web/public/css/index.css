@@ -169,6 +169,22 @@ a.info:hover span:after{ /*the span will display just on :hover state*/
   transform:rotate(45deg);
 }
 
+#loading{
+  position: relative;
+  margin: auto;
+  width: 200px;
+  height: 100px;
+  text-align: center;
+}
+
+.square{
+  position:absolute;
+  width: 50px;
+  height: 50px;
+  left: 85px;
+  background-color: #112266;
+}
+
 #start{
   position: relative;
   width: 280px;

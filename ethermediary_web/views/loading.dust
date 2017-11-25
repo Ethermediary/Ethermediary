@@ -1,1 +1,13 @@
-<p>Loading...<p>
+
+</br></br>
+<div id="definition" style="margin-top: 0px; margin-bottom: 20px;">
+	<a><strong>Waiting for the Ethermediary smart contract to respond ... </strong></a>
+</div>
+<div id="loading">
+    <div class="b1 square" style="width: 1px; height: 1px; top: 24px; left: 109px;"></div>
+    <div class="b2 square" style="top: 180px;"></div>
+    <div class="b3 square" style="top: 240px;"></div>
+    <div class="b4 square" style="top: 300px; z-index: 5;"></div>
+</div>
+
+<script>loading();</script>

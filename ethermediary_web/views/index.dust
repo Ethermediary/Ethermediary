@@ -3,8 +3,8 @@
 <div id="state" data-state="index"></div>
 
 		<div id="definition" style="margin-bottom: 90px;">
-			<a><strong>Ethermediary</strong> is an Ethereum based <strong>smart contract</strong>.</br>It allows you to <strong>safely trade</strong> objects and services for money on the internet.
-				&nbsp;You can use <strong>Ether</strong> or any other <strong>ERC20 tokens</strong>.</br></br>
+			<a><strong>Ethermediary</strong> is an Ethereum based <strong>smart contract</strong>.</br>It allows you to <strong>safely trade</strong> objects and services for <strong>Ether</strong>.
+				</br></br>
 				The <strong>Ethermediary</strong> smart contract acts as a <strong>safe and trustless</br>third party</strong> which garanties the seller to be paid, and the buyer&nbsp;
 				to receive the object or service.
 			</a>
