@@ -1,0 +1,82 @@
+// email template index & timeline
+// This timeline is oriented toward the email event and not the transactions.
+
+- newDeal.dust
+- acceptedDeal.dust
+- rejectedDeal.dust
+- successDeal.dust
+- cancelRequestDeal.dust
+- cancelRefusedDeal.dust
+- cancelSuccessDeal.dust
+- revivalDeal.dust
+- frozenDeal.dust
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Phase 1 /////////////////////////////////////////////////////////////////////
+
+The seller make a deal offer to the seller via the web interface
+=> The Seller receive the "newDeal.dust" email asking him to respond
+
+////////////////////////////////////////////////////////////////////////////////
+// Phase 2 /////////////////////////////////////////////////////////////////////
+
+If the Seller respond positively to the offer:
+=> The Buyer receive the "acceptedDeal.dust" email. It contains a review of the
+deal informations, a cancelation request url, and a received url that he should
+click once the object/service is received.
+=> The Seller receive the "acceptedDeal.dust" email. It contains a review of the
+deal informations as well as a cancelation request url. The seller should know
+send the object/service.
+
+If the Seller respond negatively to the offer:
+=> The Buyer receive the "rejectedDeal.dust" email. It contains a review of the
+deal informations and certify that the deal is effectively canceled.
+=> The Buyer receive the "rejectedDeal.dust" email. It contains a review of the
+deal informations and certify that the deal is effectively canceled.
+End of the story
+
+////////////////////////////////////////////////////////////////////////////////
+// Phase 2 /////////////////////////////////////////////////////////////////////
+
+If the Buyer receive the object. He clicks on the received link in the last email,
+or directly access the web deal interface to click the received button.
+=> The Buyer receive the "successDeal.dust" email. It contains a review of the
+deal informations and certify that the deal is effectively successfull.
+=> The Seller receive the "successDeal.dust" email. It contains a review of the
+deal informations and certify that the deal is effectively successfull.
+
+If the Buyer do not receive the object, the deal remains active. One month before
+the "ice age" of the deal (365 days), before all the funds could be retrieved:
+=> The Buyer/Seller receive the "revivalDeal.dust" email. It contains a review of the
+deal informations and inform the Buyer/Seller that the deal will soon be frozen. The
+Buyer/Seller is invited to make a cancelation request to the other one via a cancelation
+request url.
+
+    If the Buyer/Seller make a cancelation request before the end of the deal:
+    => The Seller/Buyer receive the "cancelRequestDeal.dust" email, It contains a
+    review of the deal informations and inform the Seller/Buyer that the other one
+    made a cancelation request. The Seller/Buyer is invited to respond via a link
+    to the web interface. It is reminded that, if the deal is not successfull or
+    canceled, the funds will remain frozen and will never be retrivable to both of them.
+
+    if the Seller/buyer accept to cancel the deal.
+    => They both receive the "cancelSuccess.dust". It contains a review of the deal
+    informations and inform the Seller/Buyer that the deal has been successfully
+    canceled. Everybody get refunded and get his money back.
+
+    If the Buyer/Seller refuse the cancelation request before the end of the deal:
+    => The Seller/Buyer receive the "cancelRefusedDeal.dust" email, It contains a
+    review of the deal informations and inform the Seller/Buyer that the other one
+    refused the cancelation request. A cancelation request link is still provided.
+    It is reminded that, if the deal is not successfull or canceled, the funds will
+    remain frozen and will never be retrivable to both of them.
+
+If 365 days ellapsed, and the deal is neither successfull nor canceled:
+=> The Seller/buyer receive the "frozenDeal.dust" email. It contains a review of
+the deal informations and inform the Seller/Buyer that the deal is now frozen and
+that the funds could not be retreived, ever.
+!!! This is not supposed to append ! It is actually here to motivate the seller
+and the buyer to finalized the deal and to make cheating a non profitable behavior !!!
+It is therefore better to cancel the deal, for both of them, rather than waiting for
+something until the end of the deal.

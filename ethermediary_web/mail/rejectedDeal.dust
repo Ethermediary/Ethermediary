@@ -1,0 +1,18 @@
+Dear {person},{~n}{~n}
+
+{?isBuyer}The deal has been rejected by the Seller.{/isBuyer}
+{?isSeller}You rejected a deal from a Buyer.{/isSeller}
+Here are the related informations:{~n}{~n}
+
+Object or service : {meta}{~n}
+Amount : {amount} ETH{~n}
+Caution amount : {caution} ETH{~n}
+Public address of the Buyer : {buyer_address}{~n}
+Public address of the Seller : {seller_address}{~n}
+Remaining days before frozing : {frozen_time} {~n}{~n}
+
+{?isBuyer}You will get your paiement and caution back.{~n}{~n}{/isBuyer}{~n}{~n}
+
+Regards,{~n}{~n}
+
+The Ethermediary team{~n}
