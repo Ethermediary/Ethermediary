@@ -1,0 +1,31 @@
+Dear {person},{~n}{~n}
+
+{?isSeller}
+  {?BuyerAskCancel}
+    The Buyer propose you to cancel the deal. Do you accept ?{~n}{url}{~n}
+  {/BuyerAskCancel}
+  {?SellerAskCancel}
+    Your proposition to cancel the deal has been send to the Buyer. Waiting for his reply.{~n}
+  {/SellerAskCancel}
+{/isSeller}
+
+{?isBuyer}
+  {?BuyerAskCancel}
+    Your proposition to cancel the deal has been send to the Seller. Waiting for his reply.{~n}
+  {/BuyerAskCancel}
+  {?SellerAskCancel}
+    The Seller propose you to cancel the deal. Do you accept ?{~n}{url}{~n}
+  {/SellerAskCancel}
+{/isBuyer}
+Here are the related informations:{~n}{~n}
+
+Object or service : {meta}{~n}
+Amount : {amount} ETH{~n}
+Caution amount : {caution} ETH{~n}
+Public address of the Buyer : {buyer_address}{~n}
+Public address of the Seller : {seller_address}{~n}
+Remaining days before frozing : {frozen_time} {~n}{~n}
+
+Regards,{~n}{~n}
+
+The Ethermediary team{~n}

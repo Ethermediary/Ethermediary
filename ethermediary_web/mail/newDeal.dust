@@ -1,15 +1,14 @@
-Dear Seller,
+Dear Seller,{~n}{~n}
 
-A Buyer would like to propose you a new transaction. Here are the related informations:
+A Buyer would like to propose you a new transaction. Here are the related informations:{~n}{~n}
 
-Object or service : {meta}
-Amount of ETH : {amount}
-Public address of the Buyer : {buyer_address}
+Object or service : {meta}{~n}
+Amount : {amount} ETH{~n}
+Public address of the Buyer : {buyer_address}{~n}{~n}
 
-To respond to this transaction request, please follow this link:
+To respond to this transaction request, please follow this link:{~n}
+{accept_deal}{~n}{~n}
 
-{myID}
+Regards,{~n}{~n}
 
-Regards,
-
-The Ethermediary team
+The Ethermediary team{~n}

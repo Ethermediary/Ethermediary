@@ -1,0 +1,31 @@
+Dear {person},{~n}{~n}
+
+{?isSeller}
+  {?BuyerAskCancel}
+    You refused to cancel de deal which will therefore continue.{~n}
+  {/BuyerAskCancel}
+  {?SellerAskCancel}
+    Your proposition to cancel the deal has been refused by the Buyer. The deal continue.{~n}
+  {/SellerAskCancel}
+{/isSeller}
+
+{?isBuyer}
+  {?BuyerAskCancel}
+    Your proposition to cancel the deal has been refused by the Seller. The deal continue.{~n}
+  {/BuyerAskCancel}
+  {?SellerAskCancel}
+    You refused to cancel de deal which will therefore continue.{~n}
+  {/SellerAskCancel}
+{/isBuyer}
+Here are the related informations:{~n}{~n}
+
+Object or service : {meta}{~n}
+Amount : {amount} ETH{~n}
+Caution amount : {caution} ETH{~n}
+Public address of the Buyer : {buyer_address}{~n}
+Public address of the Seller : {seller_address}{~n}
+Remaining days before frozing : {frozen_time} {~n}{~n}
+
+Regards,{~n}{~n}
+
+The Ethermediary team{~n}

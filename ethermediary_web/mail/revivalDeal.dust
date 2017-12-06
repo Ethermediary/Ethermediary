@@ -1,0 +1,23 @@
+Dear {person},{~n}{~n}
+
+One month remain before the end of a deal that your are engaged with. If the Buyer do not
+validate that he received the object/service, or if you do not mutually cancel the
+deal before the frozen date ({frozen_time}), you will never be able to retrieve the
+funds secured on the smart contract and we will not be able to do anything about it.
+We therefore strongly advise you to finish or cancel the deal. Here is a link for you to make
+a cancelation request:{~n}{url}{~n}
+
+{?isBuyer}If you received the object/service, click here:{~n}{received}{~n}{~n}{/isBuyer}
+
+Here are the related informations:{~n}{~n}
+
+Object or service : {meta}{~n}
+Amount : {amount} ETH{~n}
+Caution amount : {caution} ETH{~n}
+Public address of the Buyer : {buyer_address}{~n}
+Public address of the Seller : {seller_address}{~n}
+Remaining days before frozing : {frozen_time} {~n}{~n}
+
+Regards,{~n}{~n}
+
+The Ethermediary team{~n}

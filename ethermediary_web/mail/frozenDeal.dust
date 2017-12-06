@@ -1,0 +1,21 @@
+Dear {person},{~n}{~n}
+
+You did not successfully completed or canceled a deal that you where engaged with.
+Unfornatunately, the frozen date was reached and you will not be able to retrieve the
+funds secured on the Ethermediary smart contract. Please note that we can do nothing
+about it. We are sorry that you were unable to find a mutual solution. This special
+case is not supposed to append and is actually here to motivate the successfull
+completion of a deal and to make cheating a non profitable behavior.{~n}{~n}
+
+Here are the related informations:{~n}{~n}
+
+Object or service : {meta}{~n}
+Amount : {amount} ETH{~n}
+Caution amount : {caution} ETH{~n}
+Public address of the Buyer : {buyer_address}{~n}
+Public address of the Seller : {seller_address}{~n}
+Remaining days before frozing : {frozen_time} {~n}{~n}
+
+Regards,{~n}{~n}
+
+The Ethermediary team{~n}
