@@ -14,7 +14,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "animejs": "^2.0.2",
     "body-parser": "^1.17.2",
     "cookie-parser": "^1.4.3",
     "dust": "^0.3.0",
@@ -24,8 +23,8 @@
     "hoffman": "^0.2.2",
     "ip": "^1.1.5",
     "jsonfile": "^4.0.0",
-    "nodemailer": "^4.1.0",
     "q": "^1.5.0",
+    "sendmail": "^1.2.0",
     "serve-favicon": "^2.4.3",
     "validator": "^8.1.0",
     "web3": "^0.20.1"
