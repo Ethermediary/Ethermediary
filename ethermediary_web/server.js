@@ -7,10 +7,12 @@ const hoffman = require('hoffman')
 const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
 const schedule = require('node-schedule')
+const ip = require('ip')
+const monitor = require('./monitor.js');
+
 
 // So we can use these variables in the whole app
 global.json2add = {"nb_index_load":0,"nb_new_deal":0,"nb_deal_created":0,"nb_get_deal":0,"nb_how_it_works":0,"nb_terms_of_use":0,"nb_donation":0}
-const monitor = require('./monitor.js');
 monitor();
 
 const formular = require('./formular.js');
@@ -52,15 +54,14 @@ app.get('/', function (req, res) {
   res.render('skeleton.dust', {req : req});
 })
 
-var ip = require('ip')
-var ipadress = ip.address()
+var ipadress = ip.address();
 var ser = app.listen(3000, "127.0.0.1",
-    function () {
-}) // run everyday at midnight (NOT TESTED)
+    () => {
+      console.log("==========================================================")
+      console.log("Server running from " + ipadress + " on port " + "3000")
+      console.log("==========================================================")
+    }) 
+
+schedule.scheduleJob('0 0 * * *', () => {
   monitor()
-schedule.scheduleJob('0 0 * * *', () => function(){
-        console.log(" ")
-        console.log("==========================================================")
-        console.log("Server running from " + ipadress + " on port " + "3000")
-        console.log("==========================================================")
-})
+});// run everyday at midnight (NOT TESTED)

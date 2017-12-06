@@ -90,3 +90,20 @@ module.exports = function monitor(req, res){
       })
     }
 };
+
+/*
+module.exports = (function(){
+  function privateFunc(){
+    //do stuff only private members can do 
+  }
+  let privateVar = "private var";
+
+  return {
+    publicVar = "public var",
+
+    publicFunc: function(){
+      //do stuff that can call private functions if necessary
+    }
+  }
+})();
+*/
