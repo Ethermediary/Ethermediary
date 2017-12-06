@@ -31,7 +31,7 @@ function frozenTime(creation_time){
 // This is the page for myDeal
 router.post("/myDeal", function(req, res){
 
-    monitor.json2add.nb_new_deal += 100 // increment global stat variable
+    monitor.json2add.nb_new_deal += 1 // increment stat variable
 
     var dealInfo;
     if(!("dealData" in req.body)){

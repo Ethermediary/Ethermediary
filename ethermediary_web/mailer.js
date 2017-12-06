@@ -50,10 +50,7 @@ function renderTemplate(data, args){  //Promesse du template rendu par dust.js
 
 //var render = renderTemplate(mail_path, mail_profile).then(console.log).catch(console.log);
 
-
-
 const sendmail = require('sendmail')({silent:false});
-const Q = require('q');
 
 module.exports = {
     sendMail: function(to, subject, text){

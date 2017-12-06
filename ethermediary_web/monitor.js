@@ -19,13 +19,11 @@ class Monitor{
 
   logload () { /////////////////////////////////////////////////////////////////
     console.log('Loading monitoring file ...')
-    //Today date exist ? if yes load variables and create related objects
-    //var todayDate = Math.floor(Date.now()/ 86400000); // current number of days since 01/01/70
+
     var today = new Date()
     var todayDate = today.getUTCDate() + "-" + (today.getMonth()+1) + "-" + today.getFullYear()
     var todayFile = this.logPath + "/" + todayDate + ".json"
 
-    // file exist ? if not create
     if (fs.existsSync(todayFile)) {
       console.log("Log file with current date, loading log of the day ...")
       var logFile = JSON.parse(fs.readFileSync(todayFile).toString())
@@ -45,10 +43,8 @@ class Monitor{
   // Write log and exit if 1 passed as parameter
   logwrite (exit=0) {  /////////////////////////////////////////////////////////
     process.stdin.resume()
-    //var tempsJour = Math.floor(Date.now()/ 86400000); // current number of days since 01/01/70
     var today = new Date()
     var todayDate = today.getUTCDate() + "-" + (today.getMonth()+1) + "-" + today.getFullYear()
-    //logPath = path.join(__dirname) + "/log"
 
     console.log('\nHalt requested. Writing log.json file for ' + todayDate + ". Content is :")
     var todayFile = this.logPath + "/" + todayDate + ".json"

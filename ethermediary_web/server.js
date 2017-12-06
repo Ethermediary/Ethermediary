@@ -8,7 +8,6 @@ const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
 const schedule = require('node-schedule')
 const ip = require('ip')
-const monitor = require('./monitor.js');
 
 const monitor = require('./monitor.js')
 monitor.logload();
@@ -45,7 +44,6 @@ app.enable('trust proxy');
 //   console.log("err:", err);
 // })
 
-
 app.use(formular);
 
 app.get('/', function (req, res) {
@@ -58,8 +56,7 @@ var ser = app.listen(3000, "127.0.0.1",
       console.log("==========================================================")
       console.log("Server running from " + ipadress + " on port " + "3000")
       console.log("==========================================================")
-    }) 
-
+    })
 
 schedule.scheduleJob('0 0 * * *', () => {
   monitor.logwrite
