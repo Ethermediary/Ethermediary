@@ -40,9 +40,9 @@ app.get('/', function (req, res) {
 monitor.loadLog();
 monitor.startScheduledSaving();
 
-var ser = app.listen(2500, "127.0.0.1",
+var ser = app.listen(3000, "127.0.0.1",
     () => {
       console.log("==========================================================")
-      console.log("Server running from " + ip.address() + " on port 2500")
+      console.log("Server running from " + ip.address() + " on port 3000")
       console.log("==========================================================")
     })
