@@ -8,20 +8,17 @@ const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
 const schedule = require('node-schedule')
 const ip = require('ip')
-const monitor = require('./monitor.js');
 
+const monitor = require('./monitor.js')
+monitor.logload();
 
-// So we can use these variables in the whole app
-global.json2add = {"nb_index_load":0,"nb_new_deal":0,"nb_deal_created":0,"nb_get_deal":0,"nb_how_it_works":0,"nb_terms_of_use":0,"nb_donation":0}
-monitor();
-
-const formular = require('./formular.js');
-const mailer = require("./mailer.js");
+const formular = require('./formular.js')
+const mailer = require("./mailer.js")
 
 app.use(function(req, res, next){
-  console.log(req.method + ":" + req.url);
-  next();
-});
+  console.log(req.method + ":" + req.url)
+  next()
+})
 
 // Set path ...
 app.use(bodyParser.json());
@@ -47,7 +44,6 @@ app.enable('trust proxy');
 //   console.log("err:", err);
 // })
 
-
 app.use(formular);
 
 app.get('/', function (req, res) {
@@ -60,8 +56,28 @@ var ser = app.listen(3000, "127.0.0.1",
       console.log("==========================================================")
       console.log("Server running from " + ipadress + " on port " + "3000")
       console.log("==========================================================")
-    }) 
+    })
 
 schedule.scheduleJob('0 0 * * *', () => {
-  monitor()
-});// run everyday at midnight (NOT TESTED)
+  monitor.logwrite
+}) // run everyday at midnight (NOT TESTED)
+
+// catch ctrl+c event, call logwrite(1) function before quitting
+process.on('SIGINT', function () {
+  monitor.logwrite(1)
+})
+
+//catch uncaught exceptions, call logwrite function before quitting
+/*process.on('uncaughtException', function(e) {
+  process.stdin.resume();
+  logwrite(todayDate, todayLog)
+})
+
+Event management with sockets.io
+io.sockets.on('connection', function (socket) {
+    console.log('Un client est connecté !')
+    socket.on('message', function (message) {
+        console.log('Un client me parle ! Il me dit : ' + message)
+    })
+    socket.broadcast.emit('message', 'Un autre client vient de se connecter !')
+})*/

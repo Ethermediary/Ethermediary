@@ -8,18 +8,19 @@ ethermediary.setWeb3Provider(new Web3.providers.HttpProvider("http://192.168.1.2
 // .then(console.log)
 // .fail(console.log);
 
+const monitor = require('./monitor.js')
+
 module.exports = router;
 
 // test global variable
 /*
-    json2add.nb_index_load += 1
-    json2add.nb_new_deal += 1
-    json2add.nb_deal_created += 1
-    json2add.nb_get_deal += 1                 // OK
-    json2add.nb_how_it_works += 1
-    json2add.nb_terms_of_use += 1
-    json2add.nb_donation += 1
-    console.log(json2add)
+    monitor.json2add.nb_index_load += 1
+    monitor.json2add.nb_new_deal += 1
+    monitor.json2add.nb_deal_created += 1
+    monitor.json2add.nb_get_deal += 1
+    monitor.json2add.nb_how_it_works += 1
+    monitor.json2add.nb_terms_of_use += 1
+    monitor.json2add.nb_donation += 1
 */
 
 function frozenTime(creation_time){
@@ -30,7 +31,7 @@ function frozenTime(creation_time){
 // This is the page for myDeal
 router.post("/myDeal", function(req, res){
 
-    json2add.nb_get_deal += 1 // increment global stat variable
+    monitor.json2add.nb_new_deal += 1 // increment stat variable
 
     var dealInfo;
     if(!("dealData" in req.body)){
