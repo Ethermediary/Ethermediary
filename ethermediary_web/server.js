@@ -6,13 +6,9 @@ const hoffman = require('hoffman');
 //const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
-//const { check, validationResult } = require('express-validator/check');
-//const { matchedData } = require('express-validator/filter');
-//server = require('http').createServer(app);
-//io = require('socket.io')(server);
 const formular = require('./formular.js');
 const mailer = require("./mailer.js");
-// const monitor = require('./monitor.js');
+const ip = require('ip');
 
 
 app.use(function(req, res, next){
@@ -36,27 +32,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view cache', doCache);
 app.enable('trust proxy');
 
-//contractInteraction.startWatchingContract();
+// mailer.sendMail("plenituz@gmail.com", "salut", "Bonjour je suis un bonhomme")
+// .then(rep => {
+//   console.log("rep:", rep);
+// })
+// .catch(err => {
+//   console.log("err:", err);
+// })
 
-// var interval = setInterval(function(){
-//   mailer.sendMail("ethermediary@gmx.com", "YO. This is Ethermediary", "This is a test from the Ethermediary smart contract, test n°"+i);
-//   i++;
-//   if(i > 49)
-//     clearInterval(interval);
-// }, 1000);
-
-////////////////////////////////////////////////////////////////////////////////
-
-// Every page parser
-/*app.get('/:page', function(req, res) {
-  res.render(req.params.page);
-});*/
-
-//app.use(monitor);
-
-//Load the local logfile and happend to it, else create a new one
-// var logfile = {};
-// logload()
 
 app.use(formular);
 
@@ -64,19 +47,8 @@ app.get('/', function (req, res) {
   res.render('skeleton.dust', {req : req});
 });
 
-var ip = require('ip');
 var ipadress = ip.address();
 var ser = app.listen(3000, "127.0.0.1",
     function () {
         console.log("Server running from " + ipadress + " on port " + "3000");
 });
-
-
-// Event management with sockets.io
-//io.sockets.on('connection', function (socket) {
-//    console.log('Un client est connecté !');
-//    socket.on('message', function (message) {
-//        console.log('Un client me parle ! Il me dit : ' + message);
-//    });
-//    socket.broadcast.emit('message', 'Un autre client vient de se connecter !');
-//});

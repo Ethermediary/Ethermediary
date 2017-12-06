@@ -1,41 +1,24 @@
-const nodemailer = require('nodemailer');
-
-var transporter = nodemailer.createTransport({
-    host: 'mail.gmx.com',
-    port: 587,
-    tls: {
-        ciphers:'SSLv3',
-       // rejectUnauthorized: false
-    },
-    debug:true,
-    auth: {
-        user: 'ethermediary@gmx.com',
-        //pass: ''  //Password is needed here
-    }
-},
-{
-    from: "Ethermediary <ethermediary@gmx.com>"
-});
+const sendmail = require('sendmail')({silent:false});
+const Q = require('q');
 
 module.exports = {
     sendMail: function(to, subject, text){
-        var message = {
-            to: to,
-            subject: subject,
-            text: text,
-          //  html: '<p>HTML version of the message</p>'
-        };
+        let defer = Q.defer();
 
-        console.log('Sending Mail');
-        transporter.sendMail(message, (error, info) => {
-            if (error) {
-                console.log('Error occurred');
-                console.log(error.message);
-                return;
-            }
-            console.log('Message sent successfully!');
-            console.log('Server responded with "%s"', info.response);
-            console.log(info);
+        sendmail({
+            from: 'bot@ethermediary.com',
+            to: to,
+            replyTo: 'bot@ethermediary.com',
+            subject: subject,
+            text: text
+        },
+        (err, reply) => {
+            if(err)
+                return defer.reject(err);
+            return defer.resolve(reply);
         });
+
+        return defer.promise;
     }
+
 }
