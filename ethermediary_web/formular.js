@@ -10,14 +10,28 @@ ethermediary.setWeb3Provider(new Web3.providers.HttpProvider("http://192.168.1.2
 
 module.exports = router;
 
+// test global variable
+/*
+    json2add.nb_index_load += 1
+    json2add.nb_new_deal += 1
+    json2add.nb_deal_created += 1
+    json2add.nb_get_deal += 1                 // OK
+    json2add.nb_how_it_works += 1
+    json2add.nb_terms_of_use += 1
+    json2add.nb_donation += 1
+    console.log(json2add)
+*/
+
 function frozenTime(creation_time){
   var remaining_time = 42;
   return remaining_time;
 };
 
-
 // This is the page for myDeal
 router.post("/myDeal", function(req, res){
+
+    json2add.nb_get_deal += 1 // increment global stat variable
+
     var dealInfo;
     if(!("dealData" in req.body)){
         res.status(400).send("you should provide the address in deal data");
@@ -79,6 +93,7 @@ router.post("/myDeal", function(req, res){
 var allowedPosts = ['simulation', 'terms', 'howitworks', 'needMeta', 'dealNotFound',
     'newDeal1Content', 'newDeal2Content', 'newDeal3Content',
     'getDeal', 'loading', 'newDealDone', 'index'];
+
 router.post("/:page", function(req, res, next){
     if(allowedPosts.indexOf(req.params.page) == -1){
         return next();

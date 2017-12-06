@@ -32,9 +32,9 @@ mail_profile.received = "https://ethermediary.com/idspecial";
 mail_profile.cancel = "https://ethermediary.com/cancelrequest";
 mail_profile.accept_deal = "https://ethermediary.com/acceptdeal";
 
-console.log(" ");
-console.log(mail_profile);
-console.log(" ");
+//console.log(" ");
+//console.log(mail_profile);
+//console.log(" ");
 
 function renderTemplate(data, args){  //Promesse du template rendu par dust.js
     let defer = Q.defer();
@@ -46,7 +46,9 @@ function renderTemplate(data, args){  //Promesse du template rendu par dust.js
     });
     return defer.promise;
 }
-var render = renderTemplate(mail_path, mail_profile).then(console.log).catch(console.log);
+
+
+//var render = renderTemplate(mail_path, mail_profile).then(console.log).catch(console.log);
 
 
 

@@ -1,56 +1,92 @@
-var jsonfile = require('jsonfile')
+// Read and write statistics about Ethermediary usage
 
-//module.exports = monitor
+const fs = require('fs')
+const path = require('path')
 
-//process.on('cleanup',callback);
+module.exports = function monitor(req, res){
 
-// do app specific cleaning before exiting
-process.on('exit', function () {
- process.stdin.resume();
-  logwrite();
-  process.emit('cleanup');
-})
+    logPath = path.join(__dirname) + "/log";
+    var todayLog = {}
+    var logFile
 
-// catch ctrl+c event and exit normally
-process.on('SIGINT', function () {
-  process.stdin.resume();
-  logwrite();
-  console.log('Ctrl-C...');
-  process.exit(2);
-})
+    ////////////////////////////////////////////////////////////////////////////
+    // All about the behavior when quitting the server /////////////////////////
 
-//catch uncaught exceptions, trace, then exit normallylogwrite()
+    // catch ctrl+c event, call logwrite function before quitting
+    process.on('SIGINT', function () {
+      process.stdin.resume()
+        //var tempsJour = Math.floor(Date.now()/ 86400000); // current number of days since 01/01/70
+        var today = new Date()
+        var todayDate = today.getUTCDate() + "-" + (today.getMonth()+1) + "-" + today.getFullYear()
+        logwrite(todayDate, json2add)
+    })
 
-process.on('uncaughtException', function(e) {
-  process.stdin.resume();
-  logwrite();
-  console.log('Uncaught Exception...');
-  console.log(e.stack);
-  process.exit(99);
-})
+    //catch uncaught exceptions, call logwrite function before quitting
+    /*process.on('uncaughtException', function(e) {
+      process.stdin.resume();
+      //var tempsJour = floor(Date.now()/ 86400000); // current number of days since 01/01/70
+      var today = new Date()
+      var todayDate = today.getUTCDate() + "-" + (today.getMonth()+1) + "-" + today.getFullYear()
+      logwrite(todayDate, todayLog)
+    })*/
 
-function logload(){
-  console.log('Loading monitoring file ...')
-  //File exist ?
-  //If not create
+    ////////////////////////////////////////////////////////////////////////////
+    // I/O log /////////////////////////////////////////////////////////////////
 
-  //Today date exist ?
-  //If yes load variables
-  //And create related objects
-}
+    function logload(){// load the previous log
+      console.log('Loading monitoring file ...')
 
-function logwrite(){
-  console.log('Writing monitoring file ...')
+      //Today date exist ? if yes load variables and create related objects
+      //var todayDate = Math.floor(Date.now()/ 86400000); // current number of days since 01/01/70
+      var today = new Date()
+      var todayDate = today.getUTCDate() + "-" + (today.getMonth()+1) + "-" + today.getFullYear()
+      var todayFile = logPath + "/" + todayDate + ".json"
 
-  var file = 'monitoring.json';
-  var obj = {name: 'JP'};
+      // file exist ? if not create
+      if (fs.existsSync(todayFile)) {
+        console.log("Log file with current date, loading log of the day ...")
+        var logFile = JSON.parse(fs.readFileSync(todayFile).toString())
+        todayLog["nb_index_load"] = logFile.nb_index_load
+        todayLog["nb_new_deal"] = logFile.nb_new_deal
+        todayLog["nb_deal_created"] = logFile.nb_deal_created
+        todayLog["nb_get_deal"] = logFile.nb_get_deal
+        todayLog["nb_how_it_works"] = logFile.nb_how_it_works
+        todayLog["nb_terms_of_use"] = logFile.nb_terms_of_use
+        todayLog["nb_donation"] = logFile.nb_donation
+      }
+      else {
+        console.log("Log file does not exist, creating new one ...")
+        todayLog["nb_index_load"] = 0
+        todayLog["nb_new_deal"] = 0
+        todayLog["nb_deal_created"] = 0
+        todayLog["nb_get_deal"] = 0
+        todayLog["nb_how_it_works"] = 0
+        todayLog["nb_terms_of_use"] = 0
+        todayLog["nb_donation"] = 0
+      }
+      return todayLog
+    }
 
-  jsonfile.writeFile(file, obj, {flag: 'a'}, function (err) {
-    console.error(err)
-    if(err){console.log('Erreur !!!');}
-  });
+    ////////////////////////////////////////////////////////////////////////////
+    json2add = logload()  // load log at launch ///////////////////////////////
 
-  jsonfile.readFile(file, function(err, obj) {
-    console.log(obj)
-  });
-}
+    // todayDate is current date
+    // json2add is json object to append to logfile, if not provided, new file !
+    function logwrite(todayDate, json2add = '{}'){
+      console.log('\nHalt requested. Writing log.json file for ' + todayDate + ". Content is :")
+
+      //var fileName = path.join(__dirname) + "/log/" + todayDate + '.json';
+      var todayFile = logPath + "/" + todayDate + ".json"
+      console.log(json2add)
+
+      fs.unlink(todayFile, function(err){
+        fs.writeFile(todayFile, JSON.stringify(json2add), function(err){
+          console.log(" ")
+          process.exit(2)
+          if(err){
+            console.error(err)
+          }
+        })
+      })
+    }
+};

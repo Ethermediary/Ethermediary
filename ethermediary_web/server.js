@@ -1,19 +1,24 @@
-const express = require('express');
-const app = express();
-const favicon = require('serve-favicon');
-const path = require('path');
-const hoffman = require('hoffman');
+const express = require('express')
+const app = express()
+const favicon = require('serve-favicon')
+const path = require('path')
+const hoffman = require('hoffman')
 //const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const expressValidator = require('express-validator');
+const bodyParser = require('body-parser')
+const expressValidator = require('express-validator')
+const schedule = require('node-schedule')
 //const { check, validationResult } = require('express-validator/check');
 //const { matchedData } = require('express-validator/filter');
 //server = require('http').createServer(app);
 //io = require('socket.io')(server);
+
+// So we can use these variables in the whole app
+global.json2add = {"nb_index_load":0,"nb_new_deal":0,"nb_deal_created":0,"nb_get_deal":0,"nb_how_it_works":0,"nb_terms_of_use":0,"nb_donation":0}
+const monitor = require('./monitor.js');
+monitor();
+
 const formular = require('./formular.js');
 const mailer = require("./mailer.js");
-// const monitor = require('./monitor.js');
-
 
 app.use(function(req, res, next){
   console.log(req.method + ":" + req.url);
@@ -52,24 +57,26 @@ app.enable('trust proxy');
   res.render(req.params.page);
 });*/
 
-//app.use(monitor);
-
-//Load the local logfile and happend to it, else create a new one
-// var logfile = {};
-// logload()
-
 app.use(formular);
 
 app.get('/', function (req, res) {
   res.render('skeleton.dust', {req : req});
-});
+})
 
-var ip = require('ip');
-var ipadress = ip.address();
+var ip = require('ip')
+var ipadress = ip.address()
 var ser = app.listen(3000, "127.0.0.1",
     function () {
-        console.log("Server running from " + ipadress + " on port " + "3000");
-});
+        console.log(" ")
+        console.log("==========================================================")
+        console.log("Server running from " + ipadress + " on port " + "3000")
+        console.log("==========================================================")
+})
+
+
+schedule.scheduleJob('0 0 * * *', () => function(){
+  monitor()
+}) // run everyday at midnight (NOT TESTED)
 
 
 // Event management with sockets.io
