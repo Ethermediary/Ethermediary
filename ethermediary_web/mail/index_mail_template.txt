@@ -76,7 +76,7 @@ If 365 days ellapsed, and the deal is neither successfull nor canceled:
 => The Seller/buyer receive the "frozenDeal.dust" email. It contains a review of
 the deal informations and inform the Seller/Buyer that the deal is now frozen and
 that the funds could not be retreived, ever.
-!!! This is not supposed to append ! It is actually here to motivate the seller
+!!! This is not supposed to happen ! It is actually here to motivate the seller
 and the buyer to finalized the deal and to make cheating a non profitable behavior !!!
 It is therefore better to cancel the deal, for both of them, rather than waiting for
 something until the end of the deal.

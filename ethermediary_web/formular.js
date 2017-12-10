@@ -12,17 +12,6 @@ const monitor = require('./monitor.js')
 
 module.exports = router;
 
-// test global variable
-/*
-    monitor.json2add.nb_index_load += 1
-    monitor.json2add.nb_new_deal += 1
-    monitor.json2add.nb_deal_created += 1
-    monitor.json2add.nb_get_deal += 1
-    monitor.json2add.nb_how_it_works += 1
-    monitor.json2add.nb_terms_of_use += 1
-    monitor.json2add.nb_donation += 1
-*/
-
 function frozenTime(creation_time){
   var remaining_time = 42;
   return remaining_time;
@@ -31,7 +20,7 @@ function frozenTime(creation_time){
 // This is the page for myDeal
 router.post("/myDeal", function(req, res){
 
-    monitor.json2add.nb_new_deal += 1 // increment stat variable
+    monitor.incrementStat("nb_new_deal");
 
     var dealInfo;
     if(!("dealData" in req.body)){
@@ -106,5 +95,7 @@ router.post("/:page", function(req, res, next){
     }catch(e){
         console.log(e);
         next();
+    }finally{
+        monitor.incrementStat(req.params.page);
     }
 });
