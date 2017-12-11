@@ -1,3 +1,5 @@
 node_modules/
 chain/
+log/
 mailCredential.json
+.env

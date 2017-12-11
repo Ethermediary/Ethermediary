@@ -1,11 +1,5 @@
-////////////////////////////////////////////////////////////////////////////////
-// This is a test section for the email rendering
-// A few modification are necessary to link this renderer to the email sender
-
-const dust = require('hoffman').dust
 const path = require('path')
 const Q = require('q')
-const fs = require('fs')
 const nodemailer = require('nodemailer')
 const mailTemplates = require("./mailTemplates.js");
 
@@ -14,14 +8,13 @@ class Mailer{
 
     constructor(){
         // Load mail login/mdp from json in current directory (excluded from git)
-        this.mailCredential = JSON.parse(fs.readFileSync("./mailCredential.json").toString())
         this.transporter = nodemailer.createTransport({
             host: 'SSL0.OVH.NET',
             port: 465,
             secure: true, // true for 465, false for other ports
             auth: {
-                user: this.mailCredential.mail,
-                pass: this.mailCredential.mdp
+                user: process.env.MAIL_LOGIN,
+                pass: process.env.MAIL_MDP
             }
         })
     }
@@ -29,10 +22,8 @@ class Mailer{
     /**
      * Load templates and return a promise
      */
-    loadTemplate(){
-      return new Promise((resolve, reject) => {
-        mailTemplates.cacheTemplates().then(function(){ return resolve() })
-      })
+    loadTemplates(){
+        return mailTemplates.cacheTemplates()
     }
 
     /**
@@ -65,7 +56,6 @@ class Mailer{
             if(err)
                 return defer.reject(err)
             return defer.resolve(info)
-
         })
         return defer.promise
     }
