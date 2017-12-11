@@ -8,7 +8,6 @@ module.exports = {
     cache: {},
 
     cacheTemplates: function(){
-      return new Promise((resolve, reject) => {
         return Q.nfcall(fs.readdir, mailFolder)
         .then(function(files){
             for(let i = 0; i < files.length; i++){
@@ -18,12 +17,7 @@ module.exports = {
                 let template = dust.loadSource(compiled);
                 module.exports.cache[path.parse(files[i]).name] = template;
             }
-        })
-        .then(function(){ return resolve() })
-        .catch(function(err){
-            console.log("error caching mail templates:", err);
         });
-      })
     },
 
     renderTemplate: function(name, args){

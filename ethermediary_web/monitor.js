@@ -65,8 +65,15 @@ class Monitor{
   /** Write log and exit if true passed as parameter */
   writeLog (exit = false) {
     process.stdin.resume()
-    let todayDate = formattedDate()
 
+    //don't save empty objects
+    if(Object.keys(this.json2add).length == 0){
+      if(exit)
+        process.exit()
+      return
+    }
+
+    let todayDate = formattedDate()
     console.log('\nHalt requested. Writing log.json file for ' + todayDate + ". Content is :\n", this.json2add)
     let todayFile = path.join(logPath, todayDate + ".json")
 
