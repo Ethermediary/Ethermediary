@@ -8,6 +8,7 @@ module.exports = {
     cache: {},
 
     cacheTemplates: function(){
+      return new Promise((resolve, reject) => {
         return Q.nfcall(fs.readdir, mailFolder)
         .then(function(files){
             for(let i = 0; i < files.length; i++){
@@ -18,9 +19,11 @@ module.exports = {
                 module.exports.cache[path.parse(files[i]).name] = template;
             }
         })
+        .then(function(){ return resolve() })
         .catch(function(err){
             console.log("error caching mail templates:", err);
         });
+      })
     },
 
     renderTemplate: function(name, args){
@@ -28,13 +31,13 @@ module.exports = {
             throw new Error("mail template " + name + " doesn't exist");
         let defer = Q.defer();
 
-        dust.render(module.exports.cache[name], args, 
+        dust.render(module.exports.cache[name], args,
         function(err, out){
             if(err)
                 return defer.reject(err);
             defer.resolve(out);
         });
 
-        return defer.promise;
+        return defer.promise
     }
 }
