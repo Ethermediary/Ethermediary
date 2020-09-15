@@ -1,6 +1,6 @@
 var pageWithLoading = ['myDeal']
 var pageToValidate = ['newDeal2Content', 'newDeal3Content', 'myDeal'];
-var noMetamaskNeeded = ['index', 'terms', 'howitworks'];
+var noMetamaskNeeded = ['index', 'terms', 'howitworks', 'simulation'];
 var dealData = {};
 
 function onClick(content){
