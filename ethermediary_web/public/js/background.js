@@ -6,6 +6,7 @@ class DelaunayBackground {
     this.colorA = "#252c65";
     this.colorB = "#4ec3d2";
     this.delay = 50; // ms
+    this.nbPoints = 100;
     this.mesh;
 
     this.width = window.innerWidth;
@@ -27,7 +28,7 @@ class DelaunayBackground {
 
   reset() {
     this.mesh = new Mesh(
-      200, // 200 random points
+      this.nbPoints,
       this.width,
       this.height,
       this.colorA,
@@ -144,7 +145,7 @@ class Mesh {
     for (let i = 0; i < this.points.length; i++) {
       this.directions.push(Vector.random());
       this.velocity.push([0, 0]);
-      this.radiuses.push(Math.random() * 50);
+      this.radiuses.push(Math.random() * 1);
     }
 
     this.homePoints = this.points.map((p) => [p[0], p[1]]);
@@ -168,8 +169,8 @@ class Mesh {
 
       var vect = this.directions[i];
       var vel = this.velocity[i];
-      vel[0] += vect[0] * (1 / 30.0);
-      vel[1] += vect[1] * (1 / 30.0);
+      vel[0] += vect[0] * (1 / 60.0);
+      vel[1] += vect[1] * (1 / 60.0);
 
       var velLength = Vector.length(vel);
       if (velLength > 10) {
