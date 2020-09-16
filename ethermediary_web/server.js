@@ -44,7 +44,7 @@ app.get("/", function (req, res) {
   res.render("skeleton.dust", { req: req });
 });
 
-var ser = app.listen(3000, "127.0.0.1", () => {
+var ser = app.listen(3000, "0.0.0.0", () => {
   console.log("==========================================================");
   console.log("Server running from " + ip.address() + " on port 3000");
   console.log("==========================================================");
