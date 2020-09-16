@@ -1,17 +1,19 @@
-html {height: 100%;}
+html {
+  height: 100%;
+}
 
-a{
+a {
   text-decoration: none;
   color: inherit;
 }
 
-span{
+span {
   font-size: 20px;
 }
 
-body{
+body {
   background-color: #112266;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   box-sizing: inherit;
   height: 600px;
   padding: 20px;
@@ -19,7 +21,7 @@ body{
   margin-top: 0px;
 }
 
-.toggle{
+.toggle {
   position: relative;
   font-size: 15px;
   height: 30px;
@@ -29,14 +31,14 @@ body{
   color: #112266;
 }
 
-#circle{
+#circle {
   position: absolute;
   top: 15px;
   left: 20px;
   width: 20px;
   height: 20px;
-  background-color: #262F67;
-  border: 4px solid #262F67;
+  background-color: #262f67;
+  border: 4px solid #262f67;
   border-radius: 15px;
 }
 
@@ -52,7 +54,7 @@ body{
   letter-spacing: 3px;
 }
 
-#frame{
+#frame {
   position: relative;
   margin-top: 0px;
   width: 1100px;
@@ -66,7 +68,7 @@ body{
   background-color: rgba(145, 230, 250, 0.95);
 }
 
-#definition{
+#definition {
   width: 1000px;
   height: auto;
   margin-top: 30px;
@@ -76,7 +78,7 @@ body{
   margin-right: auto;
 }
 
-#return{
+#return {
   position: absolute;
   top: 180px;
   width: 50px;
@@ -100,13 +102,15 @@ body{
   margin-left: 335px;
 }
 
-.margo{margin-right: 40px;}
+.margo {
+  margin-right: 40px;
+}
 
 .inline {
   display: inline-block;
 }
 
-.side{
+.side {
   position: relative;
   width: 520px;
   height: 400px;
@@ -114,62 +118,63 @@ body{
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  float: left;
 }
 
-.clear{
+.clear {
   position: absolute;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 20px;
   letter-spacing: 3px;
   left: 350px;
   margin-top: -3px;
 }
 
-a.info{
-    position:absolute; /*this is the key*/
-    top:1px;
-    left:-35px;
-    text-decoration:none;
-    text-align: center;
-  }
-a.info span{
-  display: none
+a.info {
+  position: absolute; /*this is the key*/
+  top: 1px;
+  left: -35px;
+  text-decoration: none;
+  text-align: center;
 }
-a.info:hover span{ /*the span will display just on :hover state*/
-    display:block;
-    position:absolute;
-    top:-82px;
-    left: -215px;
-    border: 3px solid #112266;
-    border-radius: 3px;
-    padding:10px;
-    z-index: 1;
-    height: 35px;
-    width: 430px;
-    font-size: 15px;
-    display: flex;
-    justify-content: center; /* align horizontal */
-    align-items: center; /* align vertical */
-    background-color: rgba(145, 230, 250, 0.95);
+a.info span {
+  display: none;
 }
-a.info:hover span:after{ /*the span will display just on :hover state*/
-  content:'';
-  position:absolute;
-  bottom:-9px;
-  width:10px;
-  height:10px;
+a.info:hover span {
+  /*the span will display just on :hover state*/
+  display: block;
+  position: absolute;
+  top: -82px;
+  left: -215px;
+  border: 3px solid #112266;
+  border-radius: 3px;
+  padding: 10px;
+  z-index: 1;
+  height: 35px;
+  width: 430px;
+  font-size: 15px;
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+  background-color: rgba(145, 230, 250, 0.95);
+}
+a.info:hover span:after {
+  /*the span will display just on :hover state*/
+  content: "";
+  position: absolute;
+  bottom: -9px;
+  width: 10px;
+  height: 10px;
   border-bottom: 3px solid #112266;
   border-right: 3px solid #112266;
   background-color: rgba(145, 230, 250, 0.95);
-  left:50%;
-  margin-left:-5px;
-  -moz-transform:rotate(45deg);
-  -webkit-transform:rotate(45deg);
-  transform:rotate(45deg);
+  left: 50%;
+  margin-left: -5px;
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
-#loading{
+#loading {
   position: relative;
   margin: auto;
   width: 200px;
@@ -177,15 +182,15 @@ a.info:hover span:after{ /*the span will display just on :hover state*/
   text-align: center;
 }
 
-.square{
-  position:absolute;
+.square {
+  position: absolute;
   width: 50px;
   height: 50px;
   left: 85px;
   background-color: #112266;
 }
 
-#start{
+#start {
   position: relative;
   width: 280px;
   margin-left: auto;
@@ -194,7 +199,8 @@ a.info:hover span:after{ /*the span will display just on :hover state*/
   margin-bottom: 110px;
 }
 
-input[type=submit], button{
+input[type="submit"],
+button {
   width: 274px;
   height: 50px;
   background-color: #112266;
@@ -207,45 +213,49 @@ input[type=submit], button{
   cursor: pointer;
 }
 
-.red{
-  background-color: #C12A34;
-  border: 2px solid #C12A34;
+.red {
+  background-color: #c12a34;
+  border: 2px solid #c12a34;
 }
 
-.green{
+.green {
   background-color: #009113;
   border: 2px solid #009113;
 }
 
-input[type=submit]:hover, button:hover{
+input[type="submit"]:hover,
+button:hover {
   background-color: rgba(255, 255, 255, 0);
   color: #112266;
 }
 
-input[type=text]{
+input[type="text"] {
   position: relative;
   width: 250px;
   height: 40px;
-  border: solid #18469E 2px;
+  border: solid #18469e 2px;
   border-radius: 3px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   padding-left: 10px;
   padding-right: 10px;
   font-size: 15px;
   margin-right: 20px;
 }
 
-input[type=store]{display: none;}
+input[type="store"] {
+  display: none;
+}
 
-button[type=simul], input[type=simul]{
+button[type="simul"],
+input[type="simul"] {
   position: relative;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   font-size: 15px;
   color: Black;
   height: 30px;
   width: 250px;
   margin: 3px;
-  border: solid #18469E 2px;
+  border: solid #18469e 2px;
   border-radius: 3px;
   padding-left: 10px;
   padding-right: 10px;
@@ -254,38 +264,34 @@ button[type=simul], input[type=simul]{
   cursor: pointer;
 }
 
-#foo{}
-
-.alert{
+.alert {
   position: relative;
   top: 10px;
 }
 
-#new_deal_def{
+#new_deal_def {
   position: relative;
   width: 400px;
   height: 200px;
   display: inline-block;
-  float: left;
   margin-top: 10px;
   margin-left: 100px;
   text-align: center;
   font-size: 35px;
 }
 
-#get_deal_def{
+#get_deal_def {
   position: relative;
   width: 400px;
   height: 200px;
   display: inline-block;
-  float: right;
   margin-top: 10px;
   margin-right: 100px;
   text-align: center;
   font-size: 35px;
 }
 
-#button_menu{
+#button_menu {
   position: relative;
   width: 1050px;
   height: auto;
@@ -296,30 +302,32 @@ button[type=simul], input[type=simul]{
 }
 
 /*Input*/
-#new_deal_button{
+#new_deal_button {
   position: relative;
   width: 274px;
   height: 50px;
 }
 
-#left, #separator, #right {
+#left,
+#separator,
+#right {
   position: relative;
   width: 380px;
   display: inline-block;
   vertical-align: top;
 }
 
-#separator{
+#separator {
   border-radius: 2px;
   width: 2px;
   height: 350px;
-  background-color: #18469E;
+  background-color: #18469e;
   margin-right: 50px;
   margin-left: 70px;
 }
 
 /*new_deal_done*/
-#receipt{
+#receipt {
   position: relative;
   width: 900px;
   height: auto;
@@ -328,7 +336,7 @@ button[type=simul], input[type=simul]{
 }
 
 /*footer and stuff*/
-#footer{
+#footer {
   position: relative;
   width: 1060px;
   height: 50px;

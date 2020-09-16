@@ -2,7 +2,7 @@
 
 <div id="frame">
 
-	<div id="circle" onclick="switchBg();" style="cursor: pointer;" ></div>
+	<div id="circle" onclick="delaunayBackground.switch();" style="cursor: pointer;" ></div>
 	<!-- <button class="toggle" onclick="onClick('dealNotFound');">Wrong ID</button>-->
 
 	<div id="logo" onclick="onClick('index');" style="cursor: pointer;">

@@ -1,110 +1,72 @@
-const path = require('path')
-const Q = require('q')
-const nodemailer = require('nodemailer')
+// Email server setup and sender
+
+const path = require("path");
+const Q = require("q");
+const nodemailer = require("nodemailer");
 const mailTemplates = require("./mailTemplates.js");
+const { exception } = require("console");
 
-
-class Mailer{
-
-    constructor(){
-        // Load mail login/mdp from json in current directory (excluded from git)
-        this.transporter = nodemailer.createTransport({
-            host: 'SSL0.OVH.NET',
-            port: 465,
-            secure: true, // true for 465, false for other ports
-            auth: {
-                user: process.env.MAIL_LOGIN,
-                pass: process.env.MAIL_MDP
-            }
-        })
+/** A class to connect to SMTP server and send emails  */
+class Mailer {
+  /** Use environment variable to load mail config */
+  constructor() {
+    if (
+      process.env.MAIL_LOGIN == undefined ||
+      process.env.MAIL_MDP == undefined ||
+      process.env.MAIL_HOST == undefined
+    ) {
+      new Error("Mail server config is absent from env variables.");
     }
 
-    /**
-     * Load templates and return a promise
-     */
-    loadTemplates(){
-        return mailTemplates.cacheTemplates()
-    }
+    this.transporter = nodemailer.createTransport({
+      host: process.env.HOST,
+      port: 465,
+      secure: true, // true for 465, false otherwise
+      auth: {
+        user: process.env.MAIL_LOGIN,
+        pass: process.env.MAIL_MDP,
+      },
+    });
+  }
 
-    /**
-     * @param name of the template file
-     * @param templateArgs args for rendering the template, depends on the template
-     */
-    sendTemplate(name, templateArgs, to, subject){
-        mailTemplates.renderTemplate(name, templateArgs)
-        .then(text => {
-            return module.exports.sendMail(to, subject, text)
-        })
-    }
+  /**
+   * Load templates and return a promise
+   */
+  loadTemplates() {
+    return mailTemplates.cacheTemplates();
+  }
 
-    /**
-     * @param to destination email
-     * @param subject of the email
-     * @param text is a string containing the body text
-     */
-    sendMail(to, subject, text){
-        let defer = Q.defer()
-        var mailOptions = {
-            from: '"info@ethermediary.com" <info@ethermediary.com>', // sender address
-            to: to, // list of receivers
-            subject: subject, // Subject line
-            text: text, // plain text body
-            //html: '<b>Hello world?</b>' // In case we want to use html
-        }
-        this.transporter.sendMail(mailOptions, (error, info) => {
-            console.log("An email has been sent to " + to)
-            if(err)
-                return defer.reject(err)
-            return defer.resolve(info)
-        })
-        return defer.promise
-    }
+  /**
+   * @param name of the template file
+   * @param templateArgs args for rendering the template, depends on the template
+   */
+  sendTemplate(name, templateArgs, to, subject) {
+    mailTemplates.renderTemplate(name, templateArgs).then((text) => {
+      return module.exports.sendMail(to, subject, text);
+    });
+  }
 
-}
-
-module.exports = new Mailer()
-
-////////////////////////////////////////////////////////////////////////////////
-
-/*mail_path = path.join(__dirname, 'mail') + "/newDeal.dust"
-
-var profile = function (person,meta,amount,caution,buyer_address,seller_address,frozen_time) {
-    this.person = person;
-    this.meta = meta;
-    this.amount = amount;
-    this.caution = caution;
-    this.buyer_address = buyer_address;
-    this.seller_address = seller_address;
-    this.frozen_time = frozen_time;
-};
-
-caution = 666 * 0.20;
-var mail_profile = new profile("Albert Einstein","Une tourte",666,caution,"0x5eF269666ad34eC7c03f49C20739f34FDc964356",
-"0x5eF269666ad34eC7c03f49C20739f34FDc964356",365);
-
-// Two keys need to be changed accordingly
-if (role == "isSeller"){ mail_profile.isSeller = "isSeller"; }
-else { mail_profile.isSeller = "isBuyer"; } //role = isBuyer
-mail_profile.isBuyer = "isBuyer";// or isSeller
-mail_profile.BuyerAskCancel = "BuyerAskCancel";// or SellerAskCancel
-
-mail_profile.received = "https://ethermediary.com/idspecial";
-mail_profile.cancel = "https://ethermediary.com/cancelrequest";
-mail_profile.accept_deal = "https://ethermediary.com/acceptdeal";
-
-console.log(" ");
-console.log(mail_profile);
-console.log(" ");
-
-function renderTemplate(data, args){  //Promesse du template rendu par dust.js
+  /**
+   * @param to destination email
+   * @param subject of the email
+   * @param text is a string containing the body text
+   */
+  sendMail(to, subject, text) {
     let defer = Q.defer();
-    dust.render(data, args,
-      function(err, out){
-        if(err)
-          return defer.reject(err);
-        defer.resolve(out);
+    var mailOptions = {
+      from: '"info@ethermediary.com" <info@ethermediary.com>',
+      to: to, // list of receivers
+      subject: subject,
+      text: text,
+      //html: '<b>Hello world?</b>' // In case we want to use html
+    };
+    this.transporter.sendMail(mailOptions, (error, info) => {
+      console.log("An email has been sent to " + to);
+      if (err) return defer.reject(err);
+      return defer.resolve(info);
     });
     return defer.promise;
-}*/
+  }
+}
 
-//var render = renderTemplate(mail_path, mail_profile).then(console.log).catch(console.log);
+module.exports = new Mailer();
