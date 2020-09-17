@@ -11,14 +11,21 @@ Ethermediary removes the need for trust. It is a secure & decentralized third-pa
 
 # Setup
 
-
 ```bash
-cd Ethermediary/ethermediary_web/
+cd Ethermediary/web/
 npm install
 node server.js
 ```
 
-Access the web interface under locally on ```localhost:3000/```
+Or as a Docker container:
+
+```bash
+cd Ethermediary/web/
+./build.sh
+./start.sh
+```
+
+Access the web interface locally on ```localhost:8001```
 
 
 # How it works
