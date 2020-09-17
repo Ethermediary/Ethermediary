@@ -33,7 +33,7 @@ body {
 
 #circle {
   position: absolute;
-  top: 15px;
+  top: 70px;
   left: 20px;
   width: 20px;
   height: 20px;
@@ -42,10 +42,24 @@ body {
   border-radius: 15px;
 }
 
+#clickme {
+  position: absolute;
+  top: 55px;
+  left: 58px;
+  border: 3px solid #112266;
+  border-radius: 3px;
+  padding: 8px;
+  padding-bottom: 12px;
+  height: 30px;
+  font-size: 15px;
+  text-align: center;
+  background-color: rgba(145, 230, 250, 0.95);
+}
+
 #logo {
   position: relative;
   margin-top: 10px;
-  width: 1000px;
+  width: 550px;
   margin-left: auto;
   margin-right: auto;
   font-size: 60px;
@@ -71,8 +85,8 @@ body {
 #definition {
   width: 1000px;
   height: auto;
-  margin-top: 30px;
-  margin-bottom: 50px;
+  margin-top: 80px;
+  margin-bottom: 80px;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
@@ -275,7 +289,7 @@ input[type="simul"] {
   height: 200px;
   display: inline-block;
   margin-top: 10px;
-  margin-left: 100px;
+  margin-left: 130px;
   text-align: center;
   font-size: 35px;
 }
@@ -297,8 +311,7 @@ input[type="simul"] {
   height: auto;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 50px;
-  margin-bottom: 0px;
+  margin-top: 30px;
 }
 
 /*Input*/

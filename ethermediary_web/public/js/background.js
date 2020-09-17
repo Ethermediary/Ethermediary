@@ -16,6 +16,7 @@ class DelaunayBackground {
     svgbg.setAttribute("height", this.height);
 
     this.circleSwitch = document.getElementById("circle");
+    this.circleInfo = document.getElementById("clickme");
 
     localStorage.setItem("ethermediary-bg", false);
 
@@ -73,8 +74,13 @@ class DelaunayBackground {
     }
 
     if (!this.circleSwitch) return;
-    if (this.going) this.circleSwitch.style.backgroundColor = "#262F67";
-    else this.circleSwitch.style.backgroundColor = "rgb(145, 230, 250)";
+    if (this.going) {
+      this.circleSwitch.style.backgroundColor = "#262F67";
+      this.circleInfo.style.display = "none";
+    } else {
+      this.circleSwitch.style.backgroundColor = "rgb(145, 230, 250)";
+      this.circleInfo.style.display = "block";
+    }
   }
 
   /** Reset background if window is resized */

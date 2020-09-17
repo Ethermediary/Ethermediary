@@ -3,7 +3,10 @@
 <div id="frame">
 
 	<div id="circle" onclick="delaunayBackground.switch();" style="cursor: pointer;" ></div>
-	<!-- <button class="toggle" onclick="onClick('dealNotFound');">Wrong ID</button>-->
+
+	<div id="clickme">
+		<a>Click me to animate </br> the background !</a>
+	</div>
 
 	<div id="logo" onclick="onClick('index');" style="cursor: pointer;">
 		<a href="./"><img src="./imgs/logo_blue.png" width="70px" style="position: relative; top:12px;"/></a>
