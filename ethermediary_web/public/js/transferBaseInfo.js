@@ -4,6 +4,7 @@ var noMetamaskNeeded = ["index", "terms", "howitworks", "simulation"];
 var dealData = {};
 
 function onClick(content) {
+  console.log(hasMetamask());
   if (!hasMetamask() && noMetamaskNeeded.indexOf(content) == -1) {
     sendPost("needMeta");
     return;
@@ -131,9 +132,7 @@ function sendPost(content, callback) {
   });
 }
 
+/** Check if client has Metamask & is connected to his account through it */
 function hasMetamask() {
-  return (
-    typeof web3 !== "undefined" &&
-    new Web3(web3.currentProvider).eth.accounts[0] != undefined
-  );
+  return typeof ethereum !== 'undefined' && ethereum.isMetaMask;
 }
