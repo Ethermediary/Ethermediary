@@ -4,13 +4,11 @@ require("dotenv").config();
 
 // external dependencies
 const express = require("express");
-const app = express();
 const favicon = require("serve-favicon");
 const path = require("path");
-const hoffman = require("hoffman");
+const consolidate = require("consolidate");
 const bodyParser = require("body-parser");
 const expressValidator = require("express-validator");
-const ip = require("ip");
 
 // internal dependencies
 const monitor = require("./monitor.js");
@@ -18,6 +16,7 @@ const formular = require("./formular.js");
 //const mailer = require("./mailer.js")
 
 // setup express app
+const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
@@ -28,10 +27,10 @@ app.enable("trust proxy");
 
 // setup view rendering engine
 app.set("view engine", "dust");
-app.engine("dust", hoffman.__express());
+app.engine("dust", consolidate.dust);
 
 //indicate to express where the views directory is
-app.set("views", path.join(__dirname, "views"));
+app.set("views", __dirname+"/views");
 app.set("view cache", process.env.DEBUG == false);
 
 // setup log capabilities

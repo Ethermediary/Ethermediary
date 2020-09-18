@@ -3,3 +3,4 @@ chain/
 log/
 mailCredential.json
 .env
+package-lock.json

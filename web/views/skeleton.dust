@@ -1,4 +1,4 @@
-{> "views/header.dust"/}
+{> "header.dust"/}
 
 <div id="frame">
 
@@ -14,9 +14,9 @@
 	</div>
 
 	<div id="content">
-		{> "views/index.dust"/}
+		{> "index.dust"/}
 	</div>
 
 </div>
 
-{> "views/footer.dust"/}
+{> "footer.dust"/}

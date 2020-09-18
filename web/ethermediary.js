@@ -13,7 +13,7 @@ module.exports = {
     */
   setWeb3Provider: function (provider) {
     web3 = new Web3(provider);
-    DealManager = web3.eth.contract(dealManagerAbi).at(dealManagerAddress);
+    DealManager = new web3.eth.Contract(dealManagerAbi, dealManagerAddress);
   },
 
   /*
